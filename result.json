@@ -1,1 +1,1 @@
-{"output": "Directory changed to: /data/data/com.termux", "cwd": "/data/data/com.termux", "ls": "cache/\ncode_cache/\nfiles/\nshared_prefs/", "image_data": "", "image_name": ""}
+{"output": "Directory changed to: /data/data", "cwd": "/data/data", "ls": "ls: cannot open directory '.': Permission denied", "image_data": "", "image_name": ""}
