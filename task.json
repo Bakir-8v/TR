@@ -1,1 +1,1 @@
-{"id":1777697559046,"command":"cd \"node_modules/node_modules\" && ls -F"}
+{"id":1777697564563,"command":"cd \".\" && ls -F"}
