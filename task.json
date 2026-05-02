@@ -1,1 +1,1 @@
-{"id":1777697357235,"command":"cd \".\" && cat \"ip.py\""}
+{"id":1777697391316,"command":"cd \"storage\" && ls -F"}
