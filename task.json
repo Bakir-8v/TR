@@ -1,1 +1,1 @@
-{"id":1777696650665,"command":"cd \"storage\" && cat \"cat: 'cat: dcim@: No such file or directory': No such file or directory\""}
+{"id":1777696659371,"command":"cd \"storage\" && cat \"cat: \"cat: 'cat: dcim@: No such file or directory': No such file or directory\": No such file or directory\""}
