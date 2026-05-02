@@ -1,1 +1,1 @@
-{"output": "dataconnect.yaml\nexample/\nschema/\nseed_data.gql\n", "time": "07:30:33", "task_id": 1777696231576}
+{"output": "/data/data/com.termux/files/usr/bin/sh: 1: cd: can't cd to schema/\n", "time": "07:30:41", "task_id": 1777696238232}
