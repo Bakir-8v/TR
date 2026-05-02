@@ -1,1 +1,1 @@
-{"id":1777697581653,"command":"cd \"functions/src\" && ls -F"}
+{"id":1777697588200,"command":"cd \"functions/src\" && cat \"index.ts\""}
