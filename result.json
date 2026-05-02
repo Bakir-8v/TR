@@ -1,1 +1,1 @@
-{"output": "audiobooks@\ndcim@\ndocuments@\ndownloads@\nexternal-0@\nmedia-0@\nmovies@\nmusic@\npictures@\npodcasts@\nshared@\n", "time": "07:28:12", "task_id": 1777696090730}
+{"output": "/data/data/com.termux/files/usr/bin/sh: 1: cd: can't cd to dcim@\n", "time": "07:28:21", "task_id": 1777696098314}
