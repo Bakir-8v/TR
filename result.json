@@ -1,1 +1,1 @@
-{"output": "cat: '/**': No such file or directory\n", "time": "07:53:24", "task_id": 1777697601756}
+{"output": "/data/data/com.termux/files/usr/bin/sh: 1: cd: can't cd to functions/src/*\n", "time": "07:53:30", "task_id": 1777697607001}
