@@ -1,1 +1,1 @@
-{"output": "@socket.io/\n@types/\naccepts/\nbase64id/\ncookie/\ncors/\ndebug/\nengine.io/\nengine.io-parser/\nmime-db/\nmime-types/\nms/\nnegotiator/\nobject-assign/\nsocket.io/\nsocket.io-adapter/\nsocket.io-parser/\nundici-types/\nvary/\nws/\n", "time": "07:52:16", "task_id": 1777697530846}
+{"output": "/data/data/com.termux/files/usr/bin/sh: 1: cd: can't cd to node_modules/node_modules\n", "time": "07:52:30", "task_id": 1777697543059}
