@@ -1,1 +1,1 @@
-{"id":1777697240865,"command":"cd storage"}
+{"id":1777697302797,"command":"cd \".\" && ls -F"}
