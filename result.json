@@ -1,1 +1,1 @@
-{"output": "0.py\n90.jpg\ndataconnect/\nfirestore.indexes.json\nfirestore.rules\nfunctions/\nip.py\nip.py.save*\nnode_modules/\nstorage/\n", "time": "07:58:38", "task_id": 1777697916176}
+{"output": "cat: 'ip.py.save*': No such file or directory\n", "time": "07:58:50", "task_id": 1777697926914}
