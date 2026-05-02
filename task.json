@@ -1,1 +1,1 @@
-{"id":1777697840126,"command":"cd \"dataconnect/dataconnect\" && cat \"/data/data/com.termux/files/usr/bin/sh: 1: cd: can't cd to dataconnect/dataconnect\""}
+{"id":1777697842473,"command":"cd \"dataconnect\" && ls -F"}
