@@ -1,1 +1,1 @@
-{"output": "Directory changed to: /data/data", "cwd": "/data/data", "ls": "ls: cannot open directory '.': Permission denied", "image_data": "", "image_name": ""}
+{"output": "Directory changed to: /data", "cwd": "/data", "ls": "ls: cannot open directory '.': Permission denied", "image_data": "", "image_name": ""}
