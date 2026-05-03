@@ -1,0 +1,13 @@
+{
+  "history": [],
+  "extracted": {
+    "env": {
+      "ua": "Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/147.0.0.0 Mobile Safari/537.36",
+      "platform": "Linux armv81",
+      "cpu": 8,
+      "ram": 8,
+      "screen": "393x873"
+    }
+  },
+  "startTime": "2026-05-03T00:50:20.029Z"
+}
