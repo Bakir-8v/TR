@@ -1,0 +1,10 @@
+{
+    "device": "localhost",
+    "key_used": "BAKIR_PROTECTION_2026",
+    "time": "2026-05-03 19:34:49.182416",
+    "files_locked": [
+        "secret.txt",
+        "in.py",
+        "mn.op"
+    ]
+}
