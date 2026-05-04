@@ -1,5 +1,1 @@
-RESULT:
-1.py
-functions
-node_modules
-storage
+cd storage
