@@ -1,6 +1,1 @@
-RESULT:
-0.py
-1.py
-functions
-node_modules
-storage
+rm 0.py
