@@ -1,1 +1,4 @@
-{ "command": "ls" }
+{
+  "id": "101",
+  "cmd": "ipconfig /all" 
+}
