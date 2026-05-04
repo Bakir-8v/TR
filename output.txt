@@ -1,5 +1,0 @@
-0.py
-functions
-node_modules
-requests
-storage
