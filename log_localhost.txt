@@ -1,5 +1,0 @@
-
-    OS: Android 15
-    Hostname: localhost
-    User: u0_a207
-    
