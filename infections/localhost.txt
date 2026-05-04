@@ -1,8 +1,0 @@
-
-        [!] New Infection Detected
-        Time: 2026-05-04 00:38:38.670414
-        Hostname: localhost
-        IP: 127.0.0.1
-        OS: Android 15
-        Path: /data/data/com.termux/files/home/89.py
-        
