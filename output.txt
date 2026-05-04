@@ -1,1 +1,2 @@
-/data/data/com.termux/files/usr/bin/sh: 1: 8: Permission denied
+cp: missing destination file operand after '0.py'
+Try '/data/data/com.termux/files/usr/bin/cp --help' for more information.
