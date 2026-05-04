@@ -1,0 +1,12 @@
+nmap -T1 -sS -Pn -p 80,443,2000,5060 94.55.118.66
+Starting Nmap 7.95 ( https://nmap.org ) at 2026-05-04 18:28 UTC
+Nmap scan report for giris.turkiye.gov.tr (94.55.118.66)
+Host is up (0.020s latency).
+
+PORT     STATE SERVICE
+80/tcp   open  http
+443/tcp  open  https
+2000/tcp open  cisco-sccp
+5060/tcp open  sip
+
+Nmap done: 1 IP address (1 host up) scanned in 60.24 seconds
