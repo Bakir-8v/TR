@@ -1,2 +1,1 @@
-RESULT:
-/data/data/com.termux/files/usr/bin/sh: 1: 89: Permission denied
+ifconfig
