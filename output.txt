@@ -1,2 +1,6 @@
-cp: missing destination file operand after '0.py'
-Try '/data/data/com.termux/files/usr/bin/cp --help' for more information.
+0.py
+9.py
+functions
+node_modules
+requests
+storage
