@@ -1,6 +1,0 @@
-0.py
-9.py
-functions
-node_modules
-requests
-storage
