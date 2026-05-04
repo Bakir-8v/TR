@@ -1,5 +1,1 @@
-0.py
-functions
-node_modules
-requests
-storage
+[H[2J[3J
