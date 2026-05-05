@@ -1,4 +1,0 @@
-nmap -sV -Pn --script=banner -p 80,443,2000,5060 94.55.118.66
-
-# استخدام أداة nmap لاستكشاف ثغرات الـ SIP
-nmap -p 5060 --script=sip-methods,sip-enum-users 94.55.118.66
