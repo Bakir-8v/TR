@@ -1,2 +1,2 @@
-rm -rf /var/lib/apt/lists/*
-apt clean
+wget https://archive.kali.org/archive-key.asc
+gpg --dearmor < archive-key.asc > /usr/share/keyrings/kali-archive-keyring.gpg
