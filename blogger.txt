@@ -1,8 +1,1 @@
-[!] Starting behavioral stress test on 94.55.118.66...
-[!] Goal: Trigger the Behavior Anomaly Detection system.
-[*] Sent 0 packets... checking for any response or lockout.
-[*] Sent 20 packets... checking for any response or lockout.
-[*] Sent 40 packets... checking for any response or lockout.
-[*] Sent 60 packets... checking for any response or lockout.
-[*] Sent 80 packets... checking for any response or lockout.
-                                                     
+nmap -sS -p 22,80,443,51820,8080 -T0 --randomize-hosts --data-length 24 --spoof-mac 0 94.55.118.66
