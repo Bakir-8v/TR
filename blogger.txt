@@ -1,18 +1,2 @@
-from scapy.all import *
-
-target_ip = "94.55.118.66"
-
-def icmp_timestamp_probe(target):
-    print(f"[*] Sending ICMP Timestamp Request (Type 13) to {target}...")
-    
-    # إرسال حزمة طلب الطابع الزمني
-    pkt = IP(dst=target)/ICMP(type=13)
-    response = sr1(pkt, timeout=2, verbose=False)
-    
-    if response is None:
-        print(f"[+] ICMP: Silent (The wall is solid)")
-    elif response.haslayer(ICMP):
-        print(f"[!] ICMP: Responded! Type: {response.getlayer(ICMP).type}")
-        print(f"[!] System Time Leak: {response.getlayer(ICMP).ts_ori}")
-
-icmp_timestamp_probe(target_ip)
+[*] Sending ICMP Timestamp Request (Type 13) to 94.55.118.66...
+[+] ICMP: Silent (The wall is solid)
