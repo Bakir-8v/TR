@@ -1,2 +1,192 @@
-# تثبيت أداة sipsak إذا لم تكن لديك، أو استخدم هذا الأمر المباشر:
-echo -e "OPTIONS sip:nm@94.55.118.66 SIP/2.0\r\nVia: SIP/2.0/UDP 127.0.0.1\r\nFrom: <sip:nm@127.0.0.1>\r\nTo: <sip:nm@94.55.118.66>\r\nCall-ID: 1\r\nCSeq: 1 OPTIONS\r\n\r\n" | nc -u -vn -w 2 94.55.118.66 5060
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GitHub Reader & Writer | Bakir-8v</title>
+    <style>
+        :root {
+            --bg: #0d1117;
+            --card: #161b22;
+            --accent: #238636;
+            --text: #c9d1d9;
+            --border: #30363d;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, sans-serif;
+            background-color: var(--bg);
+            color: var(--text);
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1000px;
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 25px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        }
+
+        .header-box {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid var(--border);
+            padding-bottom: 15px;
+            margin-bottom: 20px;
+        }
+
+        textarea {
+            width: 100%;
+            height: 450px;
+            background: #010409;
+            color: #7ee787;
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            padding: 15px;
+            font-family: 'Consolas', monospace;
+            font-size: 14px;
+            resize: vertical;
+            box-sizing: border-box;
+        }
+
+        .status-bar {
+            margin-top: 15px;
+            padding: 10px;
+            border-radius: 6px;
+            font-size: 14px;
+            background: #0d1117;
+        }
+
+        .btn-group {
+            margin-top: 20px;
+            display: flex;
+            gap: 10px;
+        }
+
+        button {
+            padding: 12px 25px;
+            border-radius: 6px;
+            border: none;
+            cursor: pointer;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+
+        .save-btn { background: var(--accent); color: white; }
+        .load-btn { background: #21262d; color: #58a6ff; border: 1px solid var(--border); }
+        
+        button:hover { opacity: 0.8; }
+        .loading { color: #e3b341; }
+        .success { color: #3fb950; }
+        .error { color: #f85149; }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div class="header-box">
+        <h2 style="margin:0;">نظام إدارة ملفات TR 📂</h2>
+        <span id="sha-info" style="font-size: 0.8em; color: var(--border);">SHA: null</span>
+    </div>
+
+    <div id="status" class="status-bar">جاهز...</div>
+
+    <textarea id="editor" placeholder="جاري تحميل المحتوى من المستودع..."></textarea>
+
+    <div class="btn-group">
+        <button class="save-btn" onclick="saveData()">حفظ التعديلات (Write) 💾</button>
+        <button class="load-btn" onclick="loadData()">تحديث البيانات (Read) 🔄</button>
+    </div>
+</div>
+
+<script>
+    const CONFIG = {
+        TOKEN: "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",
+        OWNER: "Bakir-8v",
+        REPO: "TR",
+        PATH: "blogger.txt"
+    };
+
+    let currentSHA = "";
+
+    // الدالة الأولى: القراءة (Read)
+    async function loadData() {
+        const status = document.getElementById('status');
+        const editor = document.getElementById('editor');
+        const shaDisplay = document.getElementById('sha-info');
+
+        status.innerHTML = '<span class="loading">⏳ جاري القراءة من المستودع...</span>';
+
+        try {
+            const url = `https://api.github.com/repos/${CONFIG.OWNER}/${CONFIG.REPO}/contents/${CONFIG.PATH}`;
+            const response = await fetch(url, {
+                headers: { "Authorization": `token ${CONFIG.TOKEN}` }
+            });
+
+            if (!response.ok) throw new Error("الملف غير موجود أو الرابط خاطئ");
+
+            const data = await response.json();
+            currentSHA = data.sha;
+            shaDisplay.innerText = `SHA: ${currentSHA}`;
+
+            // فك التشفير من Base64 مع دعم اليونيكود
+            const decodedContent = decodeURIComponent(escape(atob(data.content)));
+            editor.value = decodedContent;
+
+            status.innerHTML = '<span class="success">✅ تمت القراءة بنجاح!</span>';
+        } catch (err) {
+            status.innerHTML = `<span class="error">❌ خطأ في القراءة: ${err.message}</span>`;
+        }
+    }
+
+    // الدالة الثانية: الكتابة (Write)
+    async function saveData() {
+        const status = document.getElementById('status');
+        const content = document.getElementById('editor').value;
+
+        status.innerHTML = '<span class="loading">⏳ جاري الكتابة والحفظ...</span>';
+
+        try {
+            const url = `https://api.github.com/repos/${CONFIG.OWNER}/${CONFIG.REPO}/contents/${CONFIG.PATH}`;
+            
+            // تحويل النص إلى Base64 مع دعم اليونيكود
+            const encodedContent = btoa(unescape(encodeURIComponent(content)));
+
+            const response = await fetch(url, {
+                method: "PUT",
+                headers: {
+                    "Authorization": `token ${CONFIG.TOKEN}`,
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    message: "تعديل بواسطة محرر الويب",
+                    content: encodedContent,
+                    sha: currentSHA // مهم جداً لتحديث الملف
+                })
+            });
+
+            if (!response.ok) throw new Error("فشل الحفظ، ربما بسبب تزامن الـ SHA");
+
+            const result = await response.json();
+            currentSHA = result.content.sha; // تحديث الـ SHA الجديد بعد الحفظ
+            document.getElementById('sha-info').innerText = `SHA: ${currentSHA}`;
+
+            status.innerHTML = '<span class="success">✅ تم الحفظ والتحديث في المستودع بنجاح!</span>';
+        } catch (err) {
+            status.innerHTML = `<span class="error">❌ خطأ في الحفظ: ${err.message}</span>`;
+        }
+    }
+
+    // تشغيل القراءة تلقائياً عند فتح الصفحة
+    window.onload = loadData;
+</script>
+
+</body>
+</html>
