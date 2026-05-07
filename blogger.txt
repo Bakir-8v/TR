@@ -1,1 +1,2 @@
-nano /etc/apt/sources.list
+rm -rf /var/lib/apt/lists/*
+apt clean
