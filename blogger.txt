@@ -1,26 +1,342 @@
-pip install curl-cffi
-error: externally-managed-environment
+apt install python3-venv -y
+The following packages were automatically installed and are no longer required:
+  firebird3.0-common      libdirectfb-1.7-7t64  libglvnd-dev                 libmbedcrypto7t64  libtag1v5-vanilla            python3.12
+  firebird3.0-common-doc  libegl-dev            libgtksourceview-3.0-1       libmsgraph-0-1     libtagc0                     python3.12-dev
+  libbfio1                libfmt9               libgtksourceview-3.0-common  libnetcdf19t64     libunwind-19                 python3.12-minimal
+  libc++1-19              libgdal35             libgtksourceviewmm-3.0-0v5   libpaper1          libwebrtc-audio-processing1  python3.12-venv
+  libc++abi1-19           libgl1-mesa-dev       libgumbo2                    libpoppler140      libx265-209
+  libcapstone4            libgles-dev           libhdf5-103-1t64             libpython3.12-dev  openjdk-23-jre
+  libconfig++9v5          libgles1              libhdf5-hl-100t64            libsuperlu6        openjdk-23-jre-headless
+  libconfig9              libglvnd-core-dev     libjxl0.9                    libtag1v5          python3-appdirs
+Use 'apt autoremove' to remove them.
 
-× This environment is externally managed
-╰─> To install Python packages system-wide, try apt install
-    python3-xyz, where xyz is the package you are trying to
-    install.
-    
-    If you wish to install a non-Kali-packaged Python package,
-    create a virtual environment using python3 -m venv path/to/venv.
-    Then use path/to/venv/bin/python and path/to/venv/bin/pip. Make
-    sure you have pypy3-venv installed.
-    
-    If you wish to install a non-Kali-packaged Python application,
-    it may be easiest to use pipx install xyz, which will manage a
-    virtual environment for you. Make sure you have pipx installed.
-    
-    For more information, refer to the following:
-    * https://www.kali.org/docs/general-use/python3-external-packages/
-    * /usr/share/doc/python3.12/README.venv
+Upgrading:
+  blueman         libpython3-dev     libtdb1         onboard-data      python3-ldb      python3-tdb   samba-common        smbclient
+  libldb2         libpython3-stdlib  libwbclient0    python3           python3-minimal  python3-venv  samba-common-bin    winbind                  
+  libnss-winbind  libsmbclient0      onboard         python3-aardwolf  python3-samba    samba         samba-dsdb-modules                           
+  libpam-winbind  libtalloc2         onboard-common  python3-dev       python3-talloc   samba-ad-dc   samba-libs                                   
+                                                                                                                                                   
+Installing dependencies:
+  libpython3.13-dev  python3.13  python3.13-dev  python3.13-minimal  python3.13-venv
+                                                                                                                                                   
+Suggested packages:
+  python3.13-doc  binfmt-support
 
-note: If you believe this is a mistake, please contact your Python installation or OS distribution provider. You can override this, at the risk of breaking your Python installation or OS, by passing --break-system-packages.
-hint: See PEP 668 for the detailed specification.
+REMOVING:
+  winexe
+                                                                                                                                                   
+Summary:
+  Upgrading: 30, Installing: 5, Removing: 1, Not Upgrading: 9
+  Download size: 28.3 MB
+  Space needed: 34.9 MB / 138 GB available
+
+Err:1 http://http.kali.org/kali kali-rolling/main amd64 python3-samba amd64 2:4.21.3+dfsg-6+b1
+  404  Not Found [IP: 54.39.128.230 80]
+Err:2 http://http.kali.org/kali kali-rolling/main amd64 samba-common-bin amd64 2:4.21.3+dfsg-6+b1
+  404  Not Found [IP: 54.39.128.230 80]
+Err:3 http://http.kali.org/kali kali-rolling/main amd64 smbclient amd64 2:4.21.3+dfsg-6+b1
+  404  Not Found [IP: 54.39.128.230 80]
+Err:4 http://http.kali.org/kali kali-rolling/main amd64 samba-dsdb-modules amd64 2:4.21.3+dfsg-6+b1
+  404  Not Found [IP: 54.39.128.230 80]
+Err:5 http://http.kali.org/kali kali-rolling/main amd64 libsmbclient0 amd64 2:4.21.3+dfsg-6+b1
+  404  Not Found [IP: 54.39.128.230 80]
+Err:6 http://http.kali.org/kali kali-rolling/main amd64 python3-ldb amd64 2:2.10.0+samba4.21.3+dfsg-6+b1
+  404  Not Found [IP: 54.39.128.230 80]
+Err:7 http://http.kali.org/kali kali-rolling/main amd64 libldb2 amd64 2:2.10.0+samba4.21.3+dfsg-6+b1
+  404  Not Found [IP: 54.39.128.230 80]
+Err:8 http://http.kali.org/kali kali-rolling/main amd64 samba-libs amd64 2:4.21.3+dfsg-6+b1
+  404  Not Found [IP: 54.39.128.230 80]
+Err:9 http://http.kali.org/kali kali-rolling/main amd64 samba amd64 2:4.21.3+dfsg-6+b1
+  404  Not Found [IP: 54.39.128.230 80]
+Err:10 http://http.kali.org/kali kali-rolling/main amd64 samba-ad-dc amd64 2:4.21.3+dfsg-6+b1
+  404  Not Found [IP: 54.39.128.230 80]
+Err:11 http://http.kali.org/kali kali-rolling/main amd64 libpam-winbind amd64 2:4.21.3+dfsg-6+b1
+  404  Not Found [IP: 54.39.128.230 80]
+Err:12 http://http.kali.org/kali kali-rolling/main amd64 winbind amd64 2:4.21.3+dfsg-6+b1
+  404  Not Found [IP: 54.39.128.230 80]
+Err:13 http://http.kali.org/kali kali-rolling/main amd64 libnss-winbind amd64 2:4.21.3+dfsg-6+b1
+  404  Not Found [IP: 54.39.128.230 80]
+Err:14 http://http.kali.org/kali kali-rolling/main amd64 python3.13-minimal amd64 3.13.2-1
+  404  Not Found [IP: 54.39.128.230 80]
+Err:15 http://http.kali.org/kali kali-rolling/main amd64 python3-venv amd64 3.13.1-2
+  404  Not Found [IP: 54.39.128.230 80]
+Err:16 http://http.kali.org/kali kali-rolling/main amd64 python3-tdb amd64 2:1.4.12+samba4.21.3+dfsg-6+b1
+  404  Not Found [IP: 54.39.128.230 80]
+Err:17 http://http.kali.org/kali kali-rolling/main amd64 libtalloc2 amd64 2:2.4.2+samba4.21.3+dfsg-6+b1
+  404  Not Found [IP: 54.39.128.230 80]
+Err:18 http://http.kali.org/kali kali-rolling/main amd64 python3-talloc amd64 2:2.4.2+samba4.21.3+dfsg-6+b1
+  404  Not Found [IP: 54.39.128.230 80]
+Err:19 http://http.kali.org/kali kali-rolling/main amd64 libpython3-dev amd64 3.13.1-2
+  404  Not Found [IP: 54.39.128.230 80]
+Err:20 http://http.kali.org/kali kali-rolling/main amd64 python3-dev amd64 3.13.1-2
+  404  Not Found [IP: 54.39.128.230 80]
+Err:22 http://http.kali.org/kali kali-rolling/main amd64 onboard-data all 1.4.1-10
+  404  Not Found [IP: 54.39.128.230 80]
+Err:23 http://http.kali.org/kali kali-rolling/main amd64 onboard-common all 1.4.1-10
+  404  Not Found [IP: 54.39.128.230 80]
+Err:24 http://http.kali.org/kali kali-rolling/main amd64 onboard amd64 1.4.1-10
+  404  Not Found [IP: 54.39.128.230 80]
+Err:25 http://http.kali.org/kali kali-rolling/main amd64 blueman amd64 2.4.3-1+b1
+  404  Not Found [IP: 54.39.128.230 80]
+Err:26 http://http.kali.org/kali kali-rolling/main amd64 python3-minimal amd64 3.13.1-2
+  404  Not Found [IP: 54.39.128.230 80]
+Err:27 http://http.kali.org/kali kali-rolling/main amd64 python3 amd64 3.13.1-2
+  404  Not Found [IP: 54.39.128.230 80]
+Err:28 http://http.kali.org/kali kali-rolling/main amd64 python3.13 amd64 3.13.2-1
+  404  Not Found [IP: 54.39.128.230 80]
+Err:29 http://http.kali.org/kali kali-rolling/main amd64 python3.13-venv amd64 3.13.2-1
+  404  Not Found [IP: 54.39.128.230 80]
+Err:30 http://http.kali.org/kali kali-rolling/main amd64 libtdb1 amd64 2:1.4.12+samba4.21.3+dfsg-6+b1
+  404  Not Found [IP: 54.39.128.230 80]
+Err:31 http://http.kali.org/kali kali-rolling/main amd64 libpython3.13-dev amd64 3.13.2-1
+  404  Not Found [IP: 54.39.128.230 80]
+Get:21 http://http.kali.org/kali kali-rolling/main amd64 python3-aardwolf amd64 0.2.8-0kali3+b1 [475 kB]
+Err:32 http://http.kali.org/kali kali-rolling/main amd64 python3.13-dev amd64 3.13.2-1
+  404  Not Found [IP: 54.39.128.230 80]
+Err:33 http://http.kali.org/kali kali-rolling/main amd64 libpython3-stdlib amd64 3.13.1-2
+  404  Not Found [IP: 54.39.128.230 80]
+Err:34 http://http.kali.org/kali kali-rolling/main amd64 samba-common all 2:4.21.3+dfsg-6
+  404  Not Found [IP: 54.39.128.230 80]
+Err:35 http://http.kali.org/kali kali-rolling/main amd64 libwbclient0 amd64 2:4.21.3+dfsg-6+b1
+  404  Not Found [IP: 54.39.128.230 80]
+Fetched 475 kB in 3s (189 kB/s)
+Error: Failed to fetch http://http.kali.org/kali/pool/main/s/samba/python3-samba_4.21.3%2bdfsg-6%2bb1_amd64.deb  404  Not Found [IP: 54.39.128.230 80]
+Error: Failed to fetch http://http.kali.org/kali/pool/main/s/samba/samba-common-bin_4.21.3%2bdfsg-6%2bb1_amd64.deb  404  Not Found [IP: 54.39.128.230 80]
+Error: Failed to fetch http://http.kali.org/kali/pool/main/s/samba/smbclient_4.21.3%2bdfsg-6%2bb1_amd64.deb  404  Not Found [IP: 54.39.128.230 80]
+Error: Failed to fetch http://http.kali.org/kali/pool/main/s/samba/samba-dsdb-modules_4.21.3%2bdfsg-6%2bb1_amd64.deb  404  Not Found [IP: 54.39.128.230 80]
+Error: Failed to fetch http://http.kali.org/kali/pool/main/s/samba/libsmbclient0_4.21.3%2bdfsg-6%2bb1_amd64.deb  404  Not Found [IP: 54.39.128.230 80]
+Error: Failed to fetch http://http.kali.org/kali/pool/main/s/samba/python3-ldb_2.10.0%2bsamba4.21.3%2bdfsg-6%2bb1_amd64.deb  404  Not Found [IP: 54.39.128.230 80]
+Error: Failed to fetch http://http.kali.org/kali/pool/main/s/samba/libldb2_2.10.0%2bsamba4.21.3%2bdfsg-6%2bb1_amd64.deb  404  Not Found [IP: 54.39.128.230 80]
+Error: Failed to fetch http://http.kali.org/kali/pool/main/s/samba/samba-libs_4.21.3%2bdfsg-6%2bb1_amd64.deb  404  Not Found [IP: 54.39.128.230 80]
+Error: Failed to fetch http://http.kali.org/kali/pool/main/s/samba/samba_4.21.3%2bdfsg-6%2bb1_amd64.deb  404  Not Found [IP: 54.39.128.230 80]
+Error: Failed to fetch http://http.kali.org/kali/pool/main/s/samba/samba-ad-dc_4.21.3%2bdfsg-6%2bb1_amd64.deb  404  Not Found [IP: 54.39.128.230 80]
+Error: Failed to fetch http://http.kali.org/kali/pool/main/s/samba/libpam-winbind_4.21.3%2bdfsg-6%2bb1_amd64.deb  404  Not Found [IP: 54.39.128.230 80]
+Error: Failed to fetch http://http.kali.org/kali/pool/main/s/samba/winbind_4.21.3%2bdfsg-6%2bb1_amd64.deb  404  Not Found [IP: 54.39.128.230 80]
+Error: Failed to fetch http://http.kali.org/kali/pool/main/s/samba/libnss-winbind_4.21.3%2bdfsg-6%2bb1_amd64.deb  404  Not Found [IP: 54.39.128.230 80]
+Error: Failed to fetch http://http.kali.org/kali/pool/main/p/python3.13/python3.13-minimal_3.13.2-1_amd64.deb  404  Not Found [IP: 54.39.128.230 80]
+Error: Failed to fetch http://http.kali.org/kali/pool/main/p/python3-defaults/python3-venv_3.13.1-2_amd64.deb  404  Not Found [IP: 54.39.128.230 80]
+Error: Failed to fetch http://http.kali.org/kali/pool/main/s/samba/python3-tdb_1.4.12%2bsamba4.21.3%2bdfsg-6%2bb1_amd64.deb  404  Not Found [IP: 54.39.128.230 80]
+Error: Failed to fetch http://http.kali.org/kali/pool/main/s/samba/libtalloc2_2.4.2%2bsamba4.21.3%2bdfsg-6%2bb1_amd64.deb  404  Not Found [IP: 54.39.128.230 80]
+Error: Failed to fetch http://http.kali.org/kali/pool/main/s/samba/python3-talloc_2.4.2%2bsamba4.21.3%2bdfsg-6%2bb1_amd64.deb  404  Not Found [IP: 54.39.128.230 80]
+Error: Failed to fetch http://http.kali.org/kali/pool/main/p/python3-defaults/libpython3-dev_3.13.1-2_amd64.deb  404  Not Found [IP: 54.39.128.230 80]
+Error: Failed to fetch http://http.kali.org/kali/pool/main/p/python3-defaults/python3-dev_3.13.1-2_amd64.deb  404  Not Found [IP: 54.39.128.230 80]
+Error: Failed to fetch http://http.kali.org/kali/pool/main/o/onboard/onboard-data_1.4.1-10_all.deb  404  Not Found [IP: 54.39.128.230 80]
+Error: Failed to fetch http://http.kali.org/kali/pool/main/o/onboard/onboard-common_1.4.1-10_all.deb  404  Not Found [IP: 54.39.128.230 80]
+Error: Failed to fetch http://http.kali.org/kali/pool/main/o/onboard/onboard_1.4.1-10_amd64.deb  404  Not Found [IP: 54.39.128.230 80]
+Error: Failed to fetch http://http.kali.org/kali/pool/main/b/blueman/blueman_2.4.3-1%2bb1_amd64.deb  404  Not Found [IP: 54.39.128.230 80]
+Error: Failed to fetch http://http.kali.org/kali/pool/main/p/python3-defaults/python3-minimal_3.13.1-2_amd64.deb  404  Not Found [IP: 54.39.128.230 80]
+Error: Failed to fetch http://http.kali.org/kali/pool/main/p/python3-defaults/python3_3.13.1-2_amd64.deb  404  Not Found [IP: 54.39.128.230 80]
+Error: Failed to fetch http://http.kali.org/kali/pool/main/p/python3.13/python3.13_3.13.2-1_amd64.deb  404  Not Found [IP: 54.39.128.230 80]
+Error: Failed to fetch http://http.kali.org/kali/pool/main/p/python3.13/python3.13-venv_3.13.2-1_amd64.deb  404  Not Found [IP: 54.39.128.230 80]
+Error: Failed to fetch http://http.kali.org/kali/pool/main/s/samba/libtdb1_1.4.12%2bsamba4.21.3%2bdfsg-6%2bb1_amd64.deb  404  Not Found [IP: 54.39.128.230 80]
+Error: Failed to fetch http://http.kali.org/kali/pool/main/p/python3.13/libpython3.13-dev_3.13.2-1_amd64.deb  404  Not Found [IP: 54.39.128.230 80]
+Error: Failed to fetch http://http.kali.org/kali/pool/main/p/python3.13/python3.13-dev_3.13.2-1_amd64.deb  404  Not Found [IP: 54.39.128.230 80]
+Error: Failed to fetch http://http.kali.org/kali/pool/main/p/python3-defaults/libpython3-stdlib_3.13.1-2_amd64.deb  404  Not Found [IP: 54.39.128.230 80]
+Error: Failed to fetch http://http.kali.org/kali/pool/main/s/samba/samba-common_4.21.3%2bdfsg-6_all.deb  404  Not Found [IP: 54.39.128.230 80]
+Error: Failed to fetch http://http.kali.org/kali/pool/main/s/samba/libwbclient0_4.21.3%2bdfsg-6%2bb1_amd64.deb  404  Not Found [IP: 54.39.128.230 80]
+Error: Unable to fetch some archives, maybe run apt-get update or try with --fix-missing?
                                                                                                                                                    
 ┌──(root㉿kali)-[~]
-└─# 
+└─# apt update -y              
+Ign:1 file:/run/live/medium kali-last-snapshot InRelease
+Get:2 file:/run/live/medium kali-last-snapshot Release [7,354 B]
+Get:2 file:/run/live/medium kali-last-snapshot Release [7,354 B]
+Ign:3 file:/run/live/medium kali-last-snapshot Release.gpg                                                                           
+Ign:4 http://http.kali.download/kali kali-rolling InRelease                                               
+Get:5 https://playit-cloud.github.io/ppa/data ./ InRelease [2,086 B]                                      
+Get:6 http://kali.download/kali kali-rolling InRelease [34.0 kB]                                         
+Get:7 http://kali.download/kali kali-last-snapshot InRelease [34.0 kB]
+Err:6 http://kali.download/kali kali-rolling InRelease
+  Sub-process /usr/bin/sqv returned an error code (1), error message is: Missing key 827C8569F2518CC677FECA1AED65462EC8D5E4C5, which is needed to verify signature.
+Err:7 http://kali.download/kali kali-last-snapshot InRelease
+  Sub-process /usr/bin/sqv returned an error code (1), error message is: Missing key 827C8569F2518CC677FECA1AED65462EC8D5E4C5, which is needed to verify signature.
+Get:8 https://playit-cloud.github.io/ppa/data ./ Packages [16.4 kB]
+Ign:4 http://http.kali.download/kali kali-rolling InRelease
+Ign:4 http://http.kali.download/kali kali-rolling InRelease
+Err:4 http://http.kali.download/kali kali-rolling InRelease                                                                                       
+  Could not resolve 'http.kali.download'
+Fetched 86.4 kB in 7s (11.9 kB/s)                                                                                                                 
+40 packages can be upgraded. Run 'apt list --upgradable' to see them.
+Warning: Conflicting distribution: file:/run/live/medium kali-last-snapshot Release (expected kali-last-snapshot but got kali-rolling)
+Warning: An error occurred during the signature verification. The repository is not updated and the previous index files will be used. GPG error: http://kali.download/kali kali-rolling InRelease: Sub-process /usr/bin/sqv returned an error code (1), error message is: Missing key 827C8569F2518CC677FECA1AED65462EC8D5E4C5, which is needed to verify signature.
+Warning: An error occurred during the signature verification. The repository is not updated and the previous index files will be used. GPG error: http://kali.download/kali kali-last-snapshot InRelease: Sub-process /usr/bin/sqv returned an error code (1), error message is: Missing key 827C8569F2518CC677FECA1AED65462EC8D5E4C5, which is needed to verify signature.
+Warning: Failed to fetch http://http.kali.download/kali/dists/kali-rolling/InRelease  Could not resolve 'http.kali.download'
+Warning: Failed to fetch http://http.kali.org/kali/dists/kali-rolling/InRelease  Sub-process /usr/bin/sqv returned an error code (1), error message is: Missing key 827C8569F2518CC677FECA1AED65462EC8D5E4C5, which is needed to verify signature.
+Warning: Failed to fetch http://http.kali.org/kali/dists/kali-last-snapshot/InRelease  Sub-process /usr/bin/sqv returned an error code (1), error message is: Missing key 827C8569F2518CC677FECA1AED65462EC8D5E4C5, which is needed to verify signature.
+Warning: Some index files failed to download. They have been ignored, or old ones used instead.
+                                                                                                                                                   
+┌──(root㉿kali)-[~]
+└─# apt full-upgrade 
+The following packages were automatically installed and are no longer required:
+  firebird3.0-common      libegl-dev                   libgtksourceviewmm-3.0-0v5   libmsgraph-0-1     libwebrtc-audio-processing1
+  firebird3.0-common-doc  libfmt9                      libgumbo2                    libnetcdf19t64     libx265-209
+  imagemagick-6.q16       libgdal35                    libhdf5-103-1t64             libpaper1          openjdk-23-jre
+  libbfio1                libgl1-mesa-dev              libhdf5-hl-100t64            libpoppler140      openjdk-23-jre-headless
+  libc++1-19              libgles-dev                  libjxl0.9                    libpython3.12-dev  python3-appdirs
+  libc++abi1-19           libgles1                     libldap-2.5-0                libsuperlu6        python3.12
+  libcapstone4            libglvnd-core-dev            libmagickcore-6.q16-7-extra  libtag1v5          python3.12-dev
+  libconfig++9v5          libglvnd-dev                 libmagickcore-6.q16-7t64     libtag1v5-vanilla  python3.12-minimal
+  libconfig9              libgtksourceview-3.0-1       libmagickwand-6.q16-7t64     libtagc0           python3.12-venv
+  libdirectfb-1.7-7t64    libgtksourceview-3.0-common  libmbedcrypto7t64            libunwind-19
+Use 'apt autoremove' to remove them.
+
+Upgrading:
+  blueman              libpam-winbind     libtdb1         onboard-data      python3-dev      python3-tdb   samba-common        winbind
+  imagemagick          libpython3-dev     libwbclient0    passing-the-hash  python3-ldb      python3-tk    samba-common-bin                        
+  kali-linux-headless  libpython3-stdlib  libzbar0t64     playit            python3-minimal  python3-venv  samba-dsdb-modules                      
+  libldb2              libsmbclient0      onboard         python3           python3-samba    samba         samba-libs                              
+  libnss-winbind       libtalloc2         onboard-common  python3-aardwolf  python3-talloc   samba-ad-dc   smbclient                               
+                                                                                                                                                   
+Installing dependencies:
+  imagemagick-7-common  libmagickcore-7.q16-10        libmagickwand-7.q16-10  python3.13      python3.13-minimal
+  imagemagick-7.q16     libmagickcore-7.q16-10-extra  libpython3.13-dev       python3.13-dev  python3.13-venv                                      
+                                                                                                                                                   
+Suggested packages:
+  imagemagick-7-doc  cups-bsd  | lprng   ffmpeg  gnuplot  hp2xx    libwmf-bin  povray    transfig    inkscape        binfmt-support
+  autotrace          | lpr     enscript  gimp    grads    html2ps  mplayer     radiance  libraw-bin  python3.13-doc
+
+Not upgrading:
+  kali-desktop-xfce  linux-headers-amd64  linux-image-amd64  qterminal
+
+REMOVING:
+  imagemagick-6-common  winexe
+                                                                                                                                                   
+Summary:
+  Upgrading: 36, Installing: 10, Removing: 2, Not Upgrading: 4
+  Download size: 35.8 MB / 36.3 MB
+  Space needed: 44.8 MB / 138 GB available
+
+Continue? [Y/n] y
+Get:1 https://playit-cloud.github.io/ppa/data ./ playit 0.17.1 [2,641 kB]
+Err:2 http://http.kali.org/kali kali-rolling/main amd64 imagemagick-7-common all 8:7.1.1.43+dfsg1-1
+  404  Not Found [IP: 54.39.128.230 80]
+Err:3 http://http.kali.org/kali kali-rolling/main amd64 python3-samba amd64 2:4.21.3+dfsg-6+b1
+  404  Not Found [IP: 54.39.128.230 80]
+Err:4 http://http.kali.org/kali kali-rolling/main amd64 samba-common-bin amd64 2:4.21.3+dfsg-6+b1
+  404  Not Found [IP: 54.39.128.230 80]
+Err:5 http://http.kali.org/kali kali-rolling/main amd64 smbclient amd64 2:4.21.3+dfsg-6+b1
+  404  Not Found [IP: 54.39.128.230 80]
+Err:6 http://http.kali.org/kali kali-rolling/main amd64 samba-dsdb-modules amd64 2:4.21.3+dfsg-6+b1
+  404  Not Found [IP: 54.39.128.230 80]
+Err:7 http://http.kali.org/kali kali-rolling/main amd64 libsmbclient0 amd64 2:4.21.3+dfsg-6+b1
+  404  Not Found [IP: 54.39.128.230 80]
+Err:8 http://http.kali.org/kali kali-rolling/main amd64 python3-ldb amd64 2:2.10.0+samba4.21.3+dfsg-6+b1
+  404  Not Found [IP: 54.39.128.230 80]
+Err:9 http://http.kali.org/kali kali-rolling/main amd64 libldb2 amd64 2:2.10.0+samba4.21.3+dfsg-6+b1
+  404  Not Found [IP: 54.39.128.230 80]
+Err:10 http://http.kali.org/kali kali-rolling/main amd64 samba-libs amd64 2:4.21.3+dfsg-6+b1
+  404  Not Found [IP: 54.39.128.230 80]
+Err:11 http://http.kali.org/kali kali-rolling/main amd64 samba amd64 2:4.21.3+dfsg-6+b1
+  404  Not Found [IP: 54.39.128.230 80]
+Err:12 http://http.kali.org/kali kali-rolling/main amd64 samba-ad-dc amd64 2:4.21.3+dfsg-6+b1
+  404  Not Found [IP: 54.39.128.230 80]
+Err:13 http://http.kali.org/kali kali-rolling/main amd64 libpam-winbind amd64 2:4.21.3+dfsg-6+b1
+  404  Not Found [IP: 54.39.128.230 80]
+Err:14 http://http.kali.org/kali kali-rolling/main amd64 winbind amd64 2:4.21.3+dfsg-6+b1
+  404  Not Found [IP: 54.39.128.230 80]
+Err:15 http://http.kali.org/kali kali-rolling/main amd64 libnss-winbind amd64 2:4.21.3+dfsg-6+b1
+  404  Not Found [IP: 54.39.128.230 80]
+Err:16 http://http.kali.org/kali kali-rolling/main amd64 python3.13-minimal amd64 3.13.2-1
+  404  Not Found [IP: 54.39.128.230 80]
+Err:17 http://http.kali.org/kali kali-rolling/main amd64 python3-venv amd64 3.13.1-2
+  404  Not Found [IP: 54.39.128.230 80]
+Err:18 http://http.kali.org/kali kali-rolling/main amd64 python3-tdb amd64 2:1.4.12+samba4.21.3+dfsg-6+b1
+  404  Not Found [IP: 54.39.128.230 80]
+Err:19 http://http.kali.org/kali kali-rolling/main amd64 libtalloc2 amd64 2:2.4.2+samba4.21.3+dfsg-6+b1
+  404  Not Found [IP: 54.39.128.230 80]
+Err:20 http://http.kali.org/kali kali-rolling/main amd64 python3-talloc amd64 2:2.4.2+samba4.21.3+dfsg-6+b1
+  404  Not Found [IP: 54.39.128.230 80]
+Err:21 http://http.kali.org/kali kali-rolling/main amd64 libpython3-dev amd64 3.13.1-2
+  404  Not Found [IP: 54.39.128.230 80]
+Err:22 http://http.kali.org/kali kali-rolling/main amd64 python3-dev amd64 3.13.1-2
+  404  Not Found [IP: 54.39.128.230 80]
+Err:23 http://http.kali.org/kali kali-rolling/main amd64 onboard-data all 1.4.1-10
+  404  Not Found [IP: 54.39.128.230 80]
+Err:24 http://http.kali.org/kali kali-rolling/main amd64 onboard-common all 1.4.1-10
+  404  Not Found [IP: 54.39.128.230 80]
+Err:25 http://http.kali.org/kali kali-rolling/main amd64 onboard amd64 1.4.1-10
+  404  Not Found [IP: 54.39.128.230 80]
+Err:26 http://http.kali.org/kali kali-rolling/main amd64 blueman amd64 2.4.3-1+b1
+  404  Not Found [IP: 54.39.128.230 80]
+Err:27 http://http.kali.org/kali kali-rolling/main amd64 python3-minimal amd64 3.13.1-2
+  404  Not Found [IP: 54.39.128.230 80]
+Err:28 http://http.kali.org/kali kali-rolling/main amd64 python3 amd64 3.13.1-2
+  404  Not Found [IP: 54.39.128.230 80]
+Err:29 http://http.kali.org/kali kali-rolling/main amd64 python3.13 amd64 3.13.2-1
+  404  Not Found [IP: 54.39.128.230 80]
+Err:30 http://http.kali.org/kali kali-rolling/main amd64 python3.13-venv amd64 3.13.2-1
+  404  Not Found [IP: 54.39.128.230 80]
+Err:31 http://http.kali.org/kali kali-rolling/main amd64 libtdb1 amd64 2:1.4.12+samba4.21.3+dfsg-6+b1
+  404  Not Found [IP: 54.39.128.230 80]
+Err:32 http://http.kali.org/kali kali-rolling/main amd64 libpython3.13-dev amd64 3.13.2-1
+  404  Not Found [IP: 54.39.128.230 80]
+Err:33 http://http.kali.org/kali kali-rolling/main amd64 python3.13-dev amd64 3.13.2-1
+  404  Not Found [IP: 54.39.128.230 80]
+Err:34 http://http.kali.org/kali kali-rolling/main amd64 libpython3-stdlib amd64 3.13.1-2
+  404  Not Found [IP: 54.39.128.230 80]
+Err:35 http://http.kali.org/kali kali-rolling/main amd64 samba-common all 2:4.21.3+dfsg-6
+  404  Not Found [IP: 54.39.128.230 80]
+Err:36 http://http.kali.org/kali kali-rolling/main amd64 libwbclient0 amd64 2:4.21.3+dfsg-6+b1                                                    
+  404  Not Found [IP: 54.39.128.230 80]
+Err:37 http://http.kali.org/kali kali-rolling/main amd64 libmagickcore-7.q16-10 amd64 8:7.1.1.43+dfsg1-1                                          
+  404  Not Found [IP: 54.39.128.230 80]
+Err:38 http://http.kali.org/kali kali-rolling/main amd64 libmagickwand-7.q16-10 amd64 8:7.1.1.43+dfsg1-1                                          
+  404  Not Found [IP: 54.39.128.230 80]
+Err:39 http://http.kali.org/kali kali-rolling/main amd64 imagemagick-7.q16 amd64 8:7.1.1.43+dfsg1-1                                               
+  404  Not Found [IP: 54.39.128.230 80]
+Err:40 http://http.kali.org/kali kali-rolling/main amd64 imagemagick amd64 8:7.1.1.43+dfsg1-1                                                     
+  404  Not Found [IP: 54.39.128.230 80]
+Err:42 http://http.kali.org/kali kali-rolling/main amd64 kali-linux-headless amd64 2025.1.11                                                      
+  404  Not Found [IP: 54.39.128.230 80]
+Err:43 http://http.kali.org/kali kali-rolling/main amd64 libmagickcore-7.q16-10-extra amd64 8:7.1.1.43+dfsg1-1                                    
+  404  Not Found [IP: 54.39.128.230 80]
+Err:44 http://http.kali.org/kali kali-rolling/main amd64 libzbar0t64 amd64 0.23.93-6+b1                                                           
+  404  Not Found [IP: 54.39.128.230 80]
+Err:45 http://http.kali.org/kali kali-rolling/main amd64 python3-tk amd64 3.13.1-1                                                                
+  404  Not Found [IP: 54.39.128.230 80]
+Get:41 http://http.kali.org/kali kali-rolling/main amd64 passing-the-hash amd64 0~2015.12.37+b1 [2,097 kB]                                        
+Fetched 4,738 kB in 17s (283 kB/s)                                                                                                                
+Error: Failed to fetch http://http.kali.org/kali/pool/main/i/imagemagick/imagemagick-7-common_7.1.1.43%2bdfsg1-1_all.deb  404  Not Found [IP: 54.39.128.230 80]
+Error: Failed to fetch http://http.kali.org/kali/pool/main/s/samba/python3-samba_4.21.3%2bdfsg-6%2bb1_amd64.deb  404  Not Found [IP: 54.39.128.230 80]
+Error: Failed to fetch http://http.kali.org/kali/pool/main/s/samba/samba-common-bin_4.21.3%2bdfsg-6%2bb1_amd64.deb  404  Not Found [IP: 54.39.128.230 80]
+Error: Failed to fetch http://http.kali.org/kali/pool/main/s/samba/smbclient_4.21.3%2bdfsg-6%2bb1_amd64.deb  404  Not Found [IP: 54.39.128.230 80]
+Error: Failed to fetch http://http.kali.org/kali/pool/main/s/samba/samba-dsdb-modules_4.21.3%2bdfsg-6%2bb1_amd64.deb  404  Not Found [IP: 54.39.128.230 80]
+Error: Failed to fetch http://http.kali.org/kali/pool/main/s/samba/libsmbclient0_4.21.3%2bdfsg-6%2bb1_amd64.deb  404  Not Found [IP: 54.39.128.230 80]
+Error: Failed to fetch http://http.kali.org/kali/pool/main/s/samba/python3-ldb_2.10.0%2bsamba4.21.3%2bdfsg-6%2bb1_amd64.deb  404  Not Found [IP: 54.39.128.230 80]
+Error: Failed to fetch http://http.kali.org/kali/pool/main/s/samba/libldb2_2.10.0%2bsamba4.21.3%2bdfsg-6%2bb1_amd64.deb  404  Not Found [IP: 54.39.128.230 80]
+Error: Failed to fetch http://http.kali.org/kali/pool/main/s/samba/samba-libs_4.21.3%2bdfsg-6%2bb1_amd64.deb  404  Not Found [IP: 54.39.128.230 80]
+Error: Failed to fetch http://http.kali.org/kali/pool/main/s/samba/samba_4.21.3%2bdfsg-6%2bb1_amd64.deb  404  Not Found [IP: 54.39.128.230 80]
+Error: Failed to fetch http://http.kali.org/kali/pool/main/s/samba/samba-ad-dc_4.21.3%2bdfsg-6%2bb1_amd64.deb  404  Not Found [IP: 54.39.128.230 80]
+Error: Failed to fetch http://http.kali.org/kali/pool/main/s/samba/libpam-winbind_4.21.3%2bdfsg-6%2bb1_amd64.deb  404  Not Found [IP: 54.39.128.230 80]
+Error: Failed to fetch http://http.kali.org/kali/pool/main/s/samba/winbind_4.21.3%2bdfsg-6%2bb1_amd64.deb  404  Not Found [IP: 54.39.128.230 80]
+Error: Failed to fetch http://http.kali.org/kali/pool/main/s/samba/libnss-winbind_4.21.3%2bdfsg-6%2bb1_amd64.deb  404  Not Found [IP: 54.39.128.230 80]
+Error: Failed to fetch http://http.kali.org/kali/pool/main/p/python3.13/python3.13-minimal_3.13.2-1_amd64.deb  404  Not Found [IP: 54.39.128.230 80]
+Error: Failed to fetch http://http.kali.org/kali/pool/main/p/python3-defaults/python3-venv_3.13.1-2_amd64.deb  404  Not Found [IP: 54.39.128.230 80]
+Error: Failed to fetch http://http.kali.org/kali/pool/main/s/samba/python3-tdb_1.4.12%2bsamba4.21.3%2bdfsg-6%2bb1_amd64.deb  404  Not Found [IP: 54.39.128.230 80]
+Error: Failed to fetch http://http.kali.org/kali/pool/main/s/samba/libtalloc2_2.4.2%2bsamba4.21.3%2bdfsg-6%2bb1_amd64.deb  404  Not Found [IP: 54.39.128.230 80]
+Error: Failed to fetch http://http.kali.org/kali/pool/main/s/samba/python3-talloc_2.4.2%2bsamba4.21.3%2bdfsg-6%2bb1_amd64.deb  404  Not Found [IP: 54.39.128.230 80]
+Error: Failed to fetch http://http.kali.org/kali/pool/main/p/python3-defaults/libpython3-dev_3.13.1-2_amd64.deb  404  Not Found [IP: 54.39.128.230 80]
+Error: Failed to fetch http://http.kali.org/kali/pool/main/p/python3-defaults/python3-dev_3.13.1-2_amd64.deb  404  Not Found [IP: 54.39.128.230 80]
+Error: Failed to fetch http://http.kali.org/kali/pool/main/o/onboard/onboard-data_1.4.1-10_all.deb  404  Not Found [IP: 54.39.128.230 80]
+Error: Failed to fetch http://http.kali.org/kali/pool/main/o/onboard/onboard-common_1.4.1-10_all.deb  404  Not Found [IP: 54.39.128.230 80]
+Error: Failed to fetch http://http.kali.org/kali/pool/main/o/onboard/onboard_1.4.1-10_amd64.deb  404  Not Found [IP: 54.39.128.230 80]
+Error: Failed to fetch http://http.kali.org/kali/pool/main/b/blueman/blueman_2.4.3-1%2bb1_amd64.deb  404  Not Found [IP: 54.39.128.230 80]
+Error: Failed to fetch http://http.kali.org/kali/pool/main/p/python3-defaults/python3-minimal_3.13.1-2_amd64.deb  404  Not Found [IP: 54.39.128.230 80]
+Error: Failed to fetch http://http.kali.org/kali/pool/main/p/python3-defaults/python3_3.13.1-2_amd64.deb  404  Not Found [IP: 54.39.128.230 80]
+Error: Failed to fetch http://http.kali.org/kali/pool/main/p/python3.13/python3.13_3.13.2-1_amd64.deb  404  Not Found [IP: 54.39.128.230 80]
+Error: Failed to fetch http://http.kali.org/kali/pool/main/p/python3.13/python3.13-venv_3.13.2-1_amd64.deb  404  Not Found [IP: 54.39.128.230 80]
+Error: Failed to fetch http://http.kali.org/kali/pool/main/s/samba/libtdb1_1.4.12%2bsamba4.21.3%2bdfsg-6%2bb1_amd64.deb  404  Not Found [IP: 54.39.128.230 80]
+Error: Failed to fetch http://http.kali.org/kali/pool/main/p/python3.13/libpython3.13-dev_3.13.2-1_amd64.deb  404  Not Found [IP: 54.39.128.230 80]
+Error: Failed to fetch http://http.kali.org/kali/pool/main/p/python3.13/python3.13-dev_3.13.2-1_amd64.deb  404  Not Found [IP: 54.39.128.230 80]
+Error: Failed to fetch http://http.kali.org/kali/pool/main/p/python3-defaults/libpython3-stdlib_3.13.1-2_amd64.deb  404  Not Found [IP: 54.39.128.230 80]
+Error: Failed to fetch http://http.kali.org/kali/pool/main/s/samba/samba-common_4.21.3%2bdfsg-6_all.deb  404  Not Found [IP: 54.39.128.230 80]
+Error: Failed to fetch http://http.kali.org/kali/pool/main/s/samba/libwbclient0_4.21.3%2bdfsg-6%2bb1_amd64.deb  404  Not Found [IP: 54.39.128.230 80]
+Error: Failed to fetch http://http.kali.org/kali/pool/main/i/imagemagick/libmagickcore-7.q16-10_7.1.1.43%2bdfsg1-1_amd64.deb  404  Not Found [IP: 54.39.128.230 80]
+Error: Failed to fetch http://http.kali.org/kali/pool/main/i/imagemagick/libmagickwand-7.q16-10_7.1.1.43%2bdfsg1-1_amd64.deb  404  Not Found [IP: 54.39.128.230 80]
+Error: Failed to fetch http://http.kali.org/kali/pool/main/i/imagemagick/imagemagick-7.q16_7.1.1.43%2bdfsg1-1_amd64.deb  404  Not Found [IP: 54.39.128.230 80]
+Error: Failed to fetch http://http.kali.org/kali/pool/main/i/imagemagick/imagemagick_7.1.1.43%2bdfsg1-1_amd64.deb  404  Not Found [IP: 54.39.128.230 80]
+Error: Failed to fetch http://http.kali.org/kali/pool/main/k/kali-meta/kali-linux-headless_2025.1.11_amd64.deb  404  Not Found [IP: 54.39.128.230 80]
+Error: Failed to fetch http://http.kali.org/kali/pool/main/i/imagemagick/libmagickcore-7.q16-10-extra_7.1.1.43%2bdfsg1-1_amd64.deb  404  Not Found [IP: 54.39.128.230 80]
+Error: Failed to fetch http://http.kali.org/kali/pool/main/z/zbar/libzbar0t64_0.23.93-6%2bb1_amd64.deb  404  Not Found [IP: 54.39.128.230 80]
+Error: Failed to fetch http://http.kali.org/kali/pool/main/p/python3-stdlib-extensions/python3-tk_3.13.1-1_amd64.deb  404  Not Found [IP: 54.39.128.230 80]
+Error: Unable to fetch some archives, maybe run apt-get update or try with --fix-missing?
