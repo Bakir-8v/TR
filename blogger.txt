@@ -1,28 +1,5 @@
-from scapy.all import *
-import sys
-
-# الـ IP الجديد الخاص بك
-target_ip = "94.55.118.66"
-
-def stealth_fin_syn_scan(target):
-    print(f"[*] Crafting evasive packets for {target}...")
-    # بورتات الاختبار: 22 (SSH), 80 (HTTP), 443 (HTTPS), 51820 (VPN)
-    test_ports = [22, 80, 443, 51820]
-    
-    for port in test_ports:
-        # إرسال حزمة SYN و FIN معاً (حالة غير منطقية برمجياً)
-        # الهدف: رؤية كيف سيتعامل الـ Hardened OS مع حزمة "مسمومة"
-        pkt = IP(dst=target)/TCP(dport=port, flags="SF")
-        
-        response = sr1(pkt, timeout=1, verbose=False)
-        
-        if response is None:
-            print(f"[+] Port {port}: Ignored (Silent Drop - Good Defense!)")
-        elif response.haslayer(TCP):
-            if response.getlayer(TCP).flags == 0x14: # RST-ACK
-                print(f"[-] Port {port}: Closed (Server responded with RST)")
-            else:
-                print(f"[!] Port {port}: Responded with flags {response.getlayer(TCP).flags}")
-
-if __name__ == "__main__":
-    stealth_fin_syn_scan(target_ip)
+[*] Crafting evasive packets for 94.55.118.66...
+[+] Port 22: Ignored (Silent Drop - Good Defense!)
+[+] Port 80: Ignored (Silent Drop - Good Defense!)
+[+] Port 443: Ignored (Silent Drop - Good Defense!)
+[+] Port 51820: Ignored (Silent Drop - Good Defense!)
