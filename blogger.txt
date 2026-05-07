@@ -1,20 +1,8 @@
-from scapy.all import *
-import random
-
-target_ip = "94.55.118.66"
-
-def stress_test_behavior(target):
-    print(f"[!] Starting behavioral stress test on {target}...")
-    print("[!] Goal: Trigger the Behavior Anomaly Detection system.")
-    
-    # إرسال حزم UDP عشوائية بسرعة عالية
-    for i in range(100):
-        random_port = random.randint(1024, 65535)
-        # حزمة UDP صغيرة لاختبار سرعة رد الفعل
-        pkt = IP(dst=target)/UDP(dport=random_port)/Raw(load="DEATH_BY_SILENCE")
-        send(pkt, verbose=False)
-        
-        if i % 20 == 0:
-            print(f"[*] Sent {i} packets... checking for any response or lockout.")
-
-stress_test_behavior(target_ip)
+[!] Starting behavioral stress test on 94.55.118.66...
+[!] Goal: Trigger the Behavior Anomaly Detection system.
+[*] Sent 0 packets... checking for any response or lockout.
+[*] Sent 20 packets... checking for any response or lockout.
+[*] Sent 40 packets... checking for any response or lockout.
+[*] Sent 60 packets... checking for any response or lockout.
+[*] Sent 80 packets... checking for any response or lockout.
+                                                     
