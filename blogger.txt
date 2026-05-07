@@ -1,23 +1,8 @@
-from scapy.all import *
-
-target_ip = "94.55.118.66"
-
-def ack_flag_probe(target):
-    print(f"[!] Sending Stealth TCP ACK probe to {target}...")
-    # سنختبر بورتات عشوائية وبورت الـ VPN المحتمل
-    ports = [80, 443, 22, 1194, 51820, 8080]
-    
-    for port in ports:
-        # إرسال حزمة ACK Flags فقط
-        # الجدران النارية البسيطة قد تمررها لأنها تظنها جزءاً من اتصال قائم
-        packet = IP(dst=target)/TCP(dport=port, flags="A")
-        response = sr1(packet, timeout=1, verbose=False)
-        
-        if response is None:
-            print(f"[-] Port {port}: Filtered (Stateful Firewall / DROP policy)")
-        elif response.haslayer(TCP) and response.getlayer(TCP).flags == 0x4: # RST flag
-            print(f"[+] Port {port}: Unfiltered (Firewall allowed the ACK through)")
-        else:
-            print(f"[?] Port {port}: Received unexpected response")
-
-ack_flag_probe(target_ip)
+Traceback (most recent call last):
+  File "/usr/bin/py", line 167, in <module>
+    result = eval(args.expression)
+             ^^^^^^^^^^^^^^^^^^^^^
+  File "<string>", line 1, in <module>
+    lp.py
+NameError: name 'lp' is not defined
+                                       
