@@ -1,1 +1,68 @@
-sudo nmap -sS -sV -p 1-65535 -T4 192.168.2.0/24
+nmap -sV -sC -O 94.55.118.66                     
+Starting Nmap 7.95 ( https://nmap.org ) at 2026-05-07 20:41 UTC
+Nmap scan report for giris.turkiye.gov.tr (94.55.118.66)
+Host is up (0.10s latency).
+Not shown: 995 filtered tcp ports (no-response)
+PORT     STATE  SERVICE     VERSION
+80/tcp   open   http?
+113/tcp  closed ident
+443/tcp  open   ssl/https
+| fingerprint-strings: 
+|   GetRequest: 
+|     HTTP/1.1 404 Not Found
+|     Date: Thu, 07 May 2026 17:42:47 GMT
+|     Content-Type: text/html
+|     Content-Length: 8578
+|     Connection: close
+|     Vary: Accept-Encoding
+|     ETag: "6780c275-2182"
+|     Strict-Transport-Security: max-age=15768000; includeSubDomains
+|     X-Frame-Options: SAMEORIGIN
+|     Set-Cookie: TS01807aab=015c1cbb6de2aac0b912fa98d97e232725fb37f8af752246e624514985aa99227cb523c3df7a22c5300bd88624c76f8a148a5f2b1f; Path=/; Secure; HttpOnly; ;SameSite=None
+|     <!doctype html>
+|     <html>
+|     <head>
+|     <meta charset="utf-8">
+|     <meta http-equiv="X-UA-Compatible" content="IE=edge">
+|     <meta name="viewport" content="width=device-width, initial-scale=1">
+|     <meta name="description" content="">
+|     <meta name="author" content="">
+|     <title>404 Sayfa Bulunamad
+|     </title>
+|     <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,700&amp;subset=latin-ext" rel="stylesheet">                                                                                             
+|     <style>                                                                                           
+|_    html {
+| ssl-cert: Subject: commonName=*.turkiye.gov.tr/organizationName=Siber G\xC3\xBCvenlik Ba\xC5\x9Fkanl\xC4\xB1\xC4\x9F\xC4\xB1/stateOrProvinceName=Ankara/countryName=TR
+| Subject Alternative Name: DNS:*.turkiye.gov.tr, DNS:turkiye.gov.tr
+| Not valid before: 2026-02-10T13:44:33
+|_Not valid after:  2027-03-14T13:44:32
+2000/tcp open   cisco-sccp?
+5060/tcp open   sip?
+1 service unrecognized despite returning data. If you know the service/version, please submit the following fingerprint at https://nmap.org/cgi-bin/submit.cgi?new-service :
+SF-Port443-TCP:V=7.95%T=SSL%I=7%D=5/7%Time=69FCF94A%P=x86_64-pc-linux-gnu%
+SF:r(GetRequest,233B,"HTTP/1\.1\x20404\x20Not\x20Found\r\nDate:\x20Thu,\x2
+SF:007\x20May\x202026\x2017:42:47\x20GMT\r\nContent-Type:\x20text/html\r\n
+SF:Content-Length:\x208578\r\nConnection:\x20close\r\nVary:\x20Accept-Enco
+SF:ding\r\nETag:\x20\"6780c275-2182\"\r\nStrict-Transport-Security:\x20max
+SF:-age=15768000;\x20includeSubDomains\r\nX-Frame-Options:\x20SAMEORIGIN\r
+SF:\nSet-Cookie:\x20TS01807aab=015c1cbb6de2aac0b912fa98d97e232725fb37f8af7
+SF:52246e624514985aa99227cb523c3df7a22c5300bd88624c76f8a148a5f2b1f;\x20Pat
+SF:h=/;\x20Secure;\x20HttpOnly;\x20;SameSite=None\r\n\r\n<!doctype\x20html
+SF:>\n<html>\n<head>\n\x20\x20\x20\x20<meta\x20charset=\"utf-8\">\n\x20\x2
+SF:0\x20\x20<meta\x20http-equiv=\"X-UA-Compatible\"\x20content=\"IE=edge\"
+SF:>\n\x20\x20\x20\x20<meta\x20name=\"viewport\"\x20content=\"width=device
+SF:-width,\x20initial-scale=1\">\n\x20\x20\x20\x20<meta\x20name=\"descript
+SF:ion\"\x20content=\"\">\n\x20\x20\x20\x20<meta\x20name=\"author\"\x20con
+SF:tent=\"\">\n\x20\x20\x20\x20<title>404\x20Sayfa\x20Bulunamad\xc4\xb1</t
+SF:itle>\n\x20\x20\x20\x20<link\x20href=\"https://fonts\.googleapis\.com/c
+SF:ss\?family=Open\+Sans:400,700&amp;subset=latin-ext\"\x20rel=\"styleshee
+SF:t\">\n\x20\x20\x20\x20<style>\n\x20\x20\x20\x20\x20\x20\x20\x20html\x20
+SF:{\n\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20");
+Device type: general purpose|WAP|firewall|broadband router
+Running (JUST GUESSING): Microsoft Windows XP|2008 (86%), Motorola embedded (86%), NetworksAOK embedded (86%), Linksys embedded (85%), Linux 2.6.X (85%), Netgear embedded (85%), Nokia IPSO 4.X (85%)
+OS CPE: cpe:/o:microsoft:windows_xp::sp1 cpe:/h:motorola:ap-51xx cpe:/h:linksys:wrt54g_v8 cpe:/o:linux:linux_kernel:2.6.18 cpe:/o:microsoft:windows_server_2008:r2:sp1 cpe:/h:netgear:cm500 cpe:/o:nokia:ipso:4.1build19
+Aggressive OS guesses: Microsoft Windows XP Home SP1 (French) (86%), Motorola AP-51xx WAP (86%), NetworksAOK network monitoring applicance (86%), Linksys WRT54G v8 wireless broadband router (85%), Linux 2.6.18 (85%), Linux 2.6.23 (85%), Linux 2.6.24 (85%), Microsoft Windows Server 2008 R2 SP1 (85%), Netgear CM500 cable modem (85%), Nokia firewall (IPSO 4.1Build19) (85%)
+No exact OS matches for host (test conditions non-ideal).
+
+OS and Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
+Nmap done: 1 IP address (1 host up) scanned in 290.53 seconds
