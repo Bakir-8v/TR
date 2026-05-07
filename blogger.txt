@@ -1,19 +1,4 @@
-from scapy.all import *
-
-target_ip = "94.55.118.66"
-
-def window_size_probe(target):
-    print(f"[*] Probing {target} with TCP Window manipulation...")
-    ports = [22, 443, 51820]
-    
-    for port in ports:
-        # إرسال حزمة ACK مع حجم نافذة (Window Size) غير معتاد
-        pkt = IP(dst=target)/TCP(dport=port, flags="A", window=512)
-        response = sr1(pkt, timeout=1, verbose=False)
-        
-        if response is None:
-            print(f"[+] Port {port}: Still Silent (Full Stealth)")
-        else:
-            print(f"[!] Port {port}: Responded! Analysis of Window field might reveal OS stack.")
-
-window_size_probe(target_ip)
+[*] Probing 94.55.118.66 with TCP Window manipulation...
+[+] Port 22: Still Silent (Full Stealth)
+[+] Port 443: Still Silent (Full Stealth)
+[+] Port 51820: Still Silent (Full Stealth)
