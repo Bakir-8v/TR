@@ -1,87 +1,25 @@
-import requests
-import socket
-import struct
-import re
+--- Phase 1: Cookie Analysis ---
+[*] Analyzing F5 Cookie: 1101533962.20480.0000
+[!] Potential Internal IP Discovered: 10.19.168.65:80
 
-class AbyssTargetAnalyzer:
-    def __init__(self, target_ip, target_port=443):
-        self.target_ip = target_ip
-        self.target_port = target_port
-        self.headers = {
-            'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AbyssWebForge/2.2'
-        }
+--- Phase 2: VoIP Recon ---
+[*] Sending SIP OPTIONS to 94.55.118.66:5060...
+[-] SIP Enumeration Failed: timed out
 
-    def decode_f5_cookie(self, cookie_value):
-        """فك تشفير كوكيز F5 لاكتشاف الـ IP الداخلي والمنفذ"""
-        print(f"[*] Analyzing F5 Cookie: {cookie_value}")
-        try:
-            # النمط المعتاد: TS01807aab=015c1cbb... (نحتاج الجزء الرقمي المشفر)
-            # ملاحظة: في بعض الإعدادات يكون التنسيق مختلفاً، هذا المحلل للنمط القياسي
-            parts = cookie_value.split('.')
-            if len(parts) < 2: return "[-] Unsupported Cookie Format"
-            
-            hex_ip = hex(int(parts[0]))[2:].zfill(8)
-            ip_addr = ".".join([str(int(hex_ip[i:i+2], 16)) for i in range(6, -1, -2)])
-            
-            hex_port = hex(int(parts[1]))[2:].zfill(4)
-            port = int(hex_port[2:4] + hex_port[0:2], 16)
-            
-            return f"[!] Potential Internal IP Discovered: {ip_addr}:{port}"
-        except Exception as e:
-            return f"[-] Error Decoding Cookie: {e}"
-
-    def sip_enumerate(self, sip_port=5060):
-        """محاكاة طلب OPTIONS لاكتشاف إصدار سيرفر الـ VoIP"""
-        print(f"[*] Sending SIP OPTIONS to {self.target_ip}:{sip_port}...")
-        sip_request = (
-            f"OPTIONS sip:{self.target_ip} SIP/2.0\r\n"
-            f"Via: SIP/2.0/UDP 127.0.0.1:5060;branch=z9hG4bK-74b7\r\n"
-            f"Max-Forwards: 70\r\n"
-            f"To: <sip:{self.target_ip}>\r\n"
-            f"From: Abyss <sip:abyss@127.0.0.1>;tag=63441\r\n"
-            f"Call-ID: {self.target_ip}-7788\r\n"
-            f"CSeq: 1 OPTIONS\r\n"
-            f"Contact: <sip:abyss@127.0.0.1>\r\n"
-            f"Accept: application/sdp\r\n"
-            f"Content-Length: 0\r\n\r\n"
-        )
-        
-        try:
-            sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
-            sock.settimeout(3)
-            sock.sendto(sip_request.encode(), (self.target_ip, sip_port))
-            data, addr = sock.recvfrom(1024)
-            print("[+] SIP Response Received:")
-            print(data.decode())
-        except Exception as e:
-            print(f"[-] SIP Enumeration Failed: {e}")
-
-    def scan_hidden_paths(self):
-        """فحص المسارات التي قد تتجاوز الـ 404 الظاهرية"""
-        paths = ["/admin", "/v1/api", "/.env", "/config", "/login.php"]
-        print("[*] Fuzzing for hidden paths...")
-        for path in paths:
-            url = f"https://{self.target_ip}{path}"
-            try:
-                response = requests.get(url, headers=self.headers, verify=False, timeout=5)
-                if response.status_code != 404:
-                    print(f"[!] Interesting Path Found: {url} (Status: {response.status_code})")
-            except:
-                pass
-
-if __name__ == "__main__":
-    # البيانات المستخرجة من Nmap الخاص بك
-    TARGET = "94.55.118.66"
-    F5_COOKIE = "015c1cbb6de2aac0b912fa98d97e232725fb37f8af752246e624514985aa99227cb523c3df7a22c5300bd88624c76f8a148a5f2b1f"
-
-    attacker = AbyssTargetAnalyzer(TARGET)
-    
-    print("--- Phase 1: Cookie Analysis ---")
-    # ملاحظة: سنمرر عينة رقمية لأن الكوكيز في Nmap كانت بنظام TS01 الخاص بـ F5
-    print(attacker.decode_f5_cookie("1101533962.20480.0000")) 
-    
-    print("\n--- Phase 2: VoIP Recon ---")
-    attacker.sip_enumerate()
-    
-    print("\n--- Phase 3: Path Discovery ---")
-    attacker.scan_hidden_paths()
+--- Phase 3: Path Discovery ---
+[*] Fuzzing for hidden paths...
+/usr/lib/python3/dist-packages/urllib3/connectionpool.py:1097: InsecureRequestWarning: Unverified HTTPS request is being made to host '94.55.118.66'. Adding certificate verification is strongly advised. See: https://urllib3.readthedocs.io/en/latest/advanced-usage.html#tls-warnings
+  warnings.warn(
+[!] Interesting Path Found: https://94.55.118.66/admin (Status: 406)
+/usr/lib/python3/dist-packages/urllib3/connectionpool.py:1097: InsecureRequestWarning: Unverified HTTPS request is being made to host '94.55.118.66'. Adding certificate verification is strongly advised. See: https://urllib3.readthedocs.io/en/latest/advanced-usage.html#tls-warnings
+  warnings.warn(
+[!] Interesting Path Found: https://94.55.118.66/v1/api (Status: 406)
+/usr/lib/python3/dist-packages/urllib3/connectionpool.py:1097: InsecureRequestWarning: Unverified HTTPS request is being made to host '94.55.118.66'. Adding certificate verification is strongly advised. See: https://urllib3.readthedocs.io/en/latest/advanced-usage.html#tls-warnings
+  warnings.warn(
+[!] Interesting Path Found: https://94.55.118.66/.env (Status: 406)
+/usr/lib/python3/dist-packages/urllib3/connectionpool.py:1097: InsecureRequestWarning: Unverified HTTPS request is being made to host '94.55.118.66'. Adding certificate verification is strongly advised. See: https://urllib3.readthedocs.io/en/latest/advanced-usage.html#tls-warnings
+  warnings.warn(
+[!] Interesting Path Found: https://94.55.118.66/config (Status: 406)
+/usr/lib/python3/dist-packages/urllib3/connectionpool.py:1097: InsecureRequestWarning: Unverified HTTPS request is being made to host '94.55.118.66'. Adding certificate verification is strongly advised. See: https://urllib3.readthedocs.io/en/latest/advanced-usage.html#tls-warnings
+  warnings.warn(
+[!] Interesting Path Found: https://94.55.118.66/login.php (Status: 406)
