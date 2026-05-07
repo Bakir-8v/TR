@@ -1,4 +1,5 @@
-*] Attempting Stealth Bypass on: /admin
+python 0.py
+[*] Attempting Stealth Bypass on: /admin
 [+] Response Code: 406
 [-] Failed: Still getting 406. WAF is inspecting TLS Fingerprint or JA3.
 ------------------------------
@@ -10,3 +11,4 @@
 [+] Response Code: 406
 [-] Failed: Still getting 406. WAF is inspecting TLS Fingerprint or JA3.
 ------------------------------
+                                                          
