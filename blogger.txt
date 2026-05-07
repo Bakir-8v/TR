@@ -1,1 +1,2 @@
-apt install kali-archive-keyring -y --allow-unauthenticated
+apt --fix-broken install
+dpkg --configure -a
