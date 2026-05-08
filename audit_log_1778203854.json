@@ -1,0 +1,10 @@
+{
+  "event": "RedTeam_Simulation",
+  "captured_data": "٨",
+  "source_ip": "Lab_Static_IP",
+  "system_info": {
+    "platform": "Linux armv81",
+    "agent": "Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/148.0.0.0 Mobile Safari/537.36",
+    "timestamp": "2026-05-08T01:30:54.069Z"
+  }
+}
