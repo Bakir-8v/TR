@@ -1,1 +1,1 @@
-Error: Sub-process /usr/bin/dpkg returned an error code (1)
+sudo dpkg --configure -a
