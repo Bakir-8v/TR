@@ -1,1 +1,5 @@
-sudo fsck -f /dev/sdb2
+ sudo fsck -y /dev/sdb2
+fsck from util-linux 2.40.2
+e2fsck 1.47.1 (20-May-2024)
+persistence: clean, 436374/2457600 files, 5301465/39321600 blocks
+                   
