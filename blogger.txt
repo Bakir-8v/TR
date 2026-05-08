@@ -1,1 +1,3 @@
-sudo umount /dev/sdb2
+oot㉿kali)-[~]
+└─# sudo umount /dev/sdb2
+                        
