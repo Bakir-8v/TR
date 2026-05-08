@@ -1,1 +1,1 @@
-deb http://kali.download/kali kali-rolling main contrib non-free non-free-fir8mware
+deb http://kali.download/kali kali-rolling main contrib non-free non-free-firmware
