@@ -1,1 +1,1 @@
-echo "/ union" > /mnt/persistence/persistence.conf
+umount /mnt/persistence
