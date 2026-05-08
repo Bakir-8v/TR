@@ -1,1 +1,1 @@
-sudo apt install -y kali-archive-keyring
+sudo wget https://archive.kali.org/archive-key.asc -O /etc/apt/trusted.gpg.d/kali-archive-key.asc
