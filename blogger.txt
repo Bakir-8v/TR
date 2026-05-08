@@ -1,5 +1,3 @@
- sudo fsck -y /dev/sdb2
-fsck from util-linux 2.40.2
-e2fsck 1.47.1 (20-May-2024)
-persistence: clean, 436374/2457600 files, 5301465/39321600 blocks
-                   
+sudo mount /dev/sdb2 /mnt
+echo "/ union" | sudo tee /mnt/persistence.conf
+sudo umount /mnt
