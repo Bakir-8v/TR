@@ -1,7 +1,1 @@
- sudo apt --fix-broken install -y
-Reading package lists... Error!
-Error: Write error - write (28: No space left on device)
-Error: IO Error saving source cache
-Error: The package lists or status file could not be parsed or opened.
-                                                                                                                                                                                             
-┌──(root㉿kali)-[~]
+sudo gparted
