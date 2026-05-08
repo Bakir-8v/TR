@@ -1,1 +1,1 @@
-sudo mount /dev/sdb2 /mnt
+echo "/ union" | sudo tee /mnt/persistence.conf
