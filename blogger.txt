@@ -1,1 +1,1 @@
-deb http://kali.download/kali kali-rolling main contrib non-free non-free-firmware
+sudo nano /etc/apt/sources.list
