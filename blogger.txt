@@ -1,4 +1,1 @@
-(root㉿kali)-[~]
-└─# mount | grep sdb2
-                                                                                                                                          
-┌──(root㉿kali)-[~]
+sudo fsck -f /dev/sdb2
