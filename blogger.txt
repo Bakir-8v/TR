@@ -1,1 +1,4 @@
-mount | grep sdb2
+(root㉿kali)-[~]
+└─# mount | grep sdb2
+                                                                                                                                          
+┌──(root㉿kali)-[~]
