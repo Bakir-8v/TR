@@ -43,5 +43,14 @@
     "password": "00000000",
     "role": "user",
     "createdAt": "2026-05-08T23:28:21.936Z"
+  },
+  {
+    "id": 1778283600236,
+    "name": "Rozeos",
+    "username": "Roz333",
+    "email": "alomarhasan602@gmail.com",
+    "password": "78907890",
+    "role": "user",
+    "createdAt": "2026-05-08T23:40:00.236Z"
   }
 ]
