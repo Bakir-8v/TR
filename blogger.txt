@@ -1,7 +1,1 @@
-sudo fsck -f /dev/sdb2
-fsck from util-linux 2.40.2
-e2fsck 1.47.1 (20-May-2024)
-/dev/sdb2 is mounted.
-e2fsck: Cannot continue, aborting.
-
-
+sudo umount /dev/sdb2
