@@ -1,1 +1,1 @@
-sudo wget https://archive.kali.org/archive-key.asc -O /etc/apt/trusted.gpg.d/kali-archive-key.asc
+Error: Sub-process /usr/bin/dpkg returned an error code (1)
