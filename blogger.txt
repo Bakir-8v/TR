@@ -1,3 +1,1 @@
-oot㉿kali)-[~]
-└─# sudo umount /dev/sdb2
-                        
+mount | grep sdb2
