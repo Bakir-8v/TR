@@ -1,11 +1,1 @@
- apt update
-Get:1 http://kali.download/kali kali-rolling InRelease [34.0 kB]
-Err:1 http://kali.download/kali kali-rolling InRelease
-  The following signatures couldn't be verified because the public key is not available: NO_PUBKEY ED65462EC8D5E4C5
-Warning: GPG error: http://kali.download/kali kali-rolling InRelease: The following signatures couldn't be verified because the public key is not available: NO_PUBKEY ED65462EC8D5E4C5
-Error: The repository 'http://kali.download/kali kali-rolling InRelease' is not signed.
-Notice: Updating from such a repository can't be done securely, and is therefore disabled by default.
-Notice: See apt-secure(8) manpage for repository creation and user configuration details.
-Notice: Repository 'Kali Linux' changed its 'firmware component' value from 'non-free' to 'non-free-firmware'
-Notice: More information about this can be found online at: https://www.kali.org/blog/non-free-firmware-transition/
-                             
+sudo apt install -y kali-archive-keyring
