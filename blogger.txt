@@ -1,6 +1,4 @@
-root㉿kali)-[/media/kali/persistence]
-└─# mount | grep persistence
-/dev/sdc2 on /media/kali/persistence type ext3 (rw,nosuid,nodev,relatime,errors=remount-ro,uhelper=udisks2)
+cat /proc/cmdline 
+BOOT_IMAGE=/live/vmlinuz boot=live persistence persistent=cryptsetup persistence-encryption=luks username=kali hostname=kali persistence initrd=/live/initrd.img
                                                                                  
-┌──(root㉿kali)-[/media/kali/persistence]
-└─# 
+┌──(root㉿kali)-[~]
