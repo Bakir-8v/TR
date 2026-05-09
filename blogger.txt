@@ -1,2 +1,2 @@
-sudo umount /mnt/persistence
-sudo cryptsetup close persistence
+sudo apt update
+sudo apt install grml-rescueboot -y
