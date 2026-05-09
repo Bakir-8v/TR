@@ -1,1 +1,2 @@
-sudo e2label /dev/mapper/persistence persistence
+sudo mkdir -p /mnt/persistence
+sudo mount /dev/mapper/persistence /mnt/persistence
