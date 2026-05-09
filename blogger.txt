@@ -1,10 +1,1 @@
-(root㉿kali)-[/media/kali/persistence]
-└─# df -h | grep overlay
-tmpfs           3.9G   87M  3.8G   3% /run/live/overlay
-overlay         3.9G   87M  3.8G   3% /
-                                                                                 
-┌──(root㉿kali)-[/media/kali/persistence]
-└─# 
-                                                                                 
-┌──(root㉿kali)-[/media/kali/persistence]
-└─# 
+mount | grep persistence
