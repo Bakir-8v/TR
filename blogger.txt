@@ -1,12 +1,1 @@
-apt update
-Get:1 file:/run/live/medium kali-last-snapshot InRelease
-Ign:1 file:/run/live/medium kali-last-snapshot InRelease
-Get:2 file:/run/live/medium kali-last-snapshot Release [7,354 B]
-Get:2 file:/run/live/medium kali-last-snapshot Release [7,354 B]
-Get:3 file:/run/live/medium kali-last-snapshot Release.gpg
-Ign:3 file:/run/live/medium kali-last-snapshot Release.gpg
-Hit:4 http://http.kali.org/kali kali-rolling InRelease
-2310 packages can be upgraded. Run 'apt list --upgradable' to see them.
-Warning: Conflicting distribution: file:/run/live/medium kali-last-snapshot Release (expected kali-last-snapshot but got kali-rolling)
-Warning: http://http.kali.org/kali/dists/kali-rolling/InRelease: Key is stored in legacy trusted.gpg keyring (/etc/apt/trusted.gpg), see the DEPRECATION section in apt-key(8) for details.
-                                              
+sudo mkdir -p /boot/grml/
