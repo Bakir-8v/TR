@@ -1,1 +1,16 @@
-sudo cryptsetup open /dev/sdc2 persistence
+sudo cryptsetup luksFormat /dev/sdc2
+WARNING: Device /dev/sdc2 already contains a 'ext3' superblock signature.
+
+WARNING!
+========
+This will overwrite data on /dev/sdc2 irrevocably.
+
+Are you sure? (Type 'yes' in capital letters): yes
+Operation aborted.
+
+                                                                                 
+┌──(root㉿kali)-[~]
+└─# sudo cryptsetup open /dev/sdc2 persistence
+Device /dev/sdc2 is not a valid LUKS device.
+                                                                                 
+┌──(root㉿kali)-[~]
