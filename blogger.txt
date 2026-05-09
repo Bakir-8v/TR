@@ -1,2 +1,1 @@
-sudo mkdir -p /mnt/persistence
-sudo mount /dev/mapper/persistence /mnt/persistence
+echo "/ union" | sudo tee /mnt/persistence/persistence.conf
