@@ -1,6 +1,28 @@
-─(root㉿kali)-[/media/kali/persistence]
+──(kali㉿kali)-[/media/kali/persistence]
+└─$ sudo su
+┌──(root㉿kali)-[/media/kali/persistence]
 └─# mount | grep union
                                                                              
 ┌──(root㉿kali)-[/media/kali/persistence]
-└─# 
-
+└─# lsblk -f
+NAME FSTYPE FSVER LABEL        UUID                                 FSAVAIL FSUSE% MOUNTPOINTS
+loop0
+     squash 4.0                                                           0   100% /usr/lib/live/mount/rootfs/filesystem.squashfs
+                                                                                   /run/live/rootfs/filesystem.squashfs
+sda                                                                                
+└─sda1
+     ntfs                      C8BA8A51BA8A3C46                                    
+sdb                                                                                
+├─sdb1
+│    ntfs         النظام محجوز 2056822B56820230                       23.6M    53% /media/kali/النظام محجوز
+├─sdb2
+│    ntfs                      24248E2C248E00D2                                    
+└─sdb3
+     ntfs                      A8961CD7961CA7B8                                    
+sdc                                                                                
+├─sdc1
+│    vfat   FAT32 KALI LIVE    1221-0D4D                               143G     3% /usr/lib/live/mount/medium
+│                                                                                  /run/live/medium
+└─sdc2
+     ext3   1.0   persistence  0d86208f-cbb8-134c-8f48-1baf96ba5a50  122.3G    13% /media/kali/persistence
+                                
