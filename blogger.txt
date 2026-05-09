@@ -1,1 +1,1 @@
-echo "/ union" | sudo tee /mnt/persist/persistence.conf
+sudo umount /mnt/persist
