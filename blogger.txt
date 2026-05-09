@@ -1,17 +1,1 @@
-sudo cryptsetup luksFormat /dev/sdc2      
-WARNING: Device /dev/sdc2 already contains a 'ext3' superblock signature.
-
-WARNING!
-========
-This will overwrite data on /dev/sdc2 irrevocably.
-
-Are you sure? (Type 'yes' in capital letters): YES
-Enter passphrase for /dev/sdc2: 
-Verify passphrase: 
-                                                                                 
-┌──(root㉿kali)-[~]
-└─# sudo cryptsetup open /dev/sdc2 persistence
-Enter passphrase for /dev/sdc2: 
-                                                                                 
-┌──(root㉿kali)-[~]
-└─# 
+sudo mkfs.ext3 /dev/mapper/persistence
