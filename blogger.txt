@@ -1,1 +1,23 @@
-sudo umount /mnt/persist
+Filesystem      Size  Used Avail Use% Mounted on
+udev            3.8G     0  3.8G   0% /dev
+tmpfs           783M  1.5M  782M   1% /run
+/dev/sdc1       149G  5.1G  143G   4% /run/live/medium
+/dev/loop0      4.0G  4.0G     0 100% /run/live/rootfs/filesystem.squashfs
+tmpfs           3.9G   31M  3.8G   1% /run/live/overlay
+overlay         3.9G   31M  3.8G   1% /
+tmpfs           3.9G  4.0K  3.9G   1% /dev/shm
+tmpfs           5.0M     0  5.0M   0% /run/lock
+tmpfs           1.0M     0  1.0M   0% /run/credentials/systemd-tmpfiles-setup-dev-early.service
+tmpfs           1.0M     0  1.0M   0% /run/credentials/systemd-journald.service
+tmpfs           1.0M     0  1.0M   0% /run/credentials/systemd-udev-load-credentials.service
+tmpfs           1.0M     0  1.0M   0% /run/credentials/systemd-sysusers.service
+tmpfs           1.0M     0  1.0M   0% /run/credentials/systemd-sysctl.service
+tmpfs           1.0M     0  1.0M   0% /run/credentials/systemd-tmpfiles-setup-dev.service
+tmpfs           3.9G  8.0K  3.9G   1% /tmp
+tmpfs           1.0M     0  1.0M   0% /run/credentials/systemd-tmpfiles-setup.service
+tmpfs           1.0M     0  1.0M   0% /run/credentials/getty@tty1.service
+tmpfs           783M  136K  783M   1% /run/user/1000
+/dev/sdc2       149G   20G  123G  14% /media/kali/persistence
+/dev/sdb1        50M   27M   24M  53% /media/kali/النظام محجوز
+                                                                          
+                                                                      
