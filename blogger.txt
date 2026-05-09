@@ -1,1 +1,6 @@
-mount | grep union
+─(root㉿kali)-[/media/kali/persistence]
+└─# mount | grep union
+                                                                             
+┌──(root㉿kali)-[/media/kali/persistence]
+└─# 
+
