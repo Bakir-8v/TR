@@ -52,5 +52,14 @@
     "password": "78907890",
     "role": "user",
     "createdAt": "2026-05-08T23:40:00.236Z"
+  },
+  {
+    "id": 1778323407978,
+    "name": "Rozeos",
+    "username": "Roz3",
+    "email": "alomarhasan602@gmail.com",
+    "password": "بتلتلنررون",
+    "role": "user",
+    "createdAt": "2026-05-09T10:43:27.978Z"
   }
 ]
