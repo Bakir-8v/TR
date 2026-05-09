@@ -1,1 +1,1 @@
-sudo umount /dev/sdc2 2>/dev/null
+sudo cryptsetup luksFormat /dev/sdc2
