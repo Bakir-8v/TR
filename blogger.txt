@@ -1,4 +1,1 @@
-cat /proc/cmdline 
-BOOT_IMAGE=/live/vmlinuz boot=live persistence persistent=cryptsetup persistence-encryption=luks username=kali hostname=kali persistence initrd=/live/initrd.img
-                                                                                 
-┌──(root㉿kali)-[~]
+blkid /dev/sdc2
