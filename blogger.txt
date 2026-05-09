@@ -1,2 +1,17 @@
-sudo mount -o remount,rw /
-sudo systemctl restart systemd-udevd
+(root㉿kali)-[~]
+└─# lsblk
+NAME   MAJ:MIN RM   SIZE RO TYPE MOUNTPOINTS
+loop0    7:0    0     4G  1 loop /usr/lib/live/mount/rootfs/filesystem.squashfs
+                                 /run/live/rootfs/filesystem.squashfs
+sda      8:0    0 931.5G  0 disk 
+└─sda1   8:1    0 931.5G  0 part 
+sdb      8:16   0 111.8G  0 disk 
+├─sdb1   8:17   0    50M  0 part 
+├─sdb2   8:18   0 111.2G  0 part 
+└─sdb3   8:19   0   523M  0 part 
+sdc      8:32   0 298.1G  0 disk 
+├─sdc1   8:33   0 148.1G  0 part /usr/lib/live/mount/medium
+│                                /run/live/medium
+└─sdc2   8:34   0   150G  0 part 
+                                                                             
+┌──(root㉿kali)-[~]
