@@ -1,2 +1,6 @@
-sudo apt update
-sudo apt install grml-rescueboot -y
+root㉿kali)-[/media/kali/persistence]
+└─# sudo apt install grml-rescueboot -y
+Error: Unable to locate package grml-rescueboot
+                                                                             
+┌──(root㉿kali)-[/media/kali/persistence]
+└─# 
