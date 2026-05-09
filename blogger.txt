@@ -1,1 +1,2 @@
-blkid /dev/sdc2
+
+/dev/sdc2: LABEL="persistence" UUID="0d86208f-cbb8-134c-8f48-1baf96ba5a50" BLOCK_SIZE="4096" TYPE="ext3" PARTUUID="00025838-02"
