@@ -1,1 +1,2 @@
 mount | grep persistence
+/dev/sdc2 on /media/kali/persistence type ext3 (rw,nosuid,nodev,relatime,errors=remount-ro,uhelper=udisks2)
