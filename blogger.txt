@@ -1,1 +1,2 @@
-echo "/ union" | sudo tee /mnt/persistence/persistence.conf
+sudo umount /mnt/persistence
+sudo cryptsetup close persistence
