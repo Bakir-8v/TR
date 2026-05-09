@@ -1,13 +1,1 @@
-sudo cryptsetup luksFormat /dev/sdc2
-WARNING: Device /dev/sdc2 already contains a 'ext3' superblock signature.
-
-WARNING!
-========
-This will overwrite data on /dev/sdc2 irrevocably.
-
-Are you sure? (Type 'yes' in capital letters): y
-Operation aborted.
-
-                                                                                 
-┌──(root㉿kali)-[~]
-└─# 
+sudo cryptsetup open /dev/sdc2 persistence
