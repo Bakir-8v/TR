@@ -1,1 +1,10 @@
-ss -tulnp | grep 8080
+ufw allow 8080
+Rules updated
+Rules updated (v6)
+                                                                                
+┌──(root㉿kali)-[/home/ghost]
+└─# ss -tulnp | grep 8080
+tcp   LISTEN 0      5            0.0.0.0:8080      0.0.0.0:*    users:(("python",pid=5965,fd=3))                                                                                                                                                                                       
+                                                                                
+┌──(root㉿kali)-[/home/ghost]
+└─# 
