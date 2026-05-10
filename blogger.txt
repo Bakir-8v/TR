@@ -1,4 +1,4 @@
-sudo nmap -sS -sV -sC -O -Pn \
+ sudo nmap -sS -sV -sC -O -Pn \
 --p-all \
 --reason \
 --packet-trace \
@@ -11,3 +11,7 @@ sudo nmap -sS -sV -sC -O -Pn \
 -D RND:10 \
 -vv \
 -oA deep_infiltration_results 94.55.118.66
+/usr/lib/nmap/nmap: unrecognized option '--p-all'
+See the output of nmap -h for a summary of options.
+                                                                                                                                          
+┌──(root㉿kali)-[/home/ghost/Des
