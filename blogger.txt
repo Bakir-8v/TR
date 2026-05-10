@@ -1,34 +1,4 @@
-/home/ghost/Desktop/ru.py:75: DeprecationWarning: There is no current event loop
-  loop = asyncio.get_event_loop()
-/usr/share/nodejs/playwright/lib/transform/babelBundleImpl.js:19
-`);return i!==-1&&(t=yue(t,n,s,i)),s+t+n};Object.defineProperties(Do.prototype,Qi);var vue=Do(),Sue=Do({level:cm?cm.level:0});Object.defineProperty(cr,"backgroundColorNames",{enumerable:!0,get:function(){return Mt.backgroundColorNames}});Object.defineProperty(cr,"backgroundColors",{enumerable:!0,get:function(){return Mt.backgroundColorNames}});Object.defineProperty(cr,"colorNames",{enumerable:!0,get:function(){return Mt.colorNames}});Object.defineProperty(cr,"colors",{enumerable:!0,get:function(){return Mt.colorNames}});Object.defineProperty(cr,"foregroundColorNames",{enumerable:!0,get:function(){return Mt.foregroundColorNames}});Object.defineProperty(cr,"foregroundColors",{enumerable:!0,get:function(){return Mt.foregroundColorNames}});Object.defineProperty(cr,"modifierNames",{enumerable:!0,get:function(){return Mt.modifierNames}});Object.defineProperty(cr,"modifiers",{enumerable:!0,get:function(){return Mt.modifierNames}});cr.Chalk=Sc;cr.chalkStderr=Sue;cr.default=vue;cr.supportsColor=lm;cr.supportsColorStderr=cm;(function(){let e=vc.exports,t=e.default;t.Instance=Sc,vc.exports=t;for(let r of Object.keys(e))vc.exports[r]=e[r]})()});var YP=y(wo=>{"use strict";Object.defineProperty(wo,"__esModule",{value:!0});wo.default=Iue;wo.getChalk=HP;wo.shouldHighlight=zP;var xue=BP(),KP=ji(),hm=WP(),Pue=new Set(["as","async","from","get","of","set"]);function Cue(e){return{keyword:e.cyan,capitalized:e.yellow,jsxIdentifier:e.yellow,punctuator:e.yellow,number:e.magenta,string:e.green,regex:e.magenta,comment:e.grey,invalid:e.white.bgRed.bold}}var Aue=/\r\n|[\n\r\u2028\u2029]/,Due=/^[()[\]{}]$/,GP;{let e=/^[a-z][\w-]*$/i,t=function(r){if(r.type==="name"){if((0,KP.isKeyword)(r.value)||(0,KP.isStrictReservedWord)(r.value,!0)||Pue.has(r.value))return"keyword";if(e.test(r.value))return"jsxIdentifier";if(r.value[0]!==r.value[0].toLowerCase())return"capitalized"}return r.type==="punctuator"&&Due.test(r.value)?"bracket":r.type==="invalid"&&(r.value==="@"||r.value==="#")?"punctuator":r.type};GP=function*(r){for(let s of xue(r))yield{type:t(s),value:s.value}}}function wue(e,t){let r="";for(let{type:s,value:n}of GP(t)){let i=e[s];i?r+=n.split(Aue).map(a=>i(a)).join(`
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            
-
-TypeError: Cannot set property backgroundColorNames of [object Object] which has only a getter
-    at /usr/share/nodejs/playwright/lib/transform/babelBundleImpl.js:19:1140
-    at /usr/share/nodejs/playwright/lib/transform/babelBundleImpl.js:19:1147
-    at /usr/share/nodejs/playwright/lib/transform/babelBundleImpl.js:1:343
-    at /usr/share/nodejs/playwright/lib/transform/babelBundleImpl.js:19:1305
-    at /usr/share/nodejs/playwright/lib/transform/babelBundleImpl.js:1:343
-    at /usr/share/nodejs/playwright/lib/transform/babelBundleImpl.js:20:366
-    at /usr/share/nodejs/playwright/lib/transform/babelBundleImpl.js:1:343
-    at Object.<anonymous> (/usr/share/nodejs/playwright/lib/transform/babelBundleImpl.js:2095:3707)
-    at Module._compile (node:internal/modules/cjs/loader:1705:14)
-    at Module._extensions..js (node:internal/modules/cjs/loader:1838:10)
-
-Node.js v22.22.2
-Traceback (most recent call last):
-  File "/home/ghost/Desktop/ru.py", line 76, in <module>
-    loop.run_until_complete(engine.run_probe("/admin"))
-    ~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/usr/lib/python3.13/asyncio/base_events.py", line 725, in run_until_complete
-    return future.result()
-           ~~~~~~~~~~~~~^^
-  File "/home/ghost/Desktop/ru.py", line 22, in run_probe
-    async with async_playwright() as p:
-               ~~~~~~~~~~~~~~~~^^
-  File "/usr/lib/python3/dist-packages/playwright/async_api/_context_manager.py", line 46, in __aenter__
-    playwright = AsyncPlaywright(next(iter(done)).result())
-                                 ~~~~~~~~~~~~~~~~~~~~~~~^^
-Exception: Connection closed while reading from the driver
-                                                                     
+File "/home/ghost/Desktop/ru.py", line 4
+    `);return i!==-1&&(t=yue(t,n,s,i)),s+t+n};Object.defineProperties(Do.prototype,Qi);var vue=Do(),Sue=Do({level:cm?cm.level:0});Object.defineProperty(cr,"backgroundColorNames",{enumerable:!0,get:function(){return Mt.backgroundColorNames}});Object.defineProperty(cr,"backgroundColors",{enumerable:!0,get:function(){return Mt.backgroundColorNames}});Object.defineProperty(cr,"colorNames",{enumerable:!0,get:function(){return Mt.colorNames}});Object.defineProperty(cr,"colors",{enumerable:!0,get:function(){return Mt.colorNames}});Object.defineProperty(cr,"foregroundColorNames",{enumerable:!0,get:function(){return Mt.foregroundColorNames}});Object.defineProperty(cr,"foregroundColors",{enumerable:!0,get:function(){return Mt.foregroundColorNames}});Object.defineProperty(cr,"modifierNames",{enumerable:!0,get:function(){return Mt.modifierNames}});Object.defineProperty(cr,"modifiers",{enumerable:!0,get:function(){return Mt.modifierNames}});cr.Chalk=Sc;cr.chalkStderr=Sue;cr.default=vue;cr.supportsColor=lm;cr.supportsColorStderr=cm;(function(){let e=vc.exports,t=e.default;t.Instance=Sc,vc.exports=t;for(let r of Object.keys(e))vc.exports[r]=e[r]})()});var YP=y(wo=>{"use strict";Object.defineProperty(wo,"__esModule",{value:!0});wo.default=Iue;wo.getChalk=HP;wo.shouldHighlight=zP;var xue=BP(),KP=ji(),hm=WP(),Pue=new Set(["as","async","from","get","of","set"]);function Cue(e){return{keyword:e.cyan,capitalized:e.yellow,jsxIdentifier:e.yellow,punctuator:e.yellow,number:e.magenta,string:e.green,regex:e.magenta,comment:e.grey,invalid:e.white.bgRed.bold}}var Aue=/\r\n|[\n\r\u2028\u2029]/,Due=/^[()[\]{}]$/,GP;{let e=/^[a-z][\w-]*$/i,t=function(r){if(r.type==="name"){if((0,KP.isKeyword)(r.value)||(0,KP.isStrictReservedWord)(r.value,!0)||Pue.has(r.value))return"keyword";if(e.test(r.value))return"jsxIdentifier";if(r.value[0]!==r.value[0].toLowerCase())return"capitalized"}return r.type==="punctuator"&&Due.test(r.value)?"bracket":r.type==="invalid"&&(r.value==="@"||r.value==="#")?"punctuator":r.type};GP=function*(r){for(let s of xue(r))yield{type:t(s),value:s.value}}}function wue(e,t){let r="";for(let{type:s,value:n}of GP(t)){let i=e[s];i?r+=n.split(Aue).map(a=>i(a)).join(`
+     ^
+SyntaxError: unmatched ')'
