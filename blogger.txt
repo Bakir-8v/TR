@@ -1,5 +1,76 @@
-Traceback (most recent call last):
-  File "/home/ghost/Desktop/ru.py", line 4, in <module>
-    from playwright_stealth import stealth_async
-ImportError: cannot import name 'stealth_async' from 'playwright_stealth' (/usr/local/lib/python3.13/dist-packages/playwright_stealth/__init__.py)
-                                                      
+import asyncio
+import sys
+from playwright.async_api import async_playwright
+
+# محاولة استيراد دالة التخفي بشكل مرن
+try:
+    from playwright_stealth import stealth_async as apply_stealth
+except ImportError:
+    try:
+        from playwright_stealth import stealth as apply_stealth
+    except ImportError:
+        print("[-] Error: playwright-stealth not found. Please run: pip install playwright-stealth --break-system-packages")
+        sys.exit(1)
+
+class AbyssStealthEngine:
+    def __init__(self, target_ip):
+        self.target_url = f"https://{target_ip}"
+        # بصمة متصفح حديثة جداً
+        self.ua = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36"
+
+    async def run_probe(self, path):
+        async with async_playwright() as p:
+            # تشغيل Chromium
+            browser = await p.chromium.launch(headless=True)
+            
+            # محاكاة بيئة كاملة (Fingerprint Neutralization)
+            context = await browser.new_context(
+                user_agent=self.ua,
+                viewport={'width': 1280, 'height': 720},
+                device_scale_factor=1,
+            )
+
+            page = await context.new_page()
+            
+            # تطبيق طبقة التخفي لتجاوز كشف الـ Headless
+            await apply_stealth(page)
+
+            url = f"{self.target_url}{path}"
+            print(f"\n[*] Target: {url}")
+            print("[*] Status: Bypassing JA3/JA4 and JS Challenges...")
+
+            try:
+                # محاولة الوصول مع انتظار استقرار الشبكة (تجاوز الـ Redirects)
+                response = await page.goto(url, wait_until="networkidle", timeout=60000)
+                
+                status = response.status
+                print(f"[+] Response Code: {status}")
+
+                if status == 200:
+                    print("[!!!] BYPASS SUCCESSFUL!")
+                    title = await page.title()
+                    content = await page.content()
+                    print(f"[*] Title: {title}")
+                    print(f"[*] Content Preview: {content[:200]}...")
+                elif status == 406:
+                    print("[-] Failed: 406 Not Acceptable.")
+                    print("[!] Logic: The WAF is likely using IP Reputation or Geofencing.")
+                elif status == 403:
+                    print("[-] Blocked: 403 Forbidden (Bypassed WAF, stopped by ACL).")
+                else:
+                    print(f"[-] Interaction finished with status: {status}")
+
+            except Exception as e:
+                print(f"[-] Execution Error: {str(e)}")
+            
+            await browser.close()
+
+if __name__ == "__main__":
+    # الهدف بناءً على بيانات Nmap
+    TARGET = "94.55.118.66"
+    
+    engine = AbyssStealthEngine(TARGET)
+    
+    # سنركز على المسار الإداري الذي يعطي 406 دائماً
+    loop = asyncio.get_event_loop()
+    loop.run_until_complete(engine.run_probe("/admin"))
