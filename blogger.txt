@@ -1,5 +1,13 @@
-nmap -p 80,443,8080,5060 \
---script="http-enum,http-headers,http-methods,ssl-enum-ciphers,ssl-cert,http-waf-detect,http-waf-fingerprint" \
---script-args="http.useragent='Mozilla/5.0 (Windows NT 10.0; Win64; x64) Chrome/124.0.0.0',http-waf-detect.aggro,http-waf-fingerprint.intensive" \
--Pn -sV -O --reason --packet-trace --debug \
-94.55.118.66 -oN infiltration_report.txt
+sudo nmap -sS -sV -sC -O -Pn \
+--p-all \
+--reason \
+--packet-trace \
+--mtu 24 \
+--data-length 32 \
+--ttl 128 \
+--badsum \
+--script "vulners,http-waf-detect,http-waf-fingerprint,ssl-enum-ciphers,http-headers,http-robots.txt,sip-enum-users,sip-methods" \
+--script-args="http.useragent='Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36',http-waf-detect.aggro" \
+-D RND:10 \
+-vv \
+-oA deep_infiltration_results 94.55.118.66
