@@ -1,1 +1,48 @@
 sudo nmap --script vuln 192.168.2.166
+Starting Nmap 7.99 ( https://nmap.org ) at 2026-05-10 10:03 -0400
+Nmap scan report for 192.168.2.166
+Host is up (0.0084s latency).
+Not shown: 996 closed tcp ports (reset)
+PORT    STATE    SERVICE
+22/tcp  open     ssh
+53/tcp  filtered domain
+80/tcp  open     http
+|_http-dombased-xss: Couldn't find any DOM based XSS.
+|_http-aspnet-debug: ERROR: Script execution failed (use -d to debug)
+|_http-stored-xss: Couldn't find any stored XSS vulnerabilities.
+| http-csrf: 
+| Spidering limited to: maxdepth=3; maxpagecount=20; withinhost=192.168.2.166
+|   Found the following possible CSRF vulnerabilities: 
+|     
+|     Path: http://192.168.2.166:80/
+|     Form id: loginform
+|_    Form action: /userRpm/LoginRpm.htm
+|_http-vuln-cve2014-3704: ERROR: Script execution failed (use -d to debug)
+| http-phpmyadmin-dir-traversal: 
+|   VULNERABLE:
+|   phpMyAdmin grab_globals.lib.php subform Parameter Traversal Local File Inclusion
+|     State: UNKNOWN (unable to test)
+|     IDs:  CVE:CVE-2005-3299
+|       PHP file inclusion vulnerability in grab_globals.lib.php in phpMyAdmin 2.6.4 and 2.6.4-pl1 allows remote attackers to include local files via the $__redirect parameter, possibly involving the subform array.
+|       
+|     Disclosure date: 2005-10-nil
+|     Extra information:
+|       ../../../../../etc/passwd :
+|   <body><script language="javaScript">window.parent.document.cookie="Authorization=;path=/";
+|   window.parent.location.href = "http://192.168.2.166";
+|   </script></body></html>
+|   
+|     References:
+|       http://www.exploit-db.com/exploits/1244/
+|_      https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2005-3299
+443/tcp open     https
+|_http-aspnet-debug: ERROR: Script execution failed (use -d to debug)
+|_http-dombased-xss: Couldn't find any DOM based XSS.
+|_http-csrf: Couldn't find any CSRF vulnerabilities.
+|_ssl-ccs-injection: No reply from server (TIMEOUT)
+|_http-stored-xss: Couldn't find any stored XSS vulnerabilities.
+|_http-vuln-cve2014-3704: ERROR: Script execution failed (use -d to debug)
+MAC Address: 00:31:92:AE:3D:F6 (TP-Link Systems)
+
+Nmap done: 1 IP address (1 host up) scanned in 536.14 seconds
+                                                                 
