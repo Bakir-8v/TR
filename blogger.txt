@@ -1,1 +1,13 @@
-sudo nmap -sn 192.168.2.0/24
+ nmap 192.168.2.166
+Starting Nmap 7.99 ( https://nmap.org ) at 2026-05-10 09:59 -0400
+Nmap scan report for 192.168.2.166
+Host is up (0.0069s latency).
+Not shown: 996 closed tcp ports (reset)
+PORT    STATE    SERVICE
+22/tcp  open     ssh
+53/tcp  filtered domain
+80/tcp  open     http
+443/tcp open     https
+MAC Address: 00:31:92:AE:3D:F6 (TP-Link Systems)
+
+Nmap done: 1 IP address (1 host up) scanned in 1.95 seconds
