@@ -1,14 +1,1 @@
-─(root㉿kali)-[/home/ghost]
-└─# sudo ufw allow 80/tcp
-Rules updated
-Rules updated (v6)
-                                                                                
-┌──(root㉿kali)-[/home/ghost]
-└─# sudo ufw allow 80/tcp
-Skipping adding existing rule
-Skipping adding existing rule (v6)
-                                                                                
-┌──(root㉿kali)-[/home/ghost]
-└─# sudo ufw reload
-Firewall not enabled (skipping reload)
-                                    
+sudo nmap -sn 192.168.2.0/24
