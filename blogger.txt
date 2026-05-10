@@ -1,1 +1,7 @@
-pip install curl_cffi --break-system-packages
+[*] Decision Engine: Analyzing behavioral variance for /admin...
+[-] Profile firefox120 failed: Impersonating firefox120 is not supported
+
+RESULT: Confirmed WAF Block (Strict JA3/JA4 Fingerprinting Policy)
+
+[+] Final Risk Assessment Score: 90.0%
+[!] Critical: Your WAF is successfully fingerprinting automated tools.
