@@ -1,10 +1,5 @@
-ufw allow 8080
-Rules updated
-Rules updated (v6)
-                                                                                
-┌──(root㉿kali)-[/home/ghost]
-└─# ss -tulnp | grep 8080
-tcp   LISTEN 0      5            0.0.0.0:8080      0.0.0.0:*    users:(("python",pid=5965,fd=3))                                                                                                                                                                                       
-                                                                                
-┌──(root㉿kali)-[/home/ghost]
-└─# 
+nmap 149.86.143.64 -p 8080
+Starting Nmap 7.99 ( https://nmap.org ) at 2026-05-10 09:41 -0400
+Note: Host seems down. If it is really up, but blocking our ping probes, try -Pn
+Nmap done: 1 IP address (0 hosts up) scanned in 3.20 seconds
+                                  
