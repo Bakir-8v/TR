@@ -1,7 +1,1 @@
-apt update                
-Notice: It seems that you don't have any APT data sources configured.
-Notice: You won't be able to update your system or install new packages.
-Notice: For more information, please refer to the online documentation at:
-Notice: https://www.kali.org/docs/general-use/kali-linux-sources-list-repositories/
-All packages are up to date.    
-                                      
+sudo nano /etc/apt/sources.list
