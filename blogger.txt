@@ -1,28 +1,9 @@
-# واجهة بطاقة الشبكة التي ستبث الإشارة
-interface=wlan0
-
-# تعريف التعريف (المودم) - nl80211 يعمل مع معظم البطاقات الحديثة
-driver=nl80211
-
-# اسم الشبكة الذي سيظهر للأجهزة
-ssid=Cyber_Security_Lab
-
-# نمط العمل (g تعني 2.4GHz وهو الأكثر توافقاً)
-hw_mode=g
-
-# القناة (يفضل اختيار 1 أو 6 أو 11 لتجنب التشويش)
-channel=6
-
-# تفعيل بروتوكول 802.11n للسرعات العالية (اختياري)
-ieee80211n=1
-
-# لعمل شبكة مفتوحة (بدون كلمة سر) اترك الخيارات التالية كما هي:
-auth_algs=1
-wmm_enabled=0
-
-# --- إذا أردت إضافة كلمة سر (WPA2) قم بإضافة الأسطر التالية ---
-# wpa=2
-# wpa_passphrase=YourStrongPassword
-# wpa_key_mgmt=WPA-PSK
-# wpa_pairwise=TKIP
-# rsn_pairwise=CCMP
+ip link 
+1: lo: <LOOPBACK,UP,LOWER_UP> mtu 65536 qdisc noqueue state UNKNOWN mode DEFAULT group default qlen 1000
+    link/loopback 00:00:00:00:00:00 brd 00:00:00:00:00:00
+2: eth0: <NO-CARRIER,BROADCAST,MULTICAST,UP> mtu 1500 qdisc fq_codel state DOWN mode DEFAULT group default qlen 1000
+    link/ether a0:1d:48:b0:44:32 brd ff:ff:ff:ff:ff:ff
+3: wlan0: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc noqueue state UP mode DEFAULT group default qlen 1000
+    link/ether ac:7b:a1:79:ea:69 brd ff:ff:ff:ff:ff:ff
+                                                                                
+┌──(root㉿kali)-[/home/ghost]
