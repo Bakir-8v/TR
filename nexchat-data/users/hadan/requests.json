@@ -1,10 +1,7 @@
 {
-  "pending": [
-    {
-      "from": "hanyyyh",
-      "at": "2026-05-11T02:47:17.452Z"
-    }
-  ],
+  "pending": [],
   "sent": [],
-  "friends": []
+  "friends": [
+    "hanyyyh"
+  ]
 }
