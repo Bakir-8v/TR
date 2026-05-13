@@ -4,7 +4,7 @@
  * STAGE: Advanced Obfuscation
  */
 (function() {
-    const _target = "";
+    const _target = "Q29k";
     const _engine = () => {
         console.log("Executing evolved pattern...");
         // منطق التطور الذاتي هنا
