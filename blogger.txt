@@ -1,1 +1,10 @@
-444
+
+#!/bin/bash
+
+while true; do
+    for ch in {1..13}; do
+        iw dev wlan0mon set channel $ch
+        echo "[+] Channel $ch"
+        sleep 1
+    done
+done
