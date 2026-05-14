@@ -1,0 +1,65 @@
+[
+  {
+    "id": "e1",
+    "name": "أحمد الزهراني",
+    "email": "ahmed@nexus.com",
+    "dept": "tech",
+    "role": "admin",
+    "status": "active",
+    "joined": "2021-03-15"
+  },
+  {
+    "id": "e2",
+    "name": "سارة العمري",
+    "email": "sara@nexus.com",
+    "dept": "hr",
+    "role": "manager",
+    "status": "active",
+    "joined": "2021-07-20"
+  },
+  {
+    "id": "e3",
+    "name": "خالد القحطاني",
+    "email": "khalid@nexus.com",
+    "dept": "fin",
+    "role": "user",
+    "status": "active",
+    "joined": "2022-01-10"
+  },
+  {
+    "id": "e4",
+    "name": "نورة الشمري",
+    "email": "noura@nexus.com",
+    "dept": "mkt",
+    "role": "user",
+    "status": "inactive",
+    "joined": "2022-06-05"
+  },
+  {
+    "id": "e5",
+    "name": "محمد الدوسري",
+    "email": "mdosri@nexus.com",
+    "dept": "sales",
+    "role": "manager",
+    "status": "active",
+    "joined": "2020-11-01"
+  },
+  {
+    "id": "e6",
+    "name": "فاطمة الحربي",
+    "email": "fatima@nexus.com",
+    "dept": "ops",
+    "role": "user",
+    "status": "active",
+    "joined": "2023-02-14"
+  },
+  {
+    "id": "_md6s4dz",
+    "name": "محمد حسن",
+    "email": "abn1231969@gmail.com",
+    "dept": "hr",
+    "role": "admin",
+    "status": "active",
+    "joined": "2026-05-14"
+  }
+]
