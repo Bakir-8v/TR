@@ -1,7 +1,19 @@
-python hand.py                                                  
-Traceback (most recent call last):
-  File "/home/ghost/dTa/hand.py", line 5, in <module>
-    mp_hands = mp.solutions.hands
-               ^^^^^^^^^^^^
-AttributeError: module 'mediapipe' has no attribute 'solutions'
-                         
+# 1. الانتقال إلى مجلد المشروع
+cd /home/ghost/dTa/
+
+# 2. إنشاء بيئة افتراضية معزولة باسم venv
+python3 -m venv venv
+
+# 3. تفعيل البيئة الافتراضية (ستلاحظ ظهور (venv) بجانب اسم مستخدم الترمينال)
+source venv/bin/activate
+
+# 4. تحديث مدير الحزم pip داخل البيئة
+pip install --upgrade pip
+
+# 5. تثبيت إصدارات مستقرة ومجربة متوافقة مع بعضها
+pip install opencv-python
+pip install protobuf==3.20.3
+pip install mediapipe==0.10.11
+
+# 6. تشغيل السكريبت الآن
+python hand.py
