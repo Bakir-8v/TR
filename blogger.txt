@@ -1,43 +1,15 @@
-#!/bin/bash
+./sh.sh
+[*] بدء فحص الموديلات والإضافات النشطة على الهدف...
+[+] الموديل/المسار موجود (403): /modules/contrib/blazy
+[+] الموديل/المسار موجود (403): /modules/contrib/better_exposed_filters
+[+] الموديل/المسار موجود (403): /modules/contrib/jquery_ui
+[+] الموديل/المسار موجود (403): /modules/contrib/jquery_ui_datepicker
+[+] الموديل/المسار موجود (403): /modules/contrib/text_resize
+[+] الموديل/المسار موجود (403): /modules/contrib/extlink
+[+] الموديل/المسار موجود (403): /modules/contrib/lazy
+[+] الموديل/المسار موجود (403): /modules/custom/custom
+[+] الموديل/المسار موجود (403): /modules/custom/custom_push_notifications
+[+] الموديل/المسار موجود (403): /modules/custom/stv_tweaks
+[+] الموديل/المسار موجود (403): /themes/custom/syriatv
 
-# ألوان للتنظيم
-GREEN='\033[0;32m'
-RED='\033[0;31m'
-BLUE='\033[0;34m'
-YELLOW='\033[0;33m'
-NC='\033[0m'
-
-TARGET="https://www.syria.tv"
-
-echo -e "${BLUE}[*] بدء فحص الموديلات والإضافات النشطة على الهدف...${NC}"
-
-# قائمة بالموديلات والمجلدات المستخرجة من تحليل الكود السابق
-MODULES=(
-    "modules/contrib/blazy"
-    "modules/contrib/better_exposed_filters"
-    "modules/contrib/jquery_ui"
-    "modules/contrib/jquery_ui_datepicker"
-    "modules/contrib/text_resize"
-    "modules/contrib/extlink"
-    "modules/contrib/lazy"
-    "modules/custom/custom"
-    "modules/custom/custom_push_notifications"
-    "modules/custom/stv_tweaks"
-    "themes/custom/syriatv"
-)
-
-for MOD in "${MODULES[@]}"
-do
-    # فحص الرابط الخاص بكل موديل (بحثاً عن ملف الـ info.yml أو المجلد نفسه)
-    URL="${TARGET}/${MOD}/"
-    STATUS=$(curl -s -o /dev/null -w "%{http_code}" "$URL")
-    
-    if [ "$STATUS" -eq 200 ] || [ "$STATUS" -eq 403 ]; then
-        # رمز 403 يعني أن المجلد موجود بالفعل ولكن السيرفر يمنع استعراض الملفات (Directory Listing)
-        echo -e "${GREEN}[+] الموديل/المسار موجود ($STATUS): /${MOD}${NC}"
-    else
-        echo -e "${RED}[-] المسار غير مستجيب ($STATUS): /${MOD}${NC}"
-    fi
-done
-
-echo -e "\n${YELLOW}[*] انتهى فحص الموديلات.${NC}"
+[*] انتهى فحص الموديلات.
