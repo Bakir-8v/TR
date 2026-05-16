@@ -1,1 +1,2 @@
-pip3 uninstall mediapipe protobuf -y
+pip3 uninstall mediapipe protobuf -ypip3 install --upgrade pip
+pip3 install mediapipe --force-reinstall --break-system-packages
