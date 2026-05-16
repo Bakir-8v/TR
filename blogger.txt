@@ -1,2 +1,39 @@
-sudo nginx -t
-sudo systemctl restart nginx
+# 1. كتلة حظر الاتصالات المباشرة عبر الأي بي أو النطاقات غير المعرفة
+server {
+    listen 80 default_server;
+    listen [::]:80 default_server;
+    listen 443 ssl default_server;
+    listen [::]:443 ssl default_server;
+
+    # شهادات SSL ذاتية التوقيع (Self-signed) فقط لإتمام مصافحة الـ SSL قبل الحظر
+    ssl_certificate /etc/ssl/certs/ssl-cert-snakeoil.pem;
+    ssl_certificate_key /etc/ssl/private/ssl-cert-snakeoil.key;
+
+    server_name _;
+
+    # رمز الاستجابة 444 في Nginx يقوم بإغلاق الاتصال فوراً دون إرجاع أي بيانات (Connection Drop)
+    return 444;
+}
+
+# 2. كتلة التشغيل الحقيقية للموقع (لا تستقبل إلا النطاق الرسمي)
+server {
+    listen 80;
+    listen 443 ssl;
+    
+    server_name www.syria.tv syria.tv;
+
+    ssl_certificate /etc/letsencrypt/live/syria.tv/fullchain.pem;
+    ssl_certificate_key /etc/letsencrypt/live/syria.tv/privkey.pem;
+
+    root /var/www/html;
+    index index.php index.html;
+
+    location / {
+        try_files $uri $uri/ /index.php?$query_string;
+    }
+
+    # حظر الوصول إلى المجلدات الحساسة الخاصة بالنواة لـ Drupal برمجياً
+    location ~* /core/(.*)\.txt$ {
+        return 404;
+    }
+}
