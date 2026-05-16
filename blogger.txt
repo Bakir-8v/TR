@@ -1,1 +1,43 @@
-pip install streamlit cvzone opencv-python
+import cv2
+import streamlit as st
+from cvzone.HandTrackingModule import HandDetector
+import numpy as np
+
+# إعدادات صفحة المتصفح (Streamlit)
+st.set_page_config(page_title="CyberSecurity Lab - Hand Tracking", layout="centered")
+st.title("🛡️ نظام تتبع اليد عبر المتصفح (Localhost)")
+st.text("يتم الآن المعالجة وقراءة حركة اليد في الوقت الفعلي...")
+
+# إنشاء مكان مخصص لعرض البث المباشر في المتصفح
+FRAME_WINDOW = st.image([])
+
+# تهيئة مكتشف اليد الذكي (أقصى حد يدين، ونسبة ثقة 80%)
+detector = HandDetector(detectionCon=0.8, maxHands=2)
+
+# تشغيل الكاميرا
+cap = cv2.VideoCapture(0)
+
+# زر لإيقاف التشغيل من المتصفح
+stop_button = st.button("إيقاف البث")
+
+while cap.isOpened() and not stop_button:
+    success, frame = cap.read()
+    if not success:
+        st.error("فشل في قراءة البيانات من الكاميرا. تأكد من ربط الـ USB بجهازك الوهمي.")
+        break
+
+    # قلب الإطار ليحاكي حركة المرآة الطبيعية
+    frame = cv2.flip(frame, 1)
+
+    # قراءة اليد ورسم النقاط والمفاصل تلقائياً
+    hands, frame = detector.findHands(frame)
+
+    # تحويل نظام الألوان من BGR (الخاص بـ OpenCV) إلى RGB ليتم عرضه بشكل صحيح في المتصفح
+    frame_rgb = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
+
+    # تحديث الإطار داخل المتصفح فوراً (Live Stream)
+    FRAME_WINDOW.image(frame_rgb)
+
+# تنظيف الذاكرة وإغلاق الكاميرا عند الضغط على إيقاف
+cap.release()
+st.success("تم إيقاف نظام التتبع بنجاح.")
