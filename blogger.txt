@@ -1,1 +1,1 @@
-curl -i --resolve www.syria.tv:443:195.175.182.41 https://www.syria.tv/admin
+curl -i --resolve www.syria.tv:443:195.175.182.41 https://www.syria.tv/core/changelog.txt
