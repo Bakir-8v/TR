@@ -1,8 +1,1 @@
-python hand.py            
-Matplotlib is building the font cache; this may take a moment.
-Traceback (most recent call last):
-  File "/home/ghost/dTa/hand.py", line 5, in <module>
-    mp_hands = mp.solutions.hands
-               ^^^^^^^^^^^^
-AttributeError: module 'mediapipe' has no attribute 'solutions'
-                                    
+pip3 uninstall mediapipe protobuf -y
