@@ -1,16 +1,98 @@
-🛡️ نظام قياس الأصابع والمفاصل عبر المتصفح
-تتبع الهيكل العظمي لليد بخيوط خضراء رفيعة (Python 3.13)
+import cv2
+import streamlit as st
+import numpy as np
+import math
 
-cv2.error: OpenCV(4.13.0) :-1: error: (-5:Bad argument) in function 'line' > Overload resolution failed: > - img is not a numerical tuple > - Expected Ptr<cv::UMat> for argument 'img'
-Traceback:
-File "/home/ghost/dTa/venv/lib/python3.13/site-packages/streamlit/runtime/scriptrunner/exec_code.py", line 129, in exec_func_with_error_handling
-    result = func()
-File "/home/ghost/dTa/venv/lib/python3.13/site-packages/streamlit/runtime/scriptrunner/script_runner.py", line 689, in code_to_exec
-    exec(code, module.__dict__)  # noqa: S102
-    ~~~~^^^^^^^^^^^^^^^^^^^^^^^
-File "/home/ghost/dTa/app.py", line 91, in <module>
-    cv2.line(points_to_link[j], points_to_link[j+1], (0, 255, 0), 1)
-    ~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-Copy
-Ask Google
-Ask ChatGPT
+# إعدادات صفحة المتصفح
+st.set_page_config(page_title="Advanced Hand Tracking", layout="centered")
+st.title("🛡️ نظام قياس الأصابع والمفاصل عبر المتصفح")
+st.subheader("تتبع الهيكل العظمي لليد بخيوط خضراء رفيعة (Python 3.13)")
+
+# مكان عرض البث المباشر
+FRAME_WINDOW = st.image([])
+
+# تشغيل الكاميرا
+cap = cv2.VideoCapture(0)
+stop_button = st.button("إيقاف البث")
+
+while cap.isOpened() and not stop_button:
+    success, frame = cap.read()
+    if not success:
+        st.error("فشل في قراءة الكاميرا.")
+        break
+
+    frame = cv2.flip(frame, 1)
+    h, w, c = frame.shape
+    
+    # معالجة الصورة لعزل لون البشرة (اليد)
+    blur = cv2.GaussianBlur(frame, (3, 3), 0)
+    ycrcb = cv2.cvtColor(blur, cv2.COLOR_BGR2YCrCb)
+    lower_skin = np.array([0, 135, 85], dtype=np.uint8)
+    upper_skin = np.array([255, 180, 135], dtype=np.uint8)
+    mask = cv2.inRange(ycrcb, lower_skin, upper_skin)
+    
+    # تنظيف القناع للحصول على تفاصيل أصابع حادة
+    kernel = np.ones((3, 3), np.uint8)
+    mask = cv2.erode(mask, kernel, iterations=1)
+    mask = cv2.dilate(mask, kernel, iterations=2)
+    
+    # البحث عن الخطوط المحيطة باليد
+    contours, _ = cv2.findContours(mask, cv2.RETR_TREE, cv2.CHAIN_APPROX_SIMPLE)
+    
+    if len(contours) > 0:
+        max_contour = max(contours, key=cv2.contourArea)
+        
+        if cv2.contourArea(max_contour) > 5000:
+            # 1. رسم خط محيطي رفيع جداً حول اليد بالكامل (خيط أخضر سمك 1 بكسل)
+            cv2.drawContours(frame, [max_contour], -1, (0, 255, 0), 1)
+            
+            # 2. حساب الغطاء المحدب (Convex Hull) للوصول لأطراف الأصابع
+            hull = cv2.convexHull(max_contour, returnPoints=False)
+            
+            # حساب العيوب (Defects) وهي الفراغات والمفاصل بين الأصابع
+            if len(hull) > 3:
+                defects = cv2.convexityDefects(max_contour, hull)
+                
+                if defects is not None:
+                    points_to_link = []
+                    
+                    for i in range(defects.shape[0]):
+                        s, e, f, d = defects[i, 0]
+                        start = tuple(max_contour[s][0]) # طرف الإصبع الحالي
+                        end = tuple(max_contour[e][0])   # طرف الإصبع التالي
+                        far = tuple(max_contour[f][0])   # المفصل الداخلي بينهما
+                        
+                        # تصفية النقاط بناءً على المسافة والزاوية لتجنب الخطوط العشوائية
+                        a = math.sqrt((end[0] - start[0])**2 + (end[1] - start[1])**2)
+                        b = math.sqrt((far[0] - start[0])**2 + (far[1] - start[1])**2)
+                        c_side = math.sqrt((end[0] - far[0])**2 + (end[1] - far[1])**2)
+                        
+                        # تطبيق قانون جيب التمام لحساب زاوية المفصل
+                        angle = math.acos((b**2 + c_side**2 - a**2) / (2 * b * c_side)) * 57
+                        
+                        if angle <= 90 and d > 3000: # المسافة d تعبر عن عمق المفصل
+                            # رسم نقطة حمراء صغيرة عند المفصل الداخلي
+                            cv2.circle(frame, far, 4, (0, 0, 255), -1)
+                            # رسم نقطة زرقاء عند طرف الإصبع
+                            cv2.circle(frame, start, 4, (255, 0, 0), -1)
+                            
+                            # تخزين النقاط لربطها كخيوط قياس
+                            points_to_link.append(start)
+                            points_to_link.append(far)
+                            points_to_link.append(end)
+                            
+                            # قياس المسافة برمجياً وطباعتها كبكسلات فوق الخط
+                            distance = int(b / 2)
+                            cv2.putText(frame, f"{distance}px", (far[0]+10, far[1]), 
+                                        cv2.FONT_HERSHEY_SIMPLEX, 0.35, (0, 255, 0), 1)
+
+                    # 3. التصحيح هنا: تمرير الـ frame أولاً لترسم الخطوط الخضراء الرفيعة فوقه بشكل صحيح
+                    for j in range(len(points_to_link) - 1):
+                        cv2.line(frame, points_to_link[j], points_to_link[j+1], (0, 255, 0), 1)
+
+    # تحويل الصورة للعرض في المتصفح
+    frame_rgb = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
+    FRAME_WINDOW.image(frame_rgb)
+
+cap.release()
+st.success("تم إيقاف النظام.")
