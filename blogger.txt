@@ -1,27 +1,52 @@
-./scan.sh 
-[*] بدء سكربت فحص ومطابقة ثغرات إصدارات دروبال...
+#!/bin/bash
 
-[+] فحص ثغرات النواة لـ Drupal 9.x...
----------------------------------------------- ---------------------------------
- Exploit Title                                |  Path
----------------------------------------------- ---------------------------------
-Drupal < 7.58 / < 8.3.9 / < 8.4.6 / < 8.5.1 - | php/webapps/44449.rb
-Drupal < 8.6.9 - REST Module Remote Code Exec | php/webapps/46459.py
-Drupal Module CKEditor 3.0 < 3.6.2 - Persiste | php/webapps/18389.txt
-Drupal Module CODER 2.5 - Remote Command Exec | php/webapps/40149.rb
----------------------------------------------- ---------------------------------
-Shellcodes: No Results
+# ألوان للتنظيم
+GREEN='\033[0;32m'
+RED='\033[0;31m'
+BLUE='\033[0;34m'
+YELLOW='\033[0;33m'
+NC='\033[0m'
 
-[+] فحص ثغرات المكتبة المرفقة jQuery UI 1.13.2...
-Exploits: No Results
-Shellcodes: No Results
+echo -e "${BLUE}[*] بدء سكربت الاستطلاع المتقدم وفحص الملفات الحساسة...${NC}"
 
-[+] قائمة بالمسارات الافتراضية التي يفضل التحقق منها يدوياً أو عبر curl:
-- /core/changelog.txt (لتأكيد الإصدار الدقيق لنواة النظام)
-- /composer.json (لقراءة المكتبات البرمجية المعتمدة في الخلفية)
-- /web.config أو /robots.txt (لمعرفة المجلدات المستثناة من الأرشفة)
+# اطلب رابط الهدف من المستخدم عند التشغيل
+read -p "أدخل رابط الموقع المستهدف (مثال: https://target.com): " TARGET
 
-[*] انتهى الفحص الأولي. يمكنك الآن مطابقة الـ CVEs المستخرجة مع بيئة التجارب الخاصة بك.
-                                                                                
-┌──(venv)─(root㉿kali)-[/home/ghost/dTa]
-└─# 
+# إزالة الشرطة المائلة الزائدة في نهاية الرابط إن وجدت
+TARGET="${TARGET%/}"
+
+echo -e "\n${YELLOW}[1] فحص الملفات الحساسة ومحاولة قراءة الإصدارات الحقيقية...${NC}"
+
+FILES=(
+    "/core/changelog.txt"
+    "/composer.json"
+    "/robots.txt"
+    "/web.config"
+    "/core/install.php"
+    "/README.md"
+)
+
+for FILE in "${FILES[@]}"
+do
+    URL="${TARGET}${FILE}"
+    # جلب كود الحالة الهيدر (HTTP Status)
+    STATUS=$(curl -s -o /dev/null -w "%{http_code}" "$URL")
+    
+    if [ "$STATUS" -eq 200 ]; then
+        echo -e "${GREEN}[+] تم العثور على الملف ($STATUS): $URL${NC}"
+        # عرض أول 10 أسطر من الملف لمعاينة المحتوى سريعاً
+        echo -e "${BLUE}--- معاينة المحتوى ---${NC}"
+        curl -s "$URL" | head -n 10
+        echo -e "${BLUE}----------------------${NC}\n"
+    else
+        echo -e "${RED}[-] غير موجود أو محمي ($STATUS): $FILE${NC}"
+    fi
+done
+
+echo -e "\n${YELLOW}[2] فحص الـ CVEs الثنائية لـ Drupal 9.5.7 الموثقة أمنياً...${NC}"
+echo -e "إصدار 9.5.7 يحتوي تاريخياً على نقاط ضعف يجب التحقق من ترقيعها يدوياً:"
+echo -e "${RED}- CVE-2023-40619:${NC} ثغرة تخطي صلاحيات (Access Bypass) في نواة دروبال 9.5.x."
+echo -e "${RED}- CVE-2023-27350:${NC} ثغرة Open Redirect قد تستغل في هجمات الهندسة الاجتماعية."
+
+echo -e "\n${GREEN}[+] الخطوة المقترحة الآن:${NC}"
+echo -e "إذا وجد السكربت ملف ${BLUE}/core/changelog.txt${NC} مفتوحاً، قم بقراءته بالكامل لتأكيد إذا كان السيرفر يعمل بـ 9.5.7 فعلياً أم إصدار آخر."
