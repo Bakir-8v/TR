@@ -1,43 +1,17 @@
-import cv2
-import streamlit as st
-from cvzone.HandTrackingModule import HandDetector
-import numpy as np
-
-# إعدادات صفحة المتصفح (Streamlit)
-st.set_page_config(page_title="CyberSecurity Lab - Hand Tracking", layout="centered")
-st.title("🛡️ نظام تتبع اليد عبر المتصفح (Localhost)")
-st.text("يتم الآن المعالجة وقراءة حركة اليد في الوقت الفعلي...")
-
-# إنشاء مكان مخصص لعرض البث المباشر في المتصفح
-FRAME_WINDOW = st.image([])
-
-# تهيئة مكتشف اليد الذكي (أقصى حد يدين، ونسبة ثقة 80%)
-detector = HandDetector(detectionCon=0.8, maxHands=2)
-
-# تشغيل الكاميرا
-cap = cv2.VideoCapture(0)
-
-# زر لإيقاف التشغيل من المتصفح
-stop_button = st.button("إيقاف البث")
-
-while cap.isOpened() and not stop_button:
-    success, frame = cap.read()
-    if not success:
-        st.error("فشل في قراءة البيانات من الكاميرا. تأكد من ربط الـ USB بجهازك الوهمي.")
-        break
-
-    # قلب الإطار ليحاكي حركة المرآة الطبيعية
-    frame = cv2.flip(frame, 1)
-
-    # قراءة اليد ورسم النقاط والمفاصل تلقائياً
-    hands, frame = detector.findHands(frame)
-
-    # تحويل نظام الألوان من BGR (الخاص بـ OpenCV) إلى RGB ليتم عرضه بشكل صحيح في المتصفح
-    frame_rgb = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
-
-    # تحديث الإطار داخل المتصفح فوراً (Live Stream)
-    FRAME_WINDOW.image(frame_rgb)
-
-# تنظيف الذاكرة وإغلاق الكاميرا عند الضغط على إيقاف
-cap.release()
-st.success("تم إيقاف نظام التتبع بنجاح.")
+🛡️ نظام تتبع اليد عبر المتصفح (Localhost)
+يتم الآن المعالجة وقراءة حركة اليد في الوقت الفعلي...
+AttributeError: module 'mediapipe' has no attribute 'solutions'
+Traceback:
+File "/home/ghost/dTa/venv/lib/python3.13/site-packages/streamlit/runtime/scriptrunner/exec_code.py", line 129, in exec_func_with_error_handling
+    result = func()
+File "/home/ghost/dTa/venv/lib/python3.13/site-packages/streamlit/runtime/scriptrunner/script_runner.py", line 689, in code_to_exec
+    exec(code, module.__dict__)  # noqa: S102
+    ~~~~^^^^^^^^^^^^^^^^^^^^^^^
+File "/home/ghost/dTa/app.py", line 15, in <module>
+    detector = HandDetector(detectionCon=0.8, maxHands=2)
+File "/home/ghost/dTa/venv/lib/python3.13/site-packages/cvzone/HandTrackingModule.py", line 35, in __init__
+    self.mpHands = mp.solutions.hands
+                   ^^^^^^^^^^^^
+Copy
+Ask Google
+Ask ChatGPT
