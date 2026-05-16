@@ -1,46 +1,43 @@
- ./sh.sh  
-[*] بدء سكربت الاستطلاع المتقدم وفحص الملفات الحساسة...
-أدخل رابط الموقع المستهدف (مثال: https://target.com): https://www.syria.tv
+#!/bin/bash
 
-[1] فحص الملفات الحساسة ومحاولة قراءة الإصدارات الحقيقية...
-[-] غير موجود أو محمي (404): /core/changelog.txt
-[-] غير موجود أو محمي (403): /composer.json
-[+] تم العثور على الملف (200): https://www.syria.tv/robots.txt
---- معاينة المحتوى ---
-#
-# robots.txt
-#
-# This file is to prevent the crawling and indexing of certain parts
-# of your site by web crawlers and spiders run by sites like Yahoo!
-# and Google. By telling these "robots" where not to go on your site,
-# you save bandwidth and server resources.
-#
-# This file will be ignored unless it is at the root of your host:
-# Used:    http://example.com/robots.txt
-----------------------
+# ألوان للتنظيم
+GREEN='\033[0;32m'
+RED='\033[0;31m'
+BLUE='\033[0;34m'
+YELLOW='\033[0;33m'
+NC='\033[0m'
 
-[-] غير موجود أو محمي (403): /web.config
-[-] غير موجود أو محمي (403): /core/install.php
-[+] تم العثور على الملف (200): https://www.syria.tv/README.md
---- معاينة المحتوى ---
-<img alt="Drupal Logo" src="https://www.drupal.org/files/Wordmark_blue_RGB.png" height="60px">
+TARGET="https://www.syria.tv"
 
-Drupal is an open source content management platform supporting a variety of
-websites ranging from personal weblogs to large community-driven websites. For
-more information, visit the Drupal website, [Drupal.org][Drupal.org], and join
-the [Drupal community][Drupal community].
+echo -e "${BLUE}[*] بدء فحص الموديلات والإضافات النشطة على الهدف...${NC}"
 
-## Contributing
+# قائمة بالموديلات والمجلدات المستخرجة من تحليل الكود السابق
+MODULES=(
+    "modules/contrib/blazy"
+    "modules/contrib/better_exposed_filters"
+    "modules/contrib/jquery_ui"
+    "modules/contrib/jquery_ui_datepicker"
+    "modules/contrib/text_resize"
+    "modules/contrib/extlink"
+    "modules/contrib/lazy"
+    "modules/custom/custom"
+    "modules/custom/custom_push_notifications"
+    "modules/custom/stv_tweaks"
+    "themes/custom/syriatv"
+)
 
-Drupal is developed on [Drupal.org][Drupal.org], the home of the international
-----------------------
+for MOD in "${MODULES[@]}"
+do
+    # فحص الرابط الخاص بكل موديل (بحثاً عن ملف الـ info.yml أو المجلد نفسه)
+    URL="${TARGET}/${MOD}/"
+    STATUS=$(curl -s -o /dev/null -w "%{http_code}" "$URL")
+    
+    if [ "$STATUS" -eq 200 ] || [ "$STATUS" -eq 403 ]; then
+        # رمز 403 يعني أن المجلد موجود بالفعل ولكن السيرفر يمنع استعراض الملفات (Directory Listing)
+        echo -e "${GREEN}[+] الموديل/المسار موجود ($STATUS): /${MOD}${NC}"
+    else
+        echo -e "${RED}[-] المسار غير مستجيب ($STATUS): /${MOD}${NC}"
+    fi
+done
 
-
-[2] فحص الـ CVEs الثنائية لـ Drupal 9.5.7 الموثقة أمنياً...
-إصدار 9.5.7 يحتوي تاريخياً على نقاط ضعف يجب التحقق من ترقيعها يدوياً:
-- CVE-2023-40619: ثغرة تخطي صلاحيات (Access Bypass) في نواة دروبال 9.5.x.
-- CVE-2023-27350: ثغرة Open Redirect قد تستغل في هجمات الهندسة الاجتماعية.
-
-[+] الخطوة المقترحة الآن:
-إذا وجد السكربت ملف /core/changelog.txt مفتوحاً، قم بقراءته بالكامل لتأكيد إذا كان السيرفر يعمل بـ 9.5.7 فعلياً أم إصدار آخر.
-                                                
+echo -e "\n${YELLOW}[*] انتهى فحص الموديلات.${NC}"
