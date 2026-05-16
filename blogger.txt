@@ -1,71 +1,8 @@
-import cv2
-import mediapipe as mp
-
-# تهيئة مكتبات ميديا بايب الخاصة برسم وتتبع اليد
-mp_hands = mp.solutions.hands
-mp_draw = mp.solutions.drawing_utils
-
-# إعدادات نموذج تتبع اليد
-# max_num_hands=2 لتتبع يدين كحد أقصى
-hands = mp_hands.Hands(
-    static_image_mode=False,
-    max_num_hands=2,
-    min_detection_confidence=0.7,
-    min_tracking_confidence=0.5
-)
-
-# تشغيل الكاميرا الافتراضية (رقم 0)
-# ملاحظة لكالي: تأكد من ربط كاميرا الـ USB إذا كنت تستخدم نظام وهمي (VMware/VirtualBox)
-cap = cv2.VideoCapture(0)
-
-print("[+] تم تشغيل الكاميرا بنجاح. اضغط على 'q' للخروج.")
-
-while cap.isOpened():
-    success, frame = cap.read()
-    if not success:
-        print("[!] فشل في قراءة البيانات من الكاميرا.")
-        break
-
-    # قلب الصورة أفقياً لتصبح مثل المرآة (اختياري ومريح للعين)
-    frame = cv2.flip(frame, 1)
-
-    # تحويل نظام الألوان من BGR (الخاص بـ OpenCV) إلى RGB (الذي يحتاجه MediaPipe)
-    img_rgb = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
-
-    # معالجة الصورة واستخراج نقاط اليد
-    results = hands.process(img_rgb)
-
-    # التحقق مما إذا تم اكتشاف أي يد في الإطار
-    if results.multi_hand_landmarks:
-        for hand_landmarks in results.multi_hand_landmarks:
-            
-            # استخراج إحداثيات كل نقطة (مفصل) في اليد (يوجد 21 نقطة لكل يد)
-            for id, lm in enumerate(hand_landmarks.landmark):
-                # الحصول على أبعاد الشاشة بالبكسل
-                h, w, c = frame.shape
-                # تحويل الإحداثيات النسبية (0 إلى 1) إلى بكسلات حقيقية
-                cx, cy = int(lm.x * w), int(lm.y * h)
-                
-                # طباعة إحداثيات المفصل رقم 0 (مفصل المعصم كمثال) في الترمينال
-                if id == 0:
-                    print(f"Wrist Position -> X: {cx}, Y: {cy}")
-
-            # رسم نقاط المفاصل والخطوط الواصلة بينها على اليد
-            mp_draw.draw_landmarks(
-                frame, 
-                hand_landmarks, 
-                mp_hands.HAND_CONNECTIONS,
-                mp_draw.DrawingSpec(color=(0, 0, 255), thickness=2, circle_radius=4), # لون النقاط (أحمر)
-                mp_draw.DrawingSpec(color=(255, 0, 0), thickness=2)  # لون الخطوط (أزرق)
-            )
-
-    # عرض نافذة البث المباشر
-    cv2.imshow("Hand Tracking - Kali Linux", frame)
-
-    # إنهاء البرنامج فوراً عند الضغط على زر 'q' من لوحة المفاتيح
-    if cv2.waitKey(1) & 0xFF == ord('q'):
-        break
-
-# إغلاق الكاميرا والنوافذ بعد الخروج
-cap.release()
-cv2.destroyAllWindows()
+python hand.py            
+Matplotlib is building the font cache; this may take a moment.
+Traceback (most recent call last):
+  File "/home/ghost/dTa/hand.py", line 5, in <module>
+    mp_hands = mp.solutions.hands
+               ^^^^^^^^^^^^
+AttributeError: module 'mediapipe' has no attribute 'solutions'
+                                    
