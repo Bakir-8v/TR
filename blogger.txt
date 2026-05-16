@@ -1,1 +1,1 @@
-git clone https://github.com/FluxionNetwork/fluxion.git
+iw dev | grep Interface | awk '{print $2}'
