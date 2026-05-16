@@ -1,52 +1,46 @@
-#!/bin/bash
+./sh.sh  
+[*] بدء سكربت الاستطلاع المتقدم وفحص الملفات الحساسة...
+أدخل رابط الموقع المستهدف (مثال: https://target.com): https://www.syria.tv
 
-# ألوان للتنظيم
-GREEN='\033[0;32m'
-RED='\033[0;31m'
-BLUE='\033[0;34m'
-YELLOW='\033[0;33m'
-NC='\033[0m'
+[1] فحص الملفات الحساسة ومحاولة قراءة الإصدارات الحقيقية...
+[-] غير موجود أو محمي (404): /core/changelog.txt
+[-] غير موجود أو محمي (403): /composer.json
+[+] تم العثور على الملف (200): https://www.syria.tv/robots.txt
+--- معاينة المحتوى ---
+#
+# robots.txt
+#
+# This file is to prevent the crawling and indexing of certain parts
+# of your site by web crawlers and spiders run by sites like Yahoo!
+# and Google. By telling these "robots" where not to go on your site,
+# you save bandwidth and server resources.
+#
+# This file will be ignored unless it is at the root of your host:
+# Used:    http://example.com/robots.txt
+----------------------
 
-echo -e "${BLUE}[*] بدء سكربت الاستطلاع المتقدم وفحص الملفات الحساسة...${NC}"
+[-] غير موجود أو محمي (403): /web.config
+[-] غير موجود أو محمي (403): /core/install.php
+[+] تم العثور على الملف (200): https://www.syria.tv/README.md
+--- معاينة المحتوى ---
+<img alt="Drupal Logo" src="https://www.drupal.org/files/Wordmark_blue_RGB.png" height="60px">
 
-# اطلب رابط الهدف من المستخدم عند التشغيل
-read -p "أدخل رابط الموقع المستهدف (مثال: https://target.com): " TARGET
+Drupal is an open source content management platform supporting a variety of
+websites ranging from personal weblogs to large community-driven websites. For
+more information, visit the Drupal website, [Drupal.org][Drupal.org], and join
+the [Drupal community][Drupal community].
 
-# إزالة الشرطة المائلة الزائدة في نهاية الرابط إن وجدت
-TARGET="${TARGET%/}"
+## Contributing
 
-echo -e "\n${YELLOW}[1] فحص الملفات الحساسة ومحاولة قراءة الإصدارات الحقيقية...${NC}"
+Drupal is developed on [Drupal.org][Drupal.org], the home of the international
+----------------------
 
-FILES=(
-    "/core/changelog.txt"
-    "/composer.json"
-    "/robots.txt"
-    "/web.config"
-    "/core/install.php"
-    "/README.md"
-)
 
-for FILE in "${FILES[@]}"
-do
-    URL="${TARGET}${FILE}"
-    # جلب كود الحالة الهيدر (HTTP Status)
-    STATUS=$(curl -s -o /dev/null -w "%{http_code}" "$URL")
-    
-    if [ "$STATUS" -eq 200 ]; then
-        echo -e "${GREEN}[+] تم العثور على الملف ($STATUS): $URL${NC}"
-        # عرض أول 10 أسطر من الملف لمعاينة المحتوى سريعاً
-        echo -e "${BLUE}--- معاينة المحتوى ---${NC}"
-        curl -s "$URL" | head -n 10
-        echo -e "${BLUE}----------------------${NC}\n"
-    else
-        echo -e "${RED}[-] غير موجود أو محمي ($STATUS): $FILE${NC}"
-    fi
-done
+[2] فحص الـ CVEs الثنائية لـ Drupal 9.5.7 الموثقة أمنياً...
+إصدار 9.5.7 يحتوي تاريخياً على نقاط ضعف يجب التحقق من ترقيعها يدوياً:
+- CVE-2023-40619: ثغرة تخطي صلاحيات (Access Bypass) في نواة دروبال 9.5.x.
+- CVE-2023-27350: ثغرة Open Redirect قد تستغل في هجمات الهندسة الاجتماعية.
 
-echo -e "\n${YELLOW}[2] فحص الـ CVEs الثنائية لـ Drupal 9.5.7 الموثقة أمنياً...${NC}"
-echo -e "إصدار 9.5.7 يحتوي تاريخياً على نقاط ضعف يجب التحقق من ترقيعها يدوياً:"
-echo -e "${RED}- CVE-2023-40619:${NC} ثغرة تخطي صلاحيات (Access Bypass) في نواة دروبال 9.5.x."
-echo -e "${RED}- CVE-2023-27350:${NC} ثغرة Open Redirect قد تستغل في هجمات الهندسة الاجتماعية."
-
-echo -e "\n${GREEN}[+] الخطوة المقترحة الآن:${NC}"
-echo -e "إذا وجد السكربت ملف ${BLUE}/core/changelog.txt${NC} مفتوحاً، قم بقراءته بالكامل لتأكيد إذا كان السيرفر يعمل بـ 9.5.7 فعلياً أم إصدار آخر."
+[+] الخطوة المقترحة الآن:
+إذا وجد السكربت ملف /core/changelog.txt مفتوحاً، قم بقراءته بالكامل لتأكيد إذا كان السيرفر يعمل بـ 9.5.7 فعلياً أم إصدار آخر.
+                                                
