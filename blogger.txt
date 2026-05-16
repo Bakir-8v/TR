@@ -1,1 +1,39 @@
-secure_origin.sh
+#!/bin/bash
+
+# تأكد من تشغيل السكربت بصلاحيات root
+if [ "$EUID" -ne 0 ]; then
+  echo "يرجى تشغيل السكربت بصلاحيات root (sudo)"
+  exit 1
+fi
+
+# تفعيل جدار الحماية UFW كإجراء أولي
+ufw --force reset
+ufw default deny incoming
+ufw default allow outgoing
+
+# السماح بمنفذ الـ SSH الخاص بك لكي لا تفقد الاتصال بالسيرفر (مثال: المنفذ 22)
+# يمكنك تحديد الـ IP الخاص بك هنا لزيادة الأمان
+ufw allow 22/tcp comment 'Allow SSH'
+
+# مصفوفة تحتوي على نطاقات IP الخاصة بمزود الحماية (قم بتحديثها بالنطاقات الفعلية)
+# كمثال سنضع النطاقات الافتراضية الشائعة
+ALLOWED_IPS=(
+    "23.235.32.0/20"
+    "43.249.32.0/20"
+    "103.244.50.0/24"
+    "195.175.182.0/24" # النطاق الخاص بسيرفر المختبر للتجربة
+)
+
+echo "جاري تطبيق قواعد السماح لعناوين IP المعتمدة..."
+
+# تكرار للسماح بمرور بروتوكولات HTTP و HTTPS من الشبكات المحددة فقط
+for ip in "${ALLOWED_IPS[@]}"; do
+    ufw allow from "$ip" to any port 80 proto tcp comment 'Allow HTTP from WAF'
+    ufw allow from "$ip" to any port 443 proto tcp comment 'Allow HTTPS from WAF'
+done
+
+# تفعيل جدار الحماية بعد إدخال القواعد
+ufw --force enable
+
+echo "تمت العملية بنجاح. السيرفر الآن لا يستقبل ترافيك الويب إلا من جدار الحماية الخارجي."
+ufw status verbose
