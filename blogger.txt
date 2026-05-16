@@ -1,71 +1,39 @@
-venv)─(root㉿kali)-[/home/ghost/dTa]
-└─# curl -i --resolve www.syria.tv:443:195.175.182.41 https://www.syria.tv/user/login
-HTTP/2 403 
-mime-version: 1.0
-content-type: text/html
-content-length: 380
-expires: Sat, 16 May 2026 19:29:54 GMT
-date: Sat, 16 May 2026 19:29:54 GMT
-server-timing: cdn-cache; desc=HIT
-server-timing: edge; dur=1
-akamai-cache-status: Error from child
-server-timing: ak_p; desc="1778959794713_3283072549_450936306_34_6597_20_64_15";dur=1
+#!/bin/bash
 
-<HTML><HEAD>
-<TITLE>Access Denied</TITLE>
-</HEAD><BODY>
-<H1>Access Denied</H1>
- 
-You don't have permission to access "http&#58;&#47;&#47;www&#46;syria&#46;tv&#47;user&#47;login" on this server.<P>
-Reference&#32;&#35;18&#46;25b6afc3&#46;1778959794&#46;1ae0bdf2
-<P>https&#58;&#47;&#47;errors&#46;edgesuite&#46;net&#47;18&#46;25b6afc3&#46;1778959794&#46;1ae0bdf2</P>
-</BODY>
-</HTML>
-                                                                                
-┌──(venv)─(root㉿kali)-[/home/ghost/dTa]
-└─# curl -i --resolve www.syria.tv:443:195.175.182.41 https://www.syria.tv/user/login
-HTTP/2 403 
-mime-version: 1.0
-content-type: text/html
-content-length: 380
-expires: Sat, 16 May 2026 19:30:27 GMT
-date: Sat, 16 May 2026 19:30:27 GMT
-server-timing: cdn-cache; desc=HIT
-server-timing: edge; dur=1
-akamai-cache-status: Error from child
-server-timing: ak_p; desc="1778959827075_3283072549_450988890_524_8336_52_158_15";dur=1
+# تأكد من تشغيل السكربت بصلاحيات root
+if [ "$EUID" -ne 0 ]; then
+  echo "يرجى تشغيل السكربت بصلاحيات root (sudo)"
+  exit 1
+fi
 
-<HTML><HEAD>
-<TITLE>Access Denied</TITLE>
-</HEAD><BODY>
-<H1>Access Denied</H1>
- 
-You don't have permission to access "http&#58;&#47;&#47;www&#46;syria&#46;tv&#47;user&#47;login" on this server.<P>
-Reference&#32;&#35;18&#46;25b6afc3&#46;1778959827&#46;1ae18b5a
-<P>https&#58;&#47;&#47;errors&#46;edgesuite&#46;net&#47;18&#46;25b6afc3&#46;1778959827&#46;1ae18b5a</P>
-</BODY>
-</HTML>
-                                                                                
-┌──(venv)─(root㉿kali)-[/home/ghost/dTa]
-└─# curl -i --resolve www.syria.tv:443:195.175.182.41 https://www.syria.tv/core/changelog.txt
-HTTP/2 404 
-content-type: text/html; charset=UTF-8
-x-content-type-options: nosniff
-cache-control: must-revalidate, no-cache, private
-x-ua-compatible: IE=edge
-content-language: ar
-x-content-type-options: nosniff
-x-frame-options: SAMEORIGIN
-expires: Sun, 19 Nov 1978 05:00:00 GMT
-x-varnish: 406956384
-x-varnish-cache: MISS
-x-cache-hits: 0
-date: Sat, 16 May 2026 19:30:54 GMT
-content-length: 301
-server-timing: cdn-cache; desc=MISS
-server-timing: edge; dur=197
-server-timing: origin; dur=752
-akamai-cache-status: Miss from child, Miss from parent
-server-timing: ak_p; desc="1778959853055_3283072526_338663176_94854_8369_42_100_15";dur=1
+# تفعيل جدار الحماية UFW كإجراء أولي
+ufw --force reset
+ufw default deny incoming
+ufw default allow outgoing
 
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML+RDFa 1.0//EN" "http://www.w3.org/MarkUp/DTD/xhtml-rdfa-1.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>404 Not Found</title></head><body><h1>Not Found</h1><p>The requested URL "/core/changelog.txt" was not found on this server.</p></body></html>  
+# السماح بمنفذ الـ SSH الخاص بك لكي لا تفقد الاتصال بالسيرفر (مثال: المنفذ 22)
+# يمكنك تحديد الـ IP الخاص بك هنا لزيادة الأمان
+ufw allow 22/tcp comment 'Allow SSH'
+
+# مصفوفة تحتوي على نطاقات IP الخاصة بمزود الحماية (قم بتحديثها بالنطاقات الفعلية)
+# كمثال سنضع النطاقات الافتراضية الشائعة
+ALLOWED_IPS=(
+    "23.235.32.0/20"
+    "43.249.32.0/20"
+    "103.244.50.0/24"
+    "195.175.182.0/24" # النطاق الخاص بسيرفر المختبر للتجربة
+)
+
+echo "جاري تطبيق قواعد السماح لعناوين IP المعتمدة..."
+
+# تكرار للسماح بمرور بروتوكولات HTTP و HTTPS من الشبكات المحددة فقط
+for ip in "${ALLOWED_IPS[@]}"; do
+    ufw allow from "$ip" to any port 80 proto tcp comment 'Allow HTTP from WAF'
+    ufw allow from "$ip" to any port 443 proto tcp comment 'Allow HTTPS from WAF'
+done
+
+# تفعيل جدار الحماية بعد إدخال القواعد
+ufw --force enable
+
+echo "تمت العملية بنجاح. السيرفر الآن لا يستقبل ترافيك الويب إلا من جدار الحماية الخارجي."
+ufw status verbose
