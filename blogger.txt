@@ -1,98 +1,85 @@
-import cv2
-import streamlit as st
-import numpy as np
-import math
+nmap -p- -sV -sC -O -v 195.175.182.41
+Starting Nmap 7.99 ( https://nmap.org ) at 2026-05-16 15:10 -0400
+NSE: Loaded 158 scripts for scanning.
+NSE: Script Pre-scanning.
+Initiating NSE at 15:10
+Completed NSE at 15:10, 0.00s elapsed
+Initiating NSE at 15:10
+Completed NSE at 15:10, 0.00s elapsed
+Initiating NSE at 15:10
+Completed NSE at 15:10, 0.00s elapsed
+Initiating Ping Scan at 15:10
+Scanning 195.175.182.41 [4 ports]
+Completed Ping Scan at 15:10, 0.03s elapsed (1 total hosts)
+Initiating Parallel DNS resolution of 1 host. at 15:10
+Completed Parallel DNS resolution of 1 host. at 15:10, 0.02s elapsed
+Initiating SYN Stealth Scan at 15:10
+Scanning 195.175.182.41.static.turktelekom.com.tr (195.175.182.41) [65535 ports]
+Discovered open port 80/tcp on 195.175.182.41
+Discovered open port 443/tcp on 195.175.182.41
+SYN Stealth Scan Timing: About 14.82% done; ETC: 15:14 (0:02:58 remaining)
+SYN Stealth Scan Timing: About 31.25% done; ETC: 15:13 (0:02:14 remaining)
+SYN Stealth Scan Timing: About 44.24% done; ETC: 15:14 (0:01:55 remaining)
+SYN Stealth Scan Timing: About 69.38% done; ETC: 15:13 (0:00:53 remaining)
+Completed SYN Stealth Scan at 15:13, 179.82s elapsed (65535 total ports)
+Initiating Service scan at 15:13
+Scanning 2 services on 195.175.182.41.static.turktelekom.com.tr (195.175.182.41)
+Completed Service scan at 15:13, 12.66s elapsed (2 services on 1 host)
+Initiating OS detection (try #1) against 195.175.182.41.static.turktelekom.com.tr (195.175.182.41)
+Retrying OS detection (try #2) against 195.175.182.41.static.turktelekom.com.tr (195.175.182.41)
+WARNING: OS didn't match until try #2
+NSE: Script scanning 195.175.182.41.
+Initiating NSE at 15:13
+Completed NSE at 15:13, 5.23s elapsed
+Initiating NSE at 15:13
+Completed NSE at 15:13, 1.53s elapsed
+Initiating NSE at 15:13
+Completed NSE at 15:13, 0.01s elapsed
+Nmap scan report for 195.175.182.41.static.turktelekom.com.tr (195.175.182.41)
+Host is up (0.030s latency).
+Not shown: 65531 filtered tcp ports (no-response)
+PORT     STATE  SERVICE     VERSION
+53/tcp   closed domain
+80/tcp   open   http        AkamaiGHost (Akamai's HTTP Acceleration/Mirror service)
+|_http-title: Invalid URL
+443/tcp  open   ssl/http    AkamaiGHost (Akamai's HTTP Acceleration/Mirror service)
+| tls-nextprotoneg: 
+|   http/1.1
+|_  http/1.0
+| tls-alpn: 
+|   http/1.1
+|_  http/1.0
+| ssl-cert: Subject: commonName=a248.e.akamai.net/organizationName=Akamai Technologies, Inc./stateOrProvinceName=Massachusetts/countryName=US
+| Subject Alternative Name: DNS:a248.e.akamai.net, DNS:*.akamaized.net, DNS:*.akamaized-staging.net, DNS:*.akamaihd.net, DNS:*.akamaihd-staging.net
+| Issuer: commonName=DigiCert Global G3 TLS ECC SHA384 2020 CA1/organizationName=DigiCert Inc/countryName=US
+| Public Key type: ec
+| Public Key bits: 256
+| Signature Algorithm: ecdsa-with-SHA384
+| Not valid before: 2025-12-22T00:00:00
+| Not valid after:  2026-12-22T23:59:59
+| MD5:     3adf 3ca9 fbdc 116f 8c52 b23b de7e 9244
+| SHA-1:   80b2 9fce 36f7 1b99 cdbb 7138 b210 7d02 2d47 8af9
+|_SHA-256: 792c e717 b665 ca8a 0aed f9f7 a3ba 68bd 15b7 bf81 da35 4e2c 7dc4 869b f9f2 2e62
+|_http-title: Invalid URL
+|_ssl-date: TLS randomness does not represent time
+8883/tcp closed secure-mqtt
+Device type: general purpose|router
+Running: Linux 5.X, MikroTik RouterOS 7.X
+OS CPE: cpe:/o:linux:linux_kernel:5 cpe:/o:mikrotik:routeros:7 cpe:/o:linux:linux_kernel:5.6.3
+OS details: Linux 5.0 - 5.14, MikroTik RouterOS 7.2 - 7.5 (Linux 5.6.3)
+Uptime guess: 0.903 days (since Fri May 15 17:33:22 2026)
+Network Distance: 10 hops
+TCP Sequence Prediction: Difficulty=260 (Good luck!)
+IP ID Sequence Generation: All zeros
 
-# إعدادات صفحة المتصفح
-st.set_page_config(page_title="Advanced Hand Tracking", layout="centered")
-st.title("🛡️ نظام قياس الأصابع والمفاصل عبر المتصفح")
-st.subheader("تتبع الهيكل العظمي لليد بخيوط خضراء رفيعة (Python 3.13)")
-
-# مكان عرض البث المباشر
-FRAME_WINDOW = st.image([])
-
-# تشغيل الكاميرا
-cap = cv2.VideoCapture(0)
-stop_button = st.button("إيقاف البث")
-
-while cap.isOpened() and not stop_button:
-    success, frame = cap.read()
-    if not success:
-        st.error("فشل في قراءة الكاميرا.")
-        break
-
-    frame = cv2.flip(frame, 1)
-    h, w, c = frame.shape
-    
-    # معالجة الصورة لعزل لون البشرة (اليد)
-    blur = cv2.GaussianBlur(frame, (3, 3), 0)
-    ycrcb = cv2.cvtColor(blur, cv2.COLOR_BGR2YCrCb)
-    lower_skin = np.array([0, 135, 85], dtype=np.uint8)
-    upper_skin = np.array([255, 180, 135], dtype=np.uint8)
-    mask = cv2.inRange(ycrcb, lower_skin, upper_skin)
-    
-    # تنظيف القناع للحصول على تفاصيل أصابع حادة
-    kernel = np.ones((3, 3), np.uint8)
-    mask = cv2.erode(mask, kernel, iterations=1)
-    mask = cv2.dilate(mask, kernel, iterations=2)
-    
-    # البحث عن الخطوط المحيطة باليد
-    contours, _ = cv2.findContours(mask, cv2.RETR_TREE, cv2.CHAIN_APPROX_SIMPLE)
-    
-    if len(contours) > 0:
-        max_contour = max(contours, key=cv2.contourArea)
-        
-        if cv2.contourArea(max_contour) > 5000:
-            # 1. رسم خط محيطي رفيع جداً حول اليد بالكامل (خيط أخضر سمك 1 بكسل)
-            cv2.drawContours(frame, [max_contour], -1, (0, 255, 0), 1)
-            
-            # 2. حساب الغطاء المحدب (Convex Hull) للوصول لأطراف الأصابع
-            hull = cv2.convexHull(max_contour, returnPoints=False)
-            
-            # حساب العيوب (Defects) وهي الفراغات والمفاصل بين الأصابع
-            if len(hull) > 3:
-                defects = cv2.convexityDefects(max_contour, hull)
-                
-                if defects is not None:
-                    points_to_link = []
-                    
-                    for i in range(defects.shape[0]):
-                        s, e, f, d = defects[i, 0]
-                        start = tuple(max_contour[s][0]) # طرف الإصبع الحالي
-                        end = tuple(max_contour[e][0])   # طرف الإصبع التالي
-                        far = tuple(max_contour[f][0])   # المفصل الداخلي بينهما
-                        
-                        # تصفية النقاط بناءً على المسافة والزاوية لتجنب الخطوط العشوائية
-                        a = math.sqrt((end[0] - start[0])**2 + (end[1] - start[1])**2)
-                        b = math.sqrt((far[0] - start[0])**2 + (far[1] - start[1])**2)
-                        c_side = math.sqrt((end[0] - far[0])**2 + (end[1] - far[1])**2)
-                        
-                        # تطبيق قانون جيب التمام لحساب زاوية المفصل
-                        angle = math.acos((b**2 + c_side**2 - a**2) / (2 * b * c_side)) * 57
-                        
-                        if angle <= 90 and d > 3000: # المسافة d تعبر عن عمق المفصل
-                            # رسم نقطة حمراء صغيرة عند المفصل الداخلي
-                            cv2.circle(frame, far, 4, (0, 0, 255), -1)
-                            # رسم نقطة زرقاء عند طرف الإصبع
-                            cv2.circle(frame, start, 4, (255, 0, 0), -1)
-                            
-                            # تخزين النقاط لربطها كخيوط قياس
-                            points_to_link.append(start)
-                            points_to_link.append(far)
-                            points_to_link.append(end)
-                            
-                            # قياس المسافة برمجياً وطباعتها كبكسلات فوق الخط
-                            distance = int(b / 2)
-                            cv2.putText(frame, f"{distance}px", (far[0]+10, far[1]), 
-                                        cv2.FONT_HERSHEY_SIMPLEX, 0.35, (0, 255, 0), 1)
-
-                    # 3. التصحيح هنا: تمرير الـ frame أولاً لترسم الخطوط الخضراء الرفيعة فوقه بشكل صحيح
-                    for j in range(len(points_to_link) - 1):
-                        cv2.line(frame, points_to_link[j], points_to_link[j+1], (0, 255, 0), 1)
-
-    # تحويل الصورة للعرض في المتصفح
-    frame_rgb = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
-    FRAME_WINDOW.image(frame_rgb)
-
-cap.release()
-st.success("تم إيقاف النظام.")
+NSE: Script Post-scanning.
+Initiating NSE at 15:13
+Completed NSE at 15:13, 0.00s elapsed
+Initiating NSE at 15:13
+Completed NSE at 15:13, 0.00s elapsed
+Initiating NSE at 15:13
+Completed NSE at 15:13, 0.00s elapsed
+Read data files from: /usr/share/nmap
+OS and Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
+Nmap done: 1 IP address (1 host up) scanned in 204.49 seconds
+           Raw packets sent: 131259 (5.777MB) | Rcvd: 191 (10.870KB)
