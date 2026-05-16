@@ -1,1 +1,12 @@
 curl -i -H "Host: www.syria.tv" http://195.175.182.41/
+HTTP/1.1 301 Moved Permanently
+Content-Length: 0
+Location: https://www.syria.tv/
+Date: Sat, 16 May 2026 19:24:15 GMT
+Connection: keep-alive
+Server-Timing: cdn-cache; desc=HIT
+Server-Timing: edge; dur=1
+Akamai-Cache-Status: Redirect from child
+Server-Timing: ak_p; desc="1778959455791_3283072549_450381454_16_55547_21_0_-";dur=1
+
+
