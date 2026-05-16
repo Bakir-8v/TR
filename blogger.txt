@@ -1,8 +1,8 @@
-# 1. تفعيل البيئة (إذا لم تكن مفعّلة ولونها ظاهر بجانب الـ Prompt)
-source venv/bin/activate
-
-# 2. تثبيت النسخة المحددة التي وافق عليها نظامك سابقاً
-pip install mediapipe==0.10.35 opencv-python
-
-# 3. تشغيل السكريبت المحدث
-python hand.py
+(venv)─(root㉿kali)-[/home/ghost/dTa]
+└─# python hand.py
+Traceback (most recent call last):
+  File "/home/ghost/dTa/hand.py", line 4, in <module>
+    import mediapipe.python.solutions.hands as mp_hands
+ModuleNotFoundError: No module named 'mediapipe.python'
+                                                                                
+┌──(venv)─(root㉿kali)-[
