@@ -1,12 +1,1 @@
-sudo nginx -t
-
-2026/05/16 15:44:45 [emerg] 22099#22099: cannot load certificate "/etc/letsencrypt/live/syria.tv/fullchain.pem": BIO_new_file() failed (SSL: error:80000002:system library::No such file or directory:calling fopen(/etc/letsencrypt/live/syria.tv/fullchain.pem, r) error:10000080:BIO routines::no such file)
-nginx: configuration file /etc/nginx/nginx.conf test failed
-                                                                                
-┌──(venv)─(root㉿kali)-[/home/ghost/dTa]
-└─# sudo systemctl restart nginx
-Job for nginx.service failed because the control process exited with error code.
-See "systemctl status nginx.service" and "journalctl -xeu nginx.service" for details.
-                                                                                
-┌──(venv)─(root㉿kali)-[/home/ghost/dTa]
-└─# 
+sudo openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout /etc/ssl/private/ssl-cert-snakeoil.key -out /etc/ssl/certs/ssl-cert-snakeoil.pem -subj "/CN=localhost"
