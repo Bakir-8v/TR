@@ -1,39 +1,37 @@
-#!/bin/bash
+ ./sh.sh
+[*] بدء فحص الموديلات والإضافات النشطة على الهدف...
+[+] الموديل/المسار موجود (403): /modules/contrib/blazy
+[+] الموديل/المسار موجود (403): /modules/contrib/better_exposed_filters
+[+] الموديل/المسار موجود (403): /modules/contrib/jquery_ui
+[+] الموديل/المسار موجود (403): /modules/contrib/jquery_ui_datepicker
+[+] الموديل/المسار موجود (403): /modules/contrib/text_resize
+[+] الموديل/المسار موجود (403): /modules/contrib/extlink
+[+] الموديل/المسار موجود (403): /modules/contrib/lazy
+[+] الموديل/المسار موجود (403): /modules/custom/custom
+[+] الموديل/المسار موجود (403): /modules/custom/custom_push_notifications
+[+] الموديل/المسار موجود (403): /modules/custom/stv_tweaks
+[+] الموديل/المسار موجود (403): /themes/custom/syriatv
 
-# ألوان للتنظيم
-GREEN='\033[0;32m'
-RED='\033[0;31m'
-BLUE='\033[0;34m'
-YELLOW='\033[0;33m'
-NC='\033[0m'
+[*] انتهى فحص الموديلات.
+                                                                                
+┌──(venv)─(root㉿kali)-[/home/ghost/dTa]
+└─# rm sh.sh      
+                                                                                
+┌──(venv)─(root㉿kali)-[/home/ghost/dTa]
+└─# nano sh.sh    
+                                                                                
+┌──(venv)─(root㉿kali)-[/home/ghost/dTa]
+└─# chmod +x sh.sh
+                                                                                
+┌──(venv)─(root㉿kali)-[/home/ghost/dTa]
+└─# ./sh.sh       
+[*] بدء محاولة استخراج إصدارات الموديلات عبر ملفات التعريف...
+[-] ملف التعريف محجوب أو غير موجود لـ (better_exposed_filters) - الحالة 403
+[-] ملف التعريف محجوب أو غير موجود لـ (extlink) - الحالة 403
+[-] ملف التعريف محجوب أو غير موجود لـ (lazy) - الحالة 403
+[-] ملف التعريف محجوب أو غير موجود لـ (blazy) - الحالة 403
 
-TARGET="https://www.syria.tv"
-
-echo -e "${BLUE}[*] بدء محاولة استخراج إصدارات الموديلات عبر ملفات التعريف...${NC}"
-
-# مصفوفة تحتوي على اسم الموديل والمسار المتوقع لملف التعريف الخاص به
-declare -A MOD_FILES
-MOD_FILES=(
-    ["blazy"]="modules/contrib/blazy/blazy.info.yml"
-    ["better_exposed_filters"]="modules/contrib/better_exposed_filters/better_exposed_filters.info.yml"
-    ["extlink"]="modules/contrib/extlink/extlink.info.yml"
-    ["lazy"]="modules/contrib/lazy/lazy.info.yml"
-)
-
-for MOD in "${!MOD_FILES[@]}"
-do
-    URL="${TARGET}/${MOD_FILES[$MOD]}"
-    STATUS=$(curl -s -o /dev/null -w "%{http_code}" "$URL")
-    
-    if [ "$STATUS" -eq 200 ]; then
-        echo -e "${GREEN}[+] تم الوصول لملف التعريف لـ ($MOD) - الحالة $STATUS${NC}"
-        echo -e "${BLUE}--- تفاصيل الإصدار المستخرج ---${NC}"
-        # محاولة قراءة الأسطر التي تحتوي على الإصدار أو التسمية
-        curl -s "$URL" | grep -E "version:|project:" || echo "تعذر تصفية النص تلقائياً."
-        echo -e "${BLUE}--------------------------------${NC}\n"
-    else
-        echo -e "${RED}[-] ملف التعريف محجوب أو غير موجود لـ ($MOD) - الحالة $STATUS${NC}"
-    fi
-done
-
-echo -e "\n${YELLOW}[*] تم الانتهاء من محاولة جلب الإصدارات.${NC}"
+[*] تم الانتهاء من محاولة جلب الإصدارات.
+                                                                                
+┌──(venv)─(root㉿kali)-[/home/ghost/dTa]
+└─# 
