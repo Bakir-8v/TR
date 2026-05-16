@@ -1,91 +1,33 @@
-  <script type="application/json" data-drupal-selector="drupal-settings-json">{"path":{"baseUrl":"\/","scriptPath":null,"pathPrefix":"","currentPath":"home","currentPathIsAdmin":false,"isFront":true,"currentLanguage":"ar"},"pluralDelimiter":"\u0003","suppressDeprecationErrors":true,"jquery":{"ui":{"datepicker":{"isRTL":true,"firstDay":0}}},"ckeditorheight":{"offset":1,"line_height":1.5,"unit":"em","disable_autogrow":false},"firebase_vapid":"BNapdkucAOXXqfVflnqSuO0a8oNwEoiAt9wlEmvwlIFAu9sFjBEP7jn7E4c-lzaG86FtZsAHZog0nXnVKCRBpO0","lazy":{"lazysizes":{"lazyClass":"b-lazy","loadedClass":"b-loaded","loadingClass":"lazy","preloadClass":"b-lazy","errorClass":"b-error","autosizesClass":"b-autosizes","srcAttr":"data-src","srcsetAttr":"data-srcset","sizesAttr":"data-sizes","minSize":40,"customMedia":[],"init":true,"expFactor":1.5,"hFac":0.8,"loadMode":2,"loadHidden":true,"ricTimeout":0,"throttleDelay":125,"plugins":[]},"placeholderSrc":"\/themes\/custom\/syriatv\/images\/defimage.png","preferNative":true,"minified":false,"libraryPath":"\/libraries\/lazysizes"},"data":{"extlink":{"extTarget":true,"extTargetNoOverride":false,"extNofollow":false,"extNoreferrer":false,"extFollowNoOverride":false,"extClass":"0","extLabel":"(link is external)","extImgClass":false,"extSubdomains":true,"extExclude":"","extInclude":"","extCssExclude":"","extCssExplicit":"","extAlert":false,"extAlertText":"This link will take you to an external web site. We are not responsible for their content.","mailtoClass":"0","mailtoLabel":"(link sends email)","extUseFontAwesome":false,"extIconPlacement":"before","extFaLinkClasses":"fa fa-external-link","extFaMailtoClasses":"fa fa-envelope-o","whitelistedDomains":[]}},"blazy":{"loadInvisible":true,"offset":100,"saveViewportOffsetDelay":50,"validateDelay":25,"container":"","loader":true,"unblazy":false},"blazyIo":{"disconnect":false,"rootMargin":"0px","threshold":[0,0.25,0.5,0.75,1]},"field_group":{"html_element":{"mode":"vertical_media_medium_main_area_large_image_title_and_summary","context":"view","settings":{"classes":"liveupdates-summary","show_empty_fields":false,"id":"","element":"div","show_label":false,"label_element":"h3","label_element_classes":"","attributes":"","effect":"none","speed":"fast"}}},"ajaxTrustedUrl":{"\/search-custom":true},"user":{"uid":0,"permissionsHash":"fa0f84f166f43ddbf3ad166c66f49299f95fb6da8938cfddcbd48836006b5d28"}}</script>
-<script src="/themes/custom/syriatv/assets/dist/js/jquery-3.7.1.min.js?tf5av1"></script>
-<script src="/modules/contrib/blazy/js/polyfill/blazy.polyfill.min.js?tf5av1"></script>
-<script src="/core/misc/polyfills/element.matches.js?v=9.5.7"></script>
-<script src="/modules/contrib/blazy/js/polyfill/blazy.classlist.min.js?tf5av1"></script>
-<script src="/modules/contrib/blazy/js/polyfill/blazy.promise.min.js?tf5av1"></script>
-<script src="/modules/contrib/blazy/js/polyfill/blazy.raf.min.js?tf5av1"></script>
-<script src="/core/assets/vendor/once/once.min.js?v=1.0.1"></script>
-<script src="/sites/default/files/languages/ar_bDzEHBeDfWP2NVKn5rX89EyF73HWR7Sw-0S4OuXgzrM.js?tf5av1"></script>
-<script src="/core/misc/drupalSettingsLoader.js?v=9.5.7"></script>
-<script src="/core/misc/drupal.js?v=9.5.7"></script>
-<script src="/core/misc/drupal.init.js?v=9.5.7"></script>
-<script src="/core/misc/debounce.js?v=9.5.7"></script>
-<script src="/modules/contrib/jquery_ui/assets/vendor/jquery.ui/ui/version-min.js?v=1.13.2"></script>
-<script src="/modules/contrib/jquery_ui/assets/vendor/jquery.ui/ui/ie-min.js?v=1.13.2"></script>
-<script src="/modules/contrib/jquery_ui/assets/vendor/jquery.ui/ui/widget-min.js?v=1.13.2"></script>
-<script src="/modules/contrib/jquery_ui/assets/vendor/jquery.ui/ui/widgets/mouse-min.js?v=1.13.2"></script>
-<script src="/modules/contrib/jquery_ui/assets/vendor/jquery.ui/ui/data-min.js?v=1.13.2"></script>
-<script src="/modules/contrib/jquery_ui/assets/vendor/jquery.ui/ui/disable-selection-min.js?v=1.13.2"></script>
-<script src="/modules/contrib/jquery_ui/assets/vendor/jquery.ui/ui/focusable-min.js?v=1.13.2"></script>
-<script src="/modules/contrib/jquery_ui/assets/vendor/jquery.ui/ui/form-min.js?v=1.13.2"></script>
-<script src="/modules/contrib/jquery_ui/assets/vendor/jquery.ui/ui/keycode-min.js?v=1.13.2"></script>
-<script src="/modules/contrib/jquery_ui/assets/vendor/jquery.ui/ui/labels-min.js?v=1.13.2"></script>
-<script src="/modules/contrib/jquery_ui/assets/vendor/jquery.ui/ui/plugin-min.js?v=1.13.2"></script>
-<script src="/modules/contrib/jquery_ui/assets/vendor/jquery.ui/ui/safe-active-element-min.js?v=1.13.2"></script>
-<script src="/modules/contrib/jquery_ui/assets/vendor/jquery.ui/ui/safe-blur-min.js?v=1.13.2"></script>
-<script src="/modules/contrib/jquery_ui/assets/vendor/jquery.ui/ui/scroll-parent-min.js?v=1.13.2"></script>
-<script src="/modules/contrib/jquery_ui/assets/vendor/jquery.ui/ui/tabbable-min.js?v=1.13.2"></script>
-<script src="/modules/contrib/jquery_ui/assets/vendor/jquery.ui/ui/unique-id-min.js?v=1.13.2"></script>
-<script src="/modules/contrib/jquery_ui/assets/vendor/jquery.ui/ui/widgets/datepicker-min.js?v=1.13.2"></script>
-<script src="/modules/contrib/blazy/js/dblazy.min.js?tf5av1"></script>
-<script src="/modules/contrib/blazy/js/plugin/blazy.dataset.min.js?tf5av1"></script>
-<script src="/modules/contrib/blazy/js/plugin/blazy.viewport.min.js?tf5av1"></script>
-<script src="/modules/contrib/blazy/js/plugin/blazy.dom.min.js?tf5av1"></script>
-<script src="/modules/contrib/blazy/js/plugin/blazy.xlazy.min.js?tf5av1"></script>
-<script src="/modules/contrib/blazy/js/plugin/blazy.observer.min.js?tf5av1"></script>
-<script src="/modules/contrib/blazy/js/plugin/blazy.loading.min.js?tf5av1"></script>
-<script src="/modules/contrib/blazy/js/polyfill/blazy.webp.min.js?tf5av1"></script>
-<script src="/modules/contrib/blazy/js/base/blazy.base.min.js?tf5av1"></script>
-<script src="/modules/contrib/blazy/js/base/blazy.min.js?tf5av1"></script>
-<script src="/modules/contrib/blazy/js/base/io/bio.min.js?tf5av1"></script>
-<script src="/modules/contrib/blazy/js/base/io/bio.media.min.js?tf5av1"></script>
-<script src="/modules/contrib/blazy/js/base/blazy.drupal.min.js?tf5av1"></script>
-<script src="/modules/contrib/blazy/js/blazy.load.min.js?tf5av1"></script>
-<script src="/modules/contrib/better_exposed_filters/js/better_exposed_filters.js?v=4.x"></script>
-<script src="/libraries/jquery-ui-touch-punch/jquery.ui.touch-punch.min.js?v=0"></script>
-<script src="/modules/contrib/jquery_ui_datepicker/js/locale.js?tf5av1"></script>
-<script src="/modules/contrib/better_exposed_filters/js/bef_datepickers.js?v=4.x"></script>
-<script src="/modules/contrib/text_resize/js/text_resize.js?tf5av1"></script>
-<script src="/modules/custom/custom/js/admin_js.js?v=5.x"></script>
-<script src="/modules/custom/custom/js/field_section.js?v=5.x"></script>
-<script src="/modules/custom/custom/js/text_resize.js?v=5.x"></script>
-<script src="https://www.gstatic.com/firebasejs/8.4.2/firebase-app.js"></script>
-<script src="https://www.gstatic.com/firebasejs/7.16.1/firebase-messaging.js"></script>
-<script src="/modules/custom/custom_push_notifications/js/custom-push-notifications.js?tf5av1"></script>
-<script src="/modules/contrib/lazy/js/lazy.js?v=9.5.7"></script>
-<script src="/themes/custom/syriatv/includes/bootstrap/js/bootstrap.bundle.min.js?tf5av1"></script>
-<script src="/themes/custom/syriatv/includes/ads-lazy.js?v=1.16"></script>
-<script src="/themes/custom/syriatv/includes/tricker/eocjs-newsticker.js?v=1.16"></script>
-<script src="/themes/custom/syriatv/assets/dist/js/scripts-min.js?v=1.16"></script>
-<script src="/modules/contrib/extlink/extlink.js?v=9.5.7"></script>
-<script src="/modules/custom/stv_tweaks/js/mailchimp-subscribe.js?tf5av1"></script>
-<script src="/modules/contrib/better_exposed_filters/js/auto_submit.js?v=4.x"></script>
-<script src="/themes/custom/syriatv/includes/slick/slick.min.js?tf5av1"></script>
-<script src="/themes/custom/syriatv/assets/dist/js/homepage-min.js?tf5av1"></script>
-<script src="/themes/custom/syriatv/assets/dist/js/tts-playlist-min.js?tf5av1"></script>
-<script src="/themes/custom/syriatv/assets/dist/js/audio-summaries-min.js?tf5av1"></script>
+#!/bin/bash
 
-                                   <!-- GOOGLE ANALYTICS -->
-                    <script>
-                        (function (i, s, o, g, r, a, m) {
-                            i['GoogleAnalyticsObject'] = r;
-                            i[r] = i[r] || function () {
-                                (i[r].q = i[r].q || []).push(arguments)
-                            }, i[r].l = 1 * new Date();
-                            a = s.createElement(o),
-                                    m = s.getElementsByTagName(o)[0];
-                            a.async = 1;
-                            a.src = g;
-                            m.parentNode.insertBefore(a, m)
-                        })(window, document, 'script', 'https://www.google-analytics.com/analytics.js', 'ga');
-                        ga('create', 'UA-216952176-1', 'auto');
-                        ga('send', 'pageview');
-                    </script>
-                    <!-- /GOOGLE ANALYTICS -->
-                                         </body>
-                    </html>
-                                                                                
-┌──(venv)─(root㉿kali)-[/home/ghost/dTa]
-└─# 
+# ألوان لتنظيم المخرجات
+GREEN='\033[0;32m'
+RED='\033[0;31m'
+BLUE='\033[0;34m'
+NC='\033[0m' # No Color
 
+echo -e "${BLUE}[*] بدء سكربت فحص ومطابقة ثغرات إصدارات دروبال...${NC}"
+
+# 1. التحقق من وجود أداة searchsploit
+if ! command -v searchsploit &> /dev/null
+then
+    echo -e "${RED}[!] أداة searchsploit غير مثبتة. يرجى تثبيتها أو تحديث قاعدة بيانات ExploitDB.${NC}"
+    exit 1
+fi
+
+# 2. البحث عن ثغرات النواة المكتشفة (Drupal 9.5.7)
+echo -e "\n${GREEN}[+] فحص ثغرات النواة لـ Drupal 9.x...${NC}"
+searchsploit drupal 9.
+
+# 3. البحث عن ثغرات مكتبة jQuery UI 1.13.2
+echo -e "\n${GREEN}[+] فحص ثغرات المكتبة المرفقة jQuery UI 1.13.2...${NC}"
+searchsploit jquery ui 1.13
+
+# 4. محاولة فحص المسارات الافتراضية الحساسة لدروبال (Reconnaissance)
+# يمكنك استبدال target.com برابط الهدف الفعلي عند التشغيل
+echo -e "\n${GREEN}[+] قائمة بالمسارات الافتراضية التي يفضل التحقق منها يدوياً أو عبر curl:${NC}"
+echo -e "${BLUE}- /core/changelog.txt${NC} (لتأكيد الإصدار الدقيق لنواة النظام)"
+echo -e "${BLUE}- /composer.json${NC} (لقراءة المكتبات البرمجية المعتمدة في الخلفية)"
+echo -e "${BLUE}- /web.config أو /robots.txt${NC} (لمعرفة المجلدات المستثناة من الأرشفة)"
+
+echo -e "\n${BLUE}[*] انتهى الفحص الأولي. يمكنك الآن مطابقة الـ CVEs المستخرجة مع بيئة التجارب الخاصة بك.${NC}"
