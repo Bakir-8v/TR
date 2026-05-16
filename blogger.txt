@@ -1,13 +1,14 @@
 import cv2
 import streamlit as st
 import numpy as np
+import math
 
-# إعدادات صفحة المتصفح (Streamlit)
-st.set_page_config(page_title="Hand Tracking - Python 3.13", layout="centered")
-st.title("🛡️ نظام تتبع اليد عبر المتصفح (Localhost)")
-st.subheader("إصدار مستقر متوافق مع Python 3.13 (بدون ميديا بايب)")
+# إعدادات صفحة المتصفح
+st.set_page_config(page_title="Advanced Hand Tracking", layout="centered")
+st.title("🛡️ نظام قياس الأصابع والمفاصل عبر المتصفح")
+st.subheader("تتبع الهيكل العظمي لليد بخيوط خضراء رفيعة (Python 3.13)")
 
-# إنشاء مكان مخصص لعرض البث المباشر
+# مكان عرض البث المباشر
 FRAME_WINDOW = st.image([])
 
 # تشغيل الكاميرا
@@ -17,60 +18,81 @@ stop_button = st.button("إيقاف البث")
 while cap.isOpened() and not stop_button:
     success, frame = cap.read()
     if not success:
-        st.error("فشل في قراءة البيانات من الكاميرا. تحقق من اتصال الـ USB.")
+        st.error("فشل في قراءة الكاميرا.")
         break
 
-    # قلب الإطار لمحاكاة حركة المرآة
     frame = cv2.flip(frame, 1)
+    h, w, c = frame.shape
     
-    # تحويل الصورة إلى نظام YCrCb وهو الأفضل لتحديد لون بشرة اليد وعزل الخلفية
-    blur = cv2.GaussianBlur(frame, (5, 5), 0)
+    # معالجة الصورة لعزل لون البشرة (اليد)
+    blur = cv2.GaussianBlur(frame, (3, 3), 0)
     ycrcb = cv2.cvtColor(blur, cv2.COLOR_BGR2YCrCb)
-    
-    # تحديد نطاق لون البشرة (Skin Color Range)
     lower_skin = np.array([0, 135, 85], dtype=np.uint8)
     upper_skin = np.array([255, 180, 135], dtype=np.uint8)
-    
-    # قناع لتصفية لون اليد فقط
     mask = cv2.inRange(ycrcb, lower_skin, upper_skin)
     
-    # تنظيف الضوضاء من القناع
-    kernel = np.ones((5, 5), np.uint8)
+    # تنظيف القناع للحصول على تفاصيل أصابع حادة
+    kernel = np.ones((3, 3), np.uint8)
+    mask = cv2.erode(mask, kernel, iterations=1)
     mask = cv2.dilate(mask, kernel, iterations=2)
-    mask = cv2.GaussianBlur(mask, (5, 5), 100)
     
-    # البحث عن الخطوط العريضة (Contours) لليد في الصورة
+    # البحث عن الخطوط المحيطة باليد
     contours, _ = cv2.findContours(mask, cv2.RETR_TREE, cv2.CHAIN_APPROX_SIMPLE)
     
     if len(contours) > 0:
-        # تحديد أكبر مساحة تم العثور عليها (والتي ستكون اليد)
         max_contour = max(contours, key=cv2.contourArea)
         
-        if cv2.contourArea(max_contour) > 5000: # تصفية المساحات الصغيرة جداً
-            # رسم حدود اليد باللون الأخضر وبسمك 3 بكسل
-            cv2.drawContours(frame, [max_contour], -1, (0, 255, 0), 3)
+        if cv2.contourArea(max_contour) > 5000:
+            # 1. رسم خط محيطي رفيع جداً حول اليد بالكامل (خيط أخضر سمك 1 بكسل)
+            cv2.drawContours(frame, [max_contour], -1, (0, 255, 0), 1)
             
-            # رسم صندوق محيط (Bounding Box) حول اليد
-            x, y, w, h = cv2.boundingRect(max_contour)
-            cv2.rectangle(frame, (x, y), (x+w, y+h), (255, 0, 0), 2)
+            # 2. حساب الغطاء المحدب (Convex Hull) للوصول لأطراف الأصابع
+            hull = cv2.convexHull(max_contour, returnPoints=False)
             
-            # كتابة نص توضيحي فوق الصندوق
-            cv2.putText(frame, "Hand Detected", (x, y-10), cv2.FONT_HERSHEY_SIMPLEX, 0.6, (255, 0, 0), 2)
-            
-            # حساب مركز اليد (المعصم/المنتصف) وطباعته في السيرفر
-            M = cv2.moments(max_contour)
-            if M["m00"] != 0:
-                cx = int(M["m10"] / M["m00"])
-                cy = int(M["m01"] / M["m00"])
-                # رسم نقطة زرقاء في مركز اليد
-                cv2.circle(frame, (cx, cy), 7, (255, 0, 0), -1)
+            # حساب العيوب (Defects) وهي الفراغات والمفاصل بين الأصابع
+            if len(hull) > 3:
+                defects = cv2.convexityDefects(max_contour, hull)
+                
+                if defects is not None:
+                    points_to_link = []
+                    
+                    for i in range(defects.shape[0]):
+                        s, e, f, d = defects[i, 0]
+                        start = tuple(max_contour[s][0]) # طرف الإصبع الحالي
+                        end = tuple(max_contour[e][0])   # طرف الإصبع التالي
+                        far = tuple(max_contour[f][0])   # المفصل الداخلي بينهما
+                        
+                        # تصفية النقاط بناءً على المسافة والزاوية لتجنب الخطوط العشوائية
+                        a = math.sqrt((end[0] - start[0])**2 + (end[1] - start[1])**2)
+                        b = math.sqrt((far[0] - start[0])**2 + (far[1] - start[1])**2)
+                        c_side = math.sqrt((end[0] - far[0])**2 + (end[1] - far[1])**2)
+                        
+                        # تطبيق قانون جيب التمام لحساب زاوية المفصل (إذا كانت أقل من 90 درجة فهو إصبع)
+                        angle = math.acos((b**2 + c_side**2 - a**2) / (2 * b * c_side)) * 57
+                        
+                        if angle <= 90 and d > 3000: # المسافة d تعبر عن عمق المفصل
+                            # رسم نقطة حمراء صغيرة عند المفصل الداخلي
+                            cv2.circle(frame, far, 4, (0, 0, 255), -1)
+                            # رسم نقطة زرقاء عند طرف الإصبع
+                            cv2.circle(frame, start, 4, (255, 0, 0), -1)
+                            
+                            # تخزين النقاط لربطها كخيوط قياس
+                            points_to_link.append(start)
+                            points_to_link.append(far)
+                            points_to_link.append(end)
+                            
+                            # قياس المسافة برمجياً وطباعتها كبكسلات فوق الخط (اختياري)
+                            distance = int(b / 2)
+                            cv2.putText(frame, f"{distance}px", (far[0]+10, far[1]), 
+                                        cv2.FONT_HERSHEY_SIMPLEX, 0.35, (0, 255, 0), 1)
 
-    # تحويل الألوان للعرض في المتصفح بشكل سليم (RGB)
+                    # 3. ربط المفاصل وأطراف الأصابع بخيوط خضراء رفيعة جداً (thickness=1)
+                    for j in range(len(points_to_link) - 1):
+                        cv2.line(points_to_link[j], points_to_link[j+1], (0, 255, 0), 1)
+
+    # تحويل الصورة للعرض في المتصفح
     frame_rgb = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
-    
-    # تحديث البث في المتصفح
     FRAME_WINDOW.image(frame_rgb)
 
 cap.release()
-cv2.destroyAllWindows()
-st.success("تم إيقاف النظام بنجاح.")
+st.success("تم إيقاف النظام.")
