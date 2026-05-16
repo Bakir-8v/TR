@@ -1,1 +1,20 @@
-curl -i -H "Host: localhost" http://195.175.182.41/
+
+url -i -H "Host: localhost" http://195.175.182.41/
+HTTP/1.0 400 Bad Request
+Server: AkamaiGHost
+Mime-Version: 1.0
+Content-Type: text/html
+Content-Length: 312
+Expires: Sat, 16 May 2026 19:18:32 GMT
+Date: Sat, 16 May 2026 19:18:32 GMT
+Connection: close
+
+<HTML><HEAD>
+<TITLE>Invalid URL</TITLE>
+</HEAD><BODY>
+<H1>Invalid URL</H1>
+The requested URL "&#91;no&#32;URL&#93;", is invalid.<p>
+Reference&#32;&#35;9&#46;25b6afc3&#46;1778959112&#46;1ad08410
+<P>https&#58;&#47;&#47;errors&#46;edgesuite&#46;net&#47;9&#46;25b6afc3&#46;1778959112&#46;1ad08410</P>
+</BODY></HTML>
+                    
