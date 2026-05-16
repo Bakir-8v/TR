@@ -1,33 +1,27 @@
-#!/bin/bash
+./scan.sh 
+[*] بدء سكربت فحص ومطابقة ثغرات إصدارات دروبال...
 
-# ألوان لتنظيم المخرجات
-GREEN='\033[0;32m'
-RED='\033[0;31m'
-BLUE='\033[0;34m'
-NC='\033[0m' # No Color
+[+] فحص ثغرات النواة لـ Drupal 9.x...
+---------------------------------------------- ---------------------------------
+ Exploit Title                                |  Path
+---------------------------------------------- ---------------------------------
+Drupal < 7.58 / < 8.3.9 / < 8.4.6 / < 8.5.1 - | php/webapps/44449.rb
+Drupal < 8.6.9 - REST Module Remote Code Exec | php/webapps/46459.py
+Drupal Module CKEditor 3.0 < 3.6.2 - Persiste | php/webapps/18389.txt
+Drupal Module CODER 2.5 - Remote Command Exec | php/webapps/40149.rb
+---------------------------------------------- ---------------------------------
+Shellcodes: No Results
 
-echo -e "${BLUE}[*] بدء سكربت فحص ومطابقة ثغرات إصدارات دروبال...${NC}"
+[+] فحص ثغرات المكتبة المرفقة jQuery UI 1.13.2...
+Exploits: No Results
+Shellcodes: No Results
 
-# 1. التحقق من وجود أداة searchsploit
-if ! command -v searchsploit &> /dev/null
-then
-    echo -e "${RED}[!] أداة searchsploit غير مثبتة. يرجى تثبيتها أو تحديث قاعدة بيانات ExploitDB.${NC}"
-    exit 1
-fi
+[+] قائمة بالمسارات الافتراضية التي يفضل التحقق منها يدوياً أو عبر curl:
+- /core/changelog.txt (لتأكيد الإصدار الدقيق لنواة النظام)
+- /composer.json (لقراءة المكتبات البرمجية المعتمدة في الخلفية)
+- /web.config أو /robots.txt (لمعرفة المجلدات المستثناة من الأرشفة)
 
-# 2. البحث عن ثغرات النواة المكتشفة (Drupal 9.5.7)
-echo -e "\n${GREEN}[+] فحص ثغرات النواة لـ Drupal 9.x...${NC}"
-searchsploit drupal 9.
-
-# 3. البحث عن ثغرات مكتبة jQuery UI 1.13.2
-echo -e "\n${GREEN}[+] فحص ثغرات المكتبة المرفقة jQuery UI 1.13.2...${NC}"
-searchsploit jquery ui 1.13
-
-# 4. محاولة فحص المسارات الافتراضية الحساسة لدروبال (Reconnaissance)
-# يمكنك استبدال target.com برابط الهدف الفعلي عند التشغيل
-echo -e "\n${GREEN}[+] قائمة بالمسارات الافتراضية التي يفضل التحقق منها يدوياً أو عبر curl:${NC}"
-echo -e "${BLUE}- /core/changelog.txt${NC} (لتأكيد الإصدار الدقيق لنواة النظام)"
-echo -e "${BLUE}- /composer.json${NC} (لقراءة المكتبات البرمجية المعتمدة في الخلفية)"
-echo -e "${BLUE}- /web.config أو /robots.txt${NC} (لمعرفة المجلدات المستثناة من الأرشفة)"
-
-echo -e "\n${BLUE}[*] انتهى الفحص الأولي. يمكنك الآن مطابقة الـ CVEs المستخرجة مع بيئة التجارب الخاصة بك.${NC}"
+[*] انتهى الفحص الأولي. يمكنك الآن مطابقة الـ CVEs المستخرجة مع بيئة التجارب الخاصة بك.
+                                                                                
+┌──(venv)─(root㉿kali)-[/home/ghost/dTa]
+└─# 
