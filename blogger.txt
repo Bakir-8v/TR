@@ -1,40 +1,53 @@
-# 1. كتلة حظر الاتصالات المباشرة عبر الأي بي أو النطاقات غير المعرفة
-server {
-    listen 80 default_server;
-    listen [::]:80 default_server;
-    listen 443 ssl default_server;
-    listen [::]:443 ssl default_server;
+ systemctl restart nginx
+                                                                                
+┌──(venv)─(root㉿kali)-[/home/ghost/dTa]
+└─# ls                                                                     
+app.py  hand.py  secure_origin.sh  venv
+                                                                                
+┌──(venv)─(root㉿kali)-[/home/ghost/dTa]
+└─# ./secure_origin.sh
+Backing up 'user.rules' to '/etc/ufw/user.rules.20260516_155353'
+Backing up 'before.rules' to '/etc/ufw/before.rules.20260516_155353'
+Backing up 'after.rules' to '/etc/ufw/after.rules.20260516_155353'
+Backing up 'user6.rules' to '/etc/ufw/user6.rules.20260516_155353'
+Backing up 'before6.rules' to '/etc/ufw/before6.rules.20260516_155353'
+Backing up 'after6.rules' to '/etc/ufw/after6.rules.20260516_155353'
 
-    # استخدام الشهادة المحلية للاختبار
-    ssl_certificate /etc/ssl/certs/ssl-cert-snakeoil.pem;
-    ssl_certificate_key /etc/ssl/private/ssl-cert-snakeoil.key;
+Default incoming policy changed to 'deny'
+(be sure to update your rules accordingly)
+Default outgoing policy changed to 'allow'
+(be sure to update your rules accordingly)
+Rules updated
+Rules updated (v6)
+جاري تطبيق قواعد السماح لعناوين IP المعتمدة...
+Rules updated
+Rules updated
+Rules updated
+Rules updated
+Rules updated
+Rules updated
+Rules updated
+Rules updated
+Firewall is active and enabled on system startup
+تمت العملية بنجاح. السيرفر الآن لا يستقبل ترافيك الويب إلا من جدار الحماية الخارجي.
+Status: active
+Logging: on (low)
+Default: deny (incoming), allow (outgoing), disabled (routed)
+New profiles: skip
 
-    server_name _;
+To                         Action      From
+--                         ------      ----
+22/tcp                     ALLOW IN    Anywhere                   # Allow SSH
+80/tcp                     ALLOW IN    23.235.32.0/20             # Allow HTTP from WAF
+443/tcp                    ALLOW IN    23.235.32.0/20             # Allow HTTPS from WAF
+80/tcp                     ALLOW IN    43.249.32.0/20             # Allow HTTP from WAF
+443/tcp                    ALLOW IN    43.249.32.0/20             # Allow HTTPS from WAF
+80/tcp                     ALLOW IN    103.244.50.0/24            # Allow HTTP from WAF
+443/tcp                    ALLOW IN    103.244.50.0/24            # Allow HTTPS from WAF
+80/tcp                     ALLOW IN    195.175.182.0/24           # Allow HTTP from WAF
+443/tcp                    ALLOW IN    195.175.182.0/24           # Allow HTTPS from WAF
+22/tcp (v6)                ALLOW IN    Anywhere (v6)              # Allow SSH
 
-    # قطع الاتصال فوراً دون إرجاع بيانات
-    return 444;
-}
-
-# 2. كتلة التشغيل التجريبية للموقع (لا تستقبل إلا النطاق المحدد)
-server {
-    listen 80;
-    listen 443 ssl;
-    
-    server_name www.syria.tv syria.tv;
-
-    # توجيه الموقع التجريبي لنفس الشهادة المحلية لحل مشكلة عدم وجود ملفات Let's Encrypt
-    ssl_certificate /etc/ssl/certs/ssl-cert-snakeoil.pem;
-    ssl_certificate_key /etc/ssl/private/ssl-cert-snakeoil.key;
-
-    root /var/www/html;
-    index index.php index.html;
-
-    location / {
-        try_files $uri $uri/ /index.php?$query_string;
-    }
-
-    # حظر الوصول إلى المجلدات الحساسة الخاصة بالنواة لـ Drupal برمجياً
-    location ~* /core/(.*)\.txt$ {
-        return 404;
-    }
-}
+                                                                                
+┌──(venv)─(root㉿kali)-[/home/ghost/dTa]
+└─#  
