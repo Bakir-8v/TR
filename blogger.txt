@@ -1,1 +1,40 @@
-sudo openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout /etc/ssl/private/ssl-cert-snakeoil.key -out /etc/ssl/certs/ssl-cert-snakeoil.pem -subj "/CN=localhost"
+# 1. كتلة حظر الاتصالات المباشرة عبر الأي بي أو النطاقات غير المعرفة
+server {
+    listen 80 default_server;
+    listen [::]:80 default_server;
+    listen 443 ssl default_server;
+    listen [::]:443 ssl default_server;
+
+    # استخدام الشهادة المحلية للاختبار
+    ssl_certificate /etc/ssl/certs/ssl-cert-snakeoil.pem;
+    ssl_certificate_key /etc/ssl/private/ssl-cert-snakeoil.key;
+
+    server_name _;
+
+    # قطع الاتصال فوراً دون إرجاع بيانات
+    return 444;
+}
+
+# 2. كتلة التشغيل التجريبية للموقع (لا تستقبل إلا النطاق المحدد)
+server {
+    listen 80;
+    listen 443 ssl;
+    
+    server_name www.syria.tv syria.tv;
+
+    # توجيه الموقع التجريبي لنفس الشهادة المحلية لحل مشكلة عدم وجود ملفات Let's Encrypt
+    ssl_certificate /etc/ssl/certs/ssl-cert-snakeoil.pem;
+    ssl_certificate_key /etc/ssl/private/ssl-cert-snakeoil.key;
+
+    root /var/www/html;
+    index index.php index.html;
+
+    location / {
+        try_files $uri $uri/ /index.php?$query_string;
+    }
+
+    # حظر الوصول إلى المجلدات الحساسة الخاصة بالنواة لـ Drupal برمجياً
+    location ~* /core/(.*)\.txt$ {
+        return 404;
+    }
+}
