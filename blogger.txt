@@ -1,17 +1,76 @@
-🛡️ نظام تتبع اليد عبر المتصفح (Localhost)
-يتم الآن المعالجة وقراءة حركة اليد في الوقت الفعلي...
-AttributeError: module 'mediapipe' has no attribute 'solutions'
-Traceback:
-File "/home/ghost/dTa/venv/lib/python3.13/site-packages/streamlit/runtime/scriptrunner/exec_code.py", line 129, in exec_func_with_error_handling
-    result = func()
-File "/home/ghost/dTa/venv/lib/python3.13/site-packages/streamlit/runtime/scriptrunner/script_runner.py", line 689, in code_to_exec
-    exec(code, module.__dict__)  # noqa: S102
-    ~~~~^^^^^^^^^^^^^^^^^^^^^^^
-File "/home/ghost/dTa/app.py", line 15, in <module>
-    detector = HandDetector(detectionCon=0.8, maxHands=2)
-File "/home/ghost/dTa/venv/lib/python3.13/site-packages/cvzone/HandTrackingModule.py", line 35, in __init__
-    self.mpHands = mp.solutions.hands
-                   ^^^^^^^^^^^^
-Copy
-Ask Google
-Ask ChatGPT
+import cv2
+import streamlit as st
+import numpy as np
+
+# إعدادات صفحة المتصفح (Streamlit)
+st.set_page_config(page_title="Hand Tracking - Python 3.13", layout="centered")
+st.title("🛡️ نظام تتبع اليد عبر المتصفح (Localhost)")
+st.subheader("إصدار مستقر متوافق مع Python 3.13 (بدون ميديا بايب)")
+
+# إنشاء مكان مخصص لعرض البث المباشر
+FRAME_WINDOW = st.image([])
+
+# تشغيل الكاميرا
+cap = cv2.VideoCapture(0)
+stop_button = st.button("إيقاف البث")
+
+while cap.isOpened() and not stop_button:
+    success, frame = cap.read()
+    if not success:
+        st.error("فشل في قراءة البيانات من الكاميرا. تحقق من اتصال الـ USB.")
+        break
+
+    # قلب الإطار لمحاكاة حركة المرآة
+    frame = cv2.flip(frame, 1)
+    
+    # تحويل الصورة إلى نظام YCrCb وهو الأفضل لتحديد لون بشرة اليد وعزل الخلفية
+    blur = cv2.GaussianBlur(frame, (5, 5), 0)
+    ycrcb = cv2.cvtColor(blur, cv2.COLOR_BGR2YCrCb)
+    
+    # تحديد نطاق لون البشرة (Skin Color Range)
+    lower_skin = np.array([0, 135, 85], dtype=np.uint8)
+    upper_skin = np.array([255, 180, 135], dtype=np.uint8)
+    
+    # قناع لتصفية لون اليد فقط
+    mask = cv2.inRange(ycrcb, lower_skin, upper_skin)
+    
+    # تنظيف الضوضاء من القناع
+    kernel = np.ones((5, 5), np.uint8)
+    mask = cv2.dilate(mask, kernel, iterations=2)
+    mask = cv2.GaussianBlur(mask, (5, 5), 100)
+    
+    # البحث عن الخطوط العريضة (Contours) لليد في الصورة
+    contours, _ = cv2.findContours(mask, cv2.RETR_TREE, cv2.CHAIN_APPROX_SIMPLE)
+    
+    if len(contours) > 0:
+        # تحديد أكبر مساحة تم العثور عليها (والتي ستكون اليد)
+        max_contour = max(contours, key=cv2.contourArea)
+        
+        if cv2.contourArea(max_contour) > 5000: # تصفية المساحات الصغيرة جداً
+            # رسم حدود اليد باللون الأخضر وبسمك 3 بكسل
+            cv2.drawContours(frame, [max_contour], -1, (0, 255, 0), 3)
+            
+            # رسم صندوق محيط (Bounding Box) حول اليد
+            x, y, w, h = cv2.boundingRect(max_contour)
+            cv2.rectangle(frame, (x, y), (x+w, y+h), (255, 0, 0), 2)
+            
+            # كتابة نص توضيحي فوق الصندوق
+            cv2.putText(frame, "Hand Detected", (x, y-10), cv2.FONT_HERSHEY_SIMPLEX, 0.6, (255, 0, 0), 2)
+            
+            # حساب مركز اليد (المعصم/المنتصف) وطباعته في السيرفر
+            M = cv2.moments(max_contour)
+            if M["m00"] != 0:
+                cx = int(M["m10"] / M["m00"])
+                cy = int(M["m01"] / M["m00"])
+                # رسم نقطة زرقاء في مركز اليد
+                cv2.circle(frame, (cx, cy), 7, (255, 0, 0), -1)
+
+    # تحويل الألوان للعرض في المتصفح بشكل سليم (RGB)
+    frame_rgb = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
+    
+    # تحديث البث في المتصفح
+    FRAME_WINDOW.image(frame_rgb)
+
+cap.release()
+cv2.destroyAllWindows()
+st.success("تم إيقاف النظام بنجاح.")
