@@ -1,1 +1,41 @@
-iw dev | grep Interface | awk '{print $2}'
+ enable forwarding in iptables...
+SIOCADDRT: Network is unreachable
+Traceback (most recent call last):
+  File "/usr/bin/wp3", line 33, in <module>
+    sys.exit(load_entry_point('wifipumpkin3==1.1.7', 'console_scripts', 'wp3')())
+             ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "/usr/lib/python3/dist-packages/wifipumpkin3/__main__.py", line 257, in main
+    prompt.cmdloop("Starting prompt...")
+    ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3/dist-packages/wifipumpkin3/core/common/terminal.py", line 135, in cmdloop
+    super(ConsoleUI, self).cmdloop(intro="")
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^
+  File "/usr/lib/python3.13/cmd.py", line 146, in cmdloop
+    stop = self.onecmd(line)
+  File "/usr/lib/python3/dist-packages/wifipumpkin3/core/common/terminal.py", line 91, in onecmd
+    Cmd.onecmd(self, command)
+    ~~~~~~~~~~^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.13/cmd.py", line 224, in onecmd
+    return func(arg)
+  File "/usr/lib/python3/dist-packages/wifipumpkin3/core/common/console.py", line 233, in do_start
+    if self.wireless_controller.Start() != None:
+       ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "/usr/lib/python3/dist-packages/wifipumpkin3/core/controllers/wirelessmodecontroller.py", line 71, in Start
+    self.Activated.Start()
+    ~~~~~~~~~~~~~~~~~~~~^^
+  File "/usr/lib/python3/dist-packages/wifipumpkin3/core/wirelessmode/wirelessmode.py", line 108, in Start
+    self.Initialize()
+    ~~~~~~~~~~~~~~~^^
+  File "/usr/lib/python3/dist-packages/wifipumpkin3/core/wirelessmode/static.py", line 53, in Initialize
+    if not (self.Settings.checkNetworkAP()):
+            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "/usr/lib/python3/dist-packages/wifipumpkin3/core/wirelessmode/static.py", line 237, in checkNetworkAP
+    raise InterfaceBuzyError(
+    ...<2 lines>...
+    )
+wifipumpkin3.exceptions.errors.networkException.InterfaceBuzyError: Wireless interface is busy : Device wlan0 is busy 
+ Connection has been detected, joined the correct Wi-Fi network
+Device or resource busy
+You may need to another Wi-Fi USB adapter
+for create AP or try use with local connetion(Ethernet).
+           
